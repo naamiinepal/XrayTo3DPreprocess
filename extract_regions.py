@@ -17,8 +17,8 @@ print(args)
 
 
 ctd_list = load_centroids(args.centroids)
-img = read_image(args.ct,pixeltype=ImagePixelType.ImageType)
-seg = read_image(args.seg,pixeltype=ImagePixelType.SegmentationType)
+img = read_image(args.ct)
+seg = read_image(args.seg)
 
 print(ctd_list)
 vb_id,*ctds = ctd_list[5]
