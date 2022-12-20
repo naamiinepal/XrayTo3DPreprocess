@@ -24,7 +24,7 @@ def load_centroids(ctd_path):
             ctd_list.append((d['label'], d['X'], d['Y'], d['Z']))
     return ctd_list
 
-def read_image(img_path, pixeltype: ImagePixelType):
+def read_image(img_path):
     """returns the SimpleITK image read from given path
 
     Parameters:
