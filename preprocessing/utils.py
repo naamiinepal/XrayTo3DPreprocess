@@ -3,10 +3,8 @@ import SimpleITK as sitk
 import numpy as np
 
 from tuple_ops import *
-
-
-
-
+from enumutils import ImagePixelType
+from typing import List
 
 
 def ROI_centroid_index_to_start_index(centroid_index, ROI_voxel_size):
@@ -17,14 +15,17 @@ def ROI_centroid_index_to_start_index(centroid_index, ROI_voxel_size):
                             for c, s in zip(centroid_index, ROI_voxel_size)])
     return roi_start_index
 
-def ROI_centroid_index_to_start_index_v2(centroid_index,ROI_voxel_size, extraction_ratio:tuple):
+
+def ROI_centroid_index_to_start_index_v2(centroid_index, ROI_voxel_size, extraction_ratio: tuple):
     """Given a ROI of size ROI_voxel_size in voxel units and whose centroid index is centroid_index,
     return the corresponding starting index of the ROI in the image.
     We want to extract ROI_voxel_size at given extraction_ration wr.t. the centroid index"""
 
-    roi_start_index = tuple([ (c - s * r ) for c, s, r in zip(centroid_index, ROI_voxel_size,extraction_ratio)])
-    roi_start_index = list(map(int,roi_start_index))
+    roi_start_index = tuple(
+        [(c - s * r) for c, s, r in zip(centroid_index, ROI_voxel_size, extraction_ratio)])
+    roi_start_index = list(map(int, roi_start_index))
     return roi_start_index
+
 
 def voxel_size_to_physical_size(img, voxel_size):
     """Given an img, how much physical space does a volume of given voxel size occupy?"""
@@ -35,10 +36,9 @@ def physical_size_to_voxel_size(img, physical_size):
     """Given an img, how many voxels(rounded up) does it require to represent a given physical size?"""
     return tuple([int(p / sp) for p, sp in zip(physical_size, img.GetSpacing())])
 
-def get_orientation_code(img:sitk.Image):
+
+def get_orientation_code(img: sitk.Image):
     return sitk.DICOMOrientImageFilter_GetOrientationFromDirectionCosines(img.GetDirection())
-
-
 
 
 def required_padding(img, voxel_size, centroid_index, verbose=True):
@@ -54,10 +54,13 @@ def required_padding(img, voxel_size, centroid_index, verbose=True):
                            for lb_idx in lowerbound_index])
 
     if verbose:
-        print(f'target voxel {voxel_size} lowerbound {lowerbound_pad} upperbound {upperbound_pad}')
-    np.testing.assert_array_equal(np.array(voxel_size), np.array(subtract_tuple(upperbound_index,lowerbound_index)))
+        print(
+            f'target voxel {voxel_size} lowerbound {lowerbound_pad} upperbound {upperbound_pad}')
+    np.testing.assert_array_equal(np.array(voxel_size), np.array(
+        subtract_tuple(upperbound_index, lowerbound_index)))
 
     return lowerbound_pad, upperbound_pad
+
 
 def get_opposite_axis(orientation_axis):
     if orientation_axis == 'L':
@@ -73,7 +76,8 @@ def get_opposite_axis(orientation_axis):
     if orientation_axis == 'P':
         return 'A'
 
-def dict_to_tuple(orientation_code, orientation_dict:dict):
+
+def dict_to_tuple(orientation_code, orientation_dict: dict):
     """
     LAS,{'L':0.5,'A':0.5,'S':0.5} -> (0.5,0.5,0.5)
     LPS,{'L':0.5,'A':0.33,'S':0.5} -> (0.5,0.67,0.5) """
@@ -82,30 +86,35 @@ def dict_to_tuple(orientation_code, orientation_dict:dict):
         if plane in orientation_dict.keys():
             new_orientation_dict[plane] = orientation_dict[plane]
         else:
-            new_orientation_dict[plane] = 1.0 - orientation_dict[get_opposite_axis(plane)]
-
+            new_orientation_dict[plane] = 1.0 - \
+                orientation_dict[get_opposite_axis(plane)]
 
     return tuple(new_orientation_dict[plane] for plane in orientation_code)
 
-def required_padding_v2(img, voxel_size, centroid_index, extraction_ratio:dict,verbose=True):
-    extraction_ratio_tuple = dict_to_tuple(get_orientation_code(img),extraction_ratio)
-    upperbound_index = add_tuple(centroid_index, multiply_tuple(voxel_size, extraction_ratio_tuple))
 
-    extraction_ratio_tuple = subtract_tuple((1,)*img.GetDimension(), extraction_ratio_tuple)
-    lowerbound_index = subtract_tuple(centroid_index, multiply_tuple(voxel_size,extraction_ratio_tuple))
+def required_padding_v2(img, voxel_size, centroid_index, extraction_ratio: dict, verbose=True):
+    extraction_ratio_tuple = dict_to_tuple(
+        get_orientation_code(img), extraction_ratio)
+    upperbound_index = add_tuple(centroid_index, multiply_tuple(
+        voxel_size, extraction_ratio_tuple))
 
-    lowerbound_index = list(map(int,lowerbound_index))
-    upperbound_index = list(map(int,upperbound_index))
+    extraction_ratio_tuple = subtract_tuple(
+        (1,)*img.GetDimension(), extraction_ratio_tuple)
+    lowerbound_index = subtract_tuple(
+        centroid_index, multiply_tuple(voxel_size, extraction_ratio_tuple))
+
+    lowerbound_index = list(map(int, lowerbound_index))
+    upperbound_index = list(map(int, upperbound_index))
 
     upperbound_pad = tuple([int(max(0, ub_idx - im_idx))
                            for im_idx, ub_idx in zip(img.GetSize(), upperbound_index)])
     lowerbound_pad = tuple([int(max(0, -lb_idx))
                            for lb_idx in lowerbound_index])
-    
-    np.testing.assert_array_equal(np.array(voxel_size), np.array(subtract_tuple(upperbound_index,lowerbound_index)))
+
+    np.testing.assert_array_equal(np.array(voxel_size), np.array(
+        subtract_tuple(upperbound_index, lowerbound_index)))
 
     return lowerbound_pad, upperbound_pad
-
 
 
 def extract_bbox(img, seg, label_id, physical_size, padding_value, verbose=True):
@@ -133,20 +142,25 @@ def extract_bbox(img, seg, label_id, physical_size, padding_value, verbose=True)
     assert label_id in labels
 
     # pad around Bounding Box centroid to attain given voxel size
-    centroid_index = img.TransformPhysicalPointToIndex(fltr.GetCentroid(label_id))
-    lb, ub = required_padding(img, voxel_size, centroid_index,verbose=True)
-    padded_img:sitk.Image = sitk.ConstantPad(img,lb,ub,padding_value)
+    centroid_index = img.TransformPhysicalPointToIndex(
+        fltr.GetCentroid(label_id))
+    lb, ub = required_padding(img, voxel_size, centroid_index, verbose=True)
+    padded_img: sitk.Image = sitk.ConstantPad(img, lb, ub, padding_value)
 
     # find the index of the centroid in the padded image
-    padded_centroid_index = padded_img.TransformPhysicalPointToIndex(fltr.GetCentroid(label_id))
+    padded_centroid_index = padded_img.TransformPhysicalPointToIndex(
+        fltr.GetCentroid(label_id))
 
     # get the start of the ROI
-    roi_start_index = ROI_centroid_index_to_start_index(padded_centroid_index, voxel_size)
-    ROI:sitk.Image = sitk.RegionOfInterest(padded_img, voxel_size, roi_start_index)
+    roi_start_index = ROI_centroid_index_to_start_index(
+        padded_centroid_index, voxel_size)
+    ROI: sitk.Image = sitk.RegionOfInterest(
+        padded_img, voxel_size, roi_start_index)
 
     if verbose:
         print(f'Label Bounding Box: {fltr.GetBoundingBox(label_id)}')
-        print(f'Coordinates of Segmentation Centroid {img.TransformPhysicalPointToIndex(fltr.GetCentroid(label_id))}')
+        print(
+            f'Coordinates of Segmentation Centroid {img.TransformPhysicalPointToIndex(fltr.GetCentroid(label_id))}')
 
     return ROI
 
@@ -164,34 +178,42 @@ def extract_around_centroid_v2(img, physical_size, centroid_index, extraction_ra
     """
     assert isinstance(img, sitk.Image)
     voxel_size = physical_size_to_voxel_size(img, physical_size)
-    
-    lb, ub = required_padding_v2(img, voxel_size,centroid_index,extraction_ratio)
-    padded_img:sitk.Image = sitk.ConstantPad(img,lb,ub,padding_value)
+
+    lb, ub = required_padding_v2(
+        img, voxel_size, centroid_index, extraction_ratio)
+    padded_img: sitk.Image = sitk.ConstantPad(img, lb, ub, padding_value)
 
     # find the index of the centrod in the padded image
-    original_centroid_coords = img.TransformContinuousIndexToPhysicalPoint(centroid_index)
-    padded_centroid_index = padded_img.TransformPhysicalPointToIndex(original_centroid_coords)
+    original_centroid_coords = img.TransformContinuousIndexToPhysicalPoint(
+        centroid_index)
+    padded_centroid_index = padded_img.TransformPhysicalPointToIndex(
+        original_centroid_coords)
 
     # get the start of the ROI
-    extraction_tuple = dict_to_tuple(get_orientation_code(img),extraction_ratio)
+    extraction_tuple = dict_to_tuple(
+        get_orientation_code(img), extraction_ratio)
 
-    roi_start_index = ROI_centroid_index_to_start_index_v2(padded_centroid_index, voxel_size,extraction_tuple)
+    roi_start_index = ROI_centroid_index_to_start_index_v2(
+        padded_centroid_index, voxel_size, extraction_tuple)
 
-    ROI:sitk.Image = sitk.RegionOfInterest(padded_img, voxel_size, roi_start_index)
+    ROI: sitk.Image = sitk.RegionOfInterest(
+        padded_img, voxel_size, roi_start_index)
 
-    ROI_vertebra_centroid_index = ROI.TransformPhysicalPointToContinuousIndex(original_centroid_coords)
+    ROI_vertebra_centroid_index = ROI.TransformPhysicalPointToContinuousIndex(
+        original_centroid_coords)
 
-    heatmap = generate_gaussian_heatmap(ROI_vertebra_centroid_index,ROI)
+    heatmap = generate_gaussian_heatmap(ROI_vertebra_centroid_index, ROI)
     if verbose:
         print(f'Vertebra centroid in ROI Index{ROI_vertebra_centroid_index}')
 
-    return ROI,heatmap
+    return ROI, heatmap
 
-def generate_gaussian_heatmap(centroid_index, reference_image,sigma = 5):
+
+def generate_gaussian_heatmap(centroid_index, reference_image, sigma=5):
     """Generate a Centroid Landmark Image represented by a Gaussian at the centroid index with same physical attributes as the reference image
 
     from https://github.com/christianpayer/MedicalDataAugmentationTool/blob/34e3723397ac5b343f14ec0a8ee49f792e13aeca/utils/landmark/heatmap_image_generator.py
-    
+
     Args:
         centroid_index (tuple:int): 
         volume_size (tuple): _description_
@@ -199,32 +221,37 @@ def generate_gaussian_heatmap(centroid_index, reference_image,sigma = 5):
     """
     img_sz = reference_image.GetSize()
     img_thickness = reference_image.GetSpacing()
-    iso_img_sz = multiply_tuple(img_sz,img_thickness)
-    iso_img_sz = list(map(int,iso_img_sz))
+    iso_img_sz = multiply_tuple(img_sz, img_thickness)
+    iso_img_sz = list(map(int, iso_img_sz))
 
     # flip point from [x,y,z] to [z,y,x]
-    centroid_index = list(map(int,centroid_index))
-    flipped_coords = np.flip(centroid_index,0)
-    flipped_image_thickness = np.flip(img_thickness,0)
-    dy, dx, dz = np.meshgrid(range(iso_img_sz[1]), range(iso_img_sz[0]), range(iso_img_sz[2]))
+    centroid_index = list(map(int, centroid_index))
+    flipped_coords = np.flip(centroid_index, 0)
+    flipped_image_thickness = np.flip(img_thickness, 0)
+    dy, dx, dz = np.meshgrid(range(iso_img_sz[1]), range(
+        iso_img_sz[0]), range(iso_img_sz[2]))
 
     x_diff = dx - flipped_coords[0] * flipped_image_thickness[0]
     y_diff = dy - flipped_coords[1] * flipped_image_thickness[1]
     z_diff = dz - flipped_coords[2] * flipped_image_thickness[2]
 
-    squared_distances = x_diff * x_diff  + y_diff * y_diff  + z_diff * z_diff 
-    heatmap = min(iso_img_sz) * np.exp(-squared_distances / (2*math.pow(sigma,2)))
+    squared_distances = x_diff * x_diff + y_diff * y_diff + z_diff * z_diff
+    heatmap = min(iso_img_sz) * \
+        np.exp(-squared_distances / (2*math.pow(sigma, 2)))
 
     heatmap_sitk = sitk.GetImageFromArray(heatmap)
-    set_image_metadata(heatmap_sitk,origin=reference_image.GetOrigin(),direction=reference_image.GetDirection(), spacing=(1,1,1))
-    heatmap_sitk = sitk.Resample(heatmap_sitk,reference_image)
-    
+    set_image_metadata(heatmap_sitk, origin=reference_image.GetOrigin(
+    ), direction=reference_image.GetDirection(), spacing=(1, 1, 1))
+    heatmap_sitk = sitk.Resample(heatmap_sitk, reference_image)
+
     return heatmap_sitk
 
-def set_image_metadata(img:sitk.Image, origin, direction, spacing):
+
+def set_image_metadata(img: sitk.Image, origin, direction, spacing):
     img.SetOrigin(origin)
     img.SetSpacing(spacing)
     img.SetDirection(direction)
+
 
 def extract_around_centroid(img, physical_size, centroid_index, padding_value, verbose=True):
     """extracts a simpleitk image of a given voxel size around centroid
@@ -259,15 +286,34 @@ def extract_around_centroid(img, physical_size, centroid_index, padding_value, v
     if verbose:
         print(f'Centroid (in world coordinates {original_centroid_coords}')
         print(
-            f'extracted {ROI.GetSize()} voxels starting at index {roi_start_index}')    
-        
+            f'extracted {ROI.GetSize()} voxels starting at index {roi_start_index}')
+
     return ROI
 
 
+def combine_seg(imgs: List[sitk.Image], ref_img: sitk.Image, fill_label=1):
+    """Combine multiple segmentation images into a single segmentation image.
+
+    Precondition:
+        segmentation masks do not overlap
+        
+    Postcondition:
+        a new segmentation images is returned where voxels are filled with fill_label
+        if the voxel position is labelled in one of the segmentation image
+    """
+    new_seg = np.zeros_like(sitk.GetArrayFromImage(ref_img))
+
+    for seg in imgs:
+        single_seg = sitk.GetArrayViewFromImage(seg)
+        new_seg[single_seg > 0.5] = fill_label
+    
+    img_out = sitk.GetImageFromArray(new_seg)
+    img_out.CopyInformation(ref_img)
+    return img_out
 
 
 if __name__ == '__main__':
-    from preprocessing import read_image,write_image,load_centroids
+    from preprocessing import read_image, write_image, load_centroids
 
     centroid_jsonpath = '2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse835/sub-verse835_dir-iso_seg-subreg_ctd.json'
     ct_path = '2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse835/sub-verse835_dir-iso_ct.nii.gz'
@@ -285,8 +331,8 @@ if __name__ == '__main__':
     out_img_path = '2D-3D-Reconstruction-Datasets/totalsegmentor/BIDS/vertebra/example_vertebra-l4_ct.nii.gz'
     out_seg_path = '2D-3D-Reconstruction-Datasets/totalsegmentor/BIDS/vertebra/example_vertebra-l4_seg-vert_msk.nii.gz'
 
-    img = read_image(ct_path,ImagePixelType.ImageType)
-    seg = read_image(seg_path, ImagePixelType.SegmentationType)
+    img = read_image(ct_path)
+    seg = read_image(seg_path)
     ctd = load_centroids(centroid_jsonpath)
 
     vb_id, *centroid = ctd[5]
@@ -296,7 +342,18 @@ if __name__ == '__main__':
     # ROI,centroid_heatmap = extract_around_centroid_v2(img, (96,96,96),centroid,{'L': 0.5, 'A': 0.7, 'S' :0.5},-1024)
     # write_image(centroid_heatmap, centroid_heatmap_path)
 
-    ROI = extract_bbox(img, seg, label_id=1, physical_size=(96, 96, 96), padding_value=-1024, verbose=True)
+    ROI = extract_bbox(img, seg, label_id=1, physical_size=(
+        96, 96, 96), padding_value=-1024, verbose=True)
     write_image(ROI, out_img_path)
-    ROI = extract_bbox(seg, seg, label_id=1, physical_size=(96,96,96), padding_value=0, verbose=True)
+    ROI = extract_bbox(seg, seg, label_id=1, physical_size=(
+        96, 96, 96), padding_value=0, verbose=True)
     write_image(ROI, out_seg_path)
+
+    rib_paths = '2D-3D-Reconstruction-Datasets/totalsegmentor/BIDS/example_seg_fast/rib_{rib_side}_{rib_id}.nii.gz'
+    rib_out_path = '2D-3D-Reconstruction-Datasets/totalsegmentor/BIDS/vertebra/example_rib_seg-mask.nii.gz'
+
+    rib_filenames = list(rib_paths.format(rib_side=j, rib_id=i)
+                         for i in range(1, 12) for j in ('left', 'right'))
+    images = list(map(read_image, rib_filenames))
+    fused_seg = combine_seg(images, ref_img=images[0])
+    write_image(fused_seg, rib_out_path)
