@@ -1,0 +1,11 @@
+channels:
+  - defaults
+  - conda-forge
+  - anaconda
+dependencies:
+  - simpleitk=2.0
+  - python=3.8
+  - numpy=1.22
+  - matplotlib
+  - pandas
+  - nibabel
