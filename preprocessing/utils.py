@@ -1,61 +1,12 @@
-import json
 import math
 import SimpleITK as sitk
-from pathlib import Path
-from enum import Enum
 import numpy as np
 
-
-class ImagePixelType(Enum):
-    ImageType = 1
-    SegmentationType = 2
+from tuple_ops import *
 
 
-def load_centroids(ctd_path):
-    # from https://github.com/anjany/verse/blob/main/utils/data_utilities.py
-    """loads the json centroid file
-
-    ctd_path: full path to the json file
-
-    Returns:
-    --------
-    ctd_list: a list containing the orientation and coordinates of the centroids"""
-
-    with open(ctd_path) as json_data:
-        dict_list = json.load(json_data)
-        json_data.close()
-    ctd_list = []
-    for d in dict_list:
-        if 'direction' in d:
-            ctd_list.append(tuple(['direction', *d['direction']]))
-        else:
-            ctd_list.append((d['label'], d['X'], d['Y'], d['Z']))
-    return ctd_list
 
 
-def read_image(img_path, pixeltype: ImagePixelType):
-    """returns the SimpleITK image read from given path
-
-    Parameters:
-    -----------
-    pixeltype (ImagePixelType):
-    """
-
-    if isinstance(img_path, Path):
-        img_path = str(img_path)
-
-    # if pixeltype == ImagePixelType.ImageType:
-    #     pixeltype = sitk.sitkUInt16
-    #     return sitk.ReadImage(img_path,pixeltype)
-
-    # elif pixeltype == ImagePixelType.SegmentationType:
-    #     pixeltype = sitk.sitkUInt8
-    #     return sitk.ReadImage(img_path,pixeltype)
-
-    # else:
-    #     raise ValueError(f'ImagePixelType cannot be {pixeltype}')
-
-    return sitk.ReadImage(img_path)
 
 
 def ROI_centroid_index_to_start_index(centroid_index, ROI_voxel_size):
@@ -87,33 +38,7 @@ def physical_size_to_voxel_size(img, physical_size):
 def get_orientation_code(img:sitk.Image):
     return sitk.DICOMOrientImageFilter_GetOrientationFromDirectionCosines(img.GetDirection())
 
-def add_tuple(a, b):
-    return tuple(a_i + b_i for a_i, b_i in zip(a, b))
 
-
-def subtract_tuple(a, b):
-    return tuple(a_i - b_i for a_i, b_i in zip(a, b))
-
-
-def divide_tuple_scalar(a, b):
-    b = (b,) * len(a)
-    return tuple(a_i / b_i for a_i, b_i in zip(a, b))
-
-
-def divide_tuple(a, b):
-    return tuple(a_i / b_i for a_i, b_i in zip(a, b))
-
-
-def multiply_tuple(a, b):
-    return tuple(a_i * b_i for a_i, b_i in zip(a, b))
-
-
-def ceil_tuple(a):
-    return tuple(math.ceil(a_i) for a_i in a)
-
-
-def floor_tuple(a):
-    return tuple(math.floor(a_i) for a_i in a)
 
 
 def required_padding(img, voxel_size, centroid_index, verbose=True):
@@ -339,13 +264,11 @@ def extract_around_centroid(img, physical_size, centroid_index, padding_value, v
     return ROI
 
 
-def write_image(img, out_path):
-    if isinstance(out_path, Path):
-        out_path = str(out_path)
-    sitk.WriteImage(img, out_path)
 
 
 if __name__ == '__main__':
+    from preprocessing import read_image,write_image,load_centroids
+
     centroid_jsonpath = '2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse835/sub-verse835_dir-iso_seg-subreg_ctd.json'
     ct_path = '2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse835/sub-verse835_dir-iso_ct.nii.gz'
     seg_path = '2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse835/sub-verse835_dir-iso_seg-vert_msk.nii.gz'
@@ -356,16 +279,24 @@ if __name__ == '__main__':
     # ct_path = '2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse572/sub-verse572_dir-sag_ct.nii.gz'
     # out_path = '2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse572/vertebra/sub-verse572_dir-sag_vertebra-5_ct.nii.gz'
     # centroid_heatmap_path = '2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse572/vertebra/sub-verse572_dir-sag_vertebra-5_ct-heatmap.nii.gz'
+
+    ct_path = '2D-3D-Reconstruction-Datasets/totalsegmentor/BIDS/example_ct.nii.gz'
+    seg_path = '2D-3D-Reconstruction-Datasets/totalsegmentor/BIDS/example_seg_fast/vertebrae_L4.nii.gz'
+    out_img_path = '2D-3D-Reconstruction-Datasets/totalsegmentor/BIDS/vertebra/example_vertebra-l4_ct.nii.gz'
+    out_seg_path = '2D-3D-Reconstruction-Datasets/totalsegmentor/BIDS/vertebra/example_vertebra-l4_seg-vert_msk.nii.gz'
+
     img = read_image(ct_path,ImagePixelType.ImageType)
     seg = read_image(seg_path, ImagePixelType.SegmentationType)
     ctd = load_centroids(centroid_jsonpath)
 
     vb_id, *centroid = ctd[5]
     print(centroid)
+
     # required_padding_v2(img, (100,100,100),centroid,{'L': 0.5, 'A': 0.5, 'S' :0.5})
     # ROI,centroid_heatmap = extract_around_centroid_v2(img, (96,96,96),centroid,{'L': 0.5, 'A': 0.7, 'S' :0.5},-1024)
     # write_image(centroid_heatmap, centroid_heatmap_path)
 
-    ROI = extract_bbox(img, seg, label_id=vb_id, physical_size=(96, 96, 96), padding_value=-1024, verbose=True)
-
+    ROI = extract_bbox(img, seg, label_id=1, physical_size=(96, 96, 96), padding_value=-1024, verbose=True)
     write_image(ROI, out_img_path)
+    ROI = extract_bbox(seg, seg, label_id=1, physical_size=(96,96,96), padding_value=0, verbose=True)
+    write_image(ROI, out_seg_path)
