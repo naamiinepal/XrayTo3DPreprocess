@@ -3,7 +3,7 @@ import SimpleITK as sitk
 import numpy as np
 
 from tuple_ops import *
-from enumutils import ImagePixelType
+from metadata_utils import *
 from typing import List
 
 
@@ -27,18 +27,6 @@ def ROI_centroid_index_to_start_index_v2(centroid_index, ROI_voxel_size, extract
     return roi_start_index
 
 
-def voxel_size_to_physical_size(img, voxel_size):
-    """Given an img, how much physical space does a volume of given voxel size occupy?"""
-    return tuple([v*sp for v, sp in zip(voxel_size, img.GetSpacing())])
-
-
-def physical_size_to_voxel_size(img, physical_size):
-    """Given an img, how many voxels(rounded up) does it require to represent a given physical size?"""
-    return tuple([int(p / sp) for p, sp in zip(physical_size, img.GetSpacing())])
-
-
-def get_orientation_code(img: sitk.Image):
-    return sitk.DICOMOrientImageFilter_GetOrientationFromDirectionCosines(img.GetDirection())
 
 
 def required_padding(img, voxel_size, centroid_index, verbose=True):
@@ -62,19 +50,6 @@ def required_padding(img, voxel_size, centroid_index, verbose=True):
     return lowerbound_pad, upperbound_pad
 
 
-def get_opposite_axis(orientation_axis):
-    if orientation_axis == 'L':
-        return 'R'
-    if orientation_axis == 'R':
-        return 'L'
-    if orientation_axis == 'S':
-        return 'I'
-    if orientation_axis == 'I':
-        return 'S'
-    if orientation_axis == 'A':
-        return 'P'
-    if orientation_axis == 'P':
-        return 'A'
 
 
 def dict_to_tuple(orientation_code, orientation_dict: dict):
@@ -247,10 +222,7 @@ def generate_gaussian_heatmap(centroid_index, reference_image, sigma=5):
     return heatmap_sitk
 
 
-def set_image_metadata(img: sitk.Image, origin, direction, spacing):
-    img.SetOrigin(origin)
-    img.SetSpacing(spacing)
-    img.SetDirection(direction)
+
 
 
 def extract_around_centroid(img, physical_size, centroid_index, padding_value, verbose=True):
@@ -301,6 +273,13 @@ def combine_seg(imgs: List[sitk.Image], ref_img: sitk.Image, fill_label=1):
         a new segmentation images is returned where voxels are filled with fill_label
         if the voxel position is labelled in one of the segmentation image
     """
+    # Staying within simpleitk was not always possible
+    #box = seg[:,:,:] > 0
+    #new_seg =  sitk.Paste(new_seg,seg,sourceIndex=bbox.TransformPhysicalToIndex(bbox.GetOrigin()),
+    #           destIndex = new_seg.TransformPhysicalToIndex(bbox.GetOrigin()),
+    #           sourceSize=bbox.GetSize())
+    #
+
     new_seg = np.zeros_like(sitk.GetArrayFromImage(ref_img))
 
     for seg in imgs:
