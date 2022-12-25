@@ -2,14 +2,16 @@ from fury import window, actor
 import numpy as np
 import vtk
 from vtk.util import numpy_support
+# original code from https://github.com/wasserth/TotalSegmentator/blob/master/totalsegmentator/preview.py
+# work in progress
 
-def generate_preview(ct_in, file_out):
+def generate_preview(ct_in, file_out,label_id=1):
     from xvfbwrapper import Xvfb
     with Xvfb() as xvfb:
-        plot_subject(ct_in, file_out)
+        plot_subject(ct_in, file_out,label_id=label_id)
 
-def plot_subject(ct_img, output_path):
-    window_size = (400, 400)
+def plot_subject(ct_img, output_path,label_id=1):
+    window_size = (500, 500)
 
     scene = window.Scene()
     scene.background((1.0,1.0,1.0))
@@ -20,10 +22,10 @@ def plot_subject(ct_img, output_path):
     data = data[::-1, :, :]
     # value_range = (-115, 225)
 
-    roi_data = data == 1
+    roi_data = data == label_id
     affine = ct_img.affine
     affine[:3, 3] = 0
-    roi_actor = plot_mask(scene, roi_data,affine,orientation='transverse')
+    roi_actor = plot_mask(scene, roi_data,affine,orientation='sagittal')
     scene.add(roi_actor)
 
     # slice_actor = actor.slicer(data, ct_img.affine)
@@ -31,7 +33,7 @@ def plot_subject(ct_img, output_path):
     # scene.add(slice_actor)
 
     scene.projection(proj_type='parallel')
-    scene.reset_camera_tight(margin_factor=1.02)
+    scene.reset_camera_tight(margin_factor=1.0)
 
     window.record(scene,size=window_size,out_path=output_path,reset_camera=False)
     scene.clear()
@@ -169,7 +171,11 @@ def set_input(vtk_object, inp):
 
 if __name__ == '__main__':
     import nibabel as nib
-    ct_in_path = '/mnt/driveD/dataset-vis/synthetic_hip/COLONOG-0001_seg_crop_iso_LPI.nii.gz'
+    from pathlib import Path
+
+    # ct_in_path = '/mnt/driveD/dataset-vis/synthetic_hip/COLONOG-0001_seg_crop_iso_LPI.nii.gz'
+    # ct_in_path = '/mnt/driveD/dataset-vis/COLONOG-HIP/COLONOG-0001_seg_crop_iso_LPI.nii.gz'
+    ct_in_path = '/mnt/driveD/dataset-vis/synthetic_vertebra/verse005_20_seg_seg.nii.gz'
     ct_in = nib.load(ct_in_path)    
-    file_out = '/mnt/driveD/dataset-vis/synthetic_hip/COLONOG-0001_seg_crop_iso_LPI.png'
-    generate_preview(ct_in, file_out)
+    file_out = Path(ct_in_path).with_suffix('.png')
+    generate_preview(ct_in, file_out,label_id=20)
