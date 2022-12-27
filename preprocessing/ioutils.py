@@ -17,12 +17,13 @@ def load_centroids(ctd_path):
         dict_list = json.load(json_data)
         json_data.close()
     ctd_list = []
+    direction = []
     for d in dict_list:
         if 'direction' in d:
-            ctd_list.append(tuple(['direction', *d['direction']]))
+            direction = d['direction']
         else:
             ctd_list.append((d['label'], d['X'], d['Y'], d['Z']))
-    return ctd_list
+    return direction, ctd_list
 
 def read_image(img_path):
     """returns the SimpleITK image read from given path
