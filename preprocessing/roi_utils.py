@@ -2,8 +2,8 @@ import math
 import SimpleITK as sitk
 import numpy as np
 
-from tuple_ops import *
-from metadata_utils import *
+from .tuple_ops import *
+from .metadata_utils import *
 from typing import List
 
 
@@ -81,13 +81,34 @@ def required_padding_v2(img, voxel_size, centroid_index, extraction_ratio: dict,
     lowerbound_index = list(map(int, lowerbound_index))
     upperbound_index = list(map(int, upperbound_index))
 
-    upperbound_pad = tuple([int(max(0, ub_idx - im_idx))
-                           for im_idx, ub_idx in zip(img.GetSize(), upperbound_index)])
-    lowerbound_pad = tuple([int(max(0, -lb_idx))
-                           for lb_idx in lowerbound_index])
+    # handle off-by-one error due to integer truncation
+    # since we truncate the decimal part of the index, the volume may not be exact
+    # we will handle this by Padding 1 px later on
 
-    np.testing.assert_array_equal(np.array(voxel_size), np.array(
-        subtract_tuple(upperbound_index, lowerbound_index)))
+    # try:
+    #     np.testing.assert_array_equal(np.array(voxel_size), np.array(
+    #     subtract_tuple(upperbound_index, lowerbound_index)))
+    # except AssertionError as e:
+    #     obtained_size = subtract_tuple(upperbound_index,lowerbound_index)
+    #     expected_size = voxel_size
+    #     diff = subtract_tuple(expected_size, obtained_size)
+    #     print('diff',diff,'new_lb',lowerbound_index,)
+    #     upperbound_index = add_tuple(diff,upperbound_index)
+
+    TRUNCATION_ERROR = 1 # add 1 voxel to account for truncation error         
+    upperbound_pad = tuple([TRUNCATION_ERROR + int(max(0, ub_idx - im_idx))
+                           for im_idx, ub_idx in zip(img.GetSize(), upperbound_index)])
+    lowerbound_pad = tuple([TRUNCATION_ERROR + int(max(0, -lb_idx))
+                           for lb_idx in lowerbound_index])
+    
+    if verbose:
+        if np.any(upperbound_pad) or np.any(lowerbound_pad):
+            print(f'Padding Required to extract {voxel_size} lower index padding {lowerbound_pad} upper index padding {upperbound_pad}')
+            extracted_voxel_size = subtract_tuple(upperbound_index,lowerbound_index)
+            print(f'The extracted voxel size is going to be {extracted_voxel_size}')
+
+    # np.testing.assert_array_equal(np.array(voxel_size), np.array(
+    #     subtract_tuple(upperbound_index, lowerbound_index)))
 
     return lowerbound_pad, upperbound_pad
 
@@ -150,12 +171,16 @@ def extract_around_centroid_v2(img, physical_size, centroid_index, extraction_ra
         extraction_ratio (dict): {'P':0.33, 'L':0.5,'S': 0.5}
         padding_value (scalar): value to fill in for region outside of img
         verbose (bool, optional): print diagnostic info. Defaults to True.
+    
+    postcondition:
+        The actual extracted voxel tuple can be less by 1 voxel due to truncation error.
+        This is due to transformation back and forth between physical coordinates and index coordinates.
     """
     assert isinstance(img, sitk.Image)
     voxel_size = physical_size_to_voxel_size(img, physical_size)
 
     lb, ub = required_padding_v2(
-        img, voxel_size, centroid_index, extraction_ratio)
+        img, voxel_size, centroid_index, extraction_ratio,verbose=verbose)
     padded_img: sitk.Image = sitk.ConstantPad(img, lb, ub, padding_value)
 
     # find the index of the centrod in the padded image
@@ -315,7 +340,6 @@ if __name__ == '__main__':
     ctd = load_centroids(centroid_jsonpath)
 
     vb_id, *centroid = ctd[5]
-    print(centroid)
 
     # required_padding_v2(img, (100,100,100),centroid,{'L': 0.5, 'A': 0.5, 'S' :0.5})
     # ROI,centroid_heatmap = extract_around_centroid_v2(img, (96,96,96),centroid,{'L': 0.5, 'A': 0.7, 'S' :0.5},-1024)
