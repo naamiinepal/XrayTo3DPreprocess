@@ -2,7 +2,12 @@ import SimpleITK as sitk
 from pathlib import Path
 from .enumutils import ImagePixelType
 import json
+import yaml
 
+def read_yaml(yaml_path):
+    stream = open(yaml_path,'r')
+    return yaml.safe_load(stream)
+    
 def load_centroids(ctd_path):
     # from https://github.com/anjany/verse/blob/main/utils/data_utilities.py
     """loads the json centroid file
