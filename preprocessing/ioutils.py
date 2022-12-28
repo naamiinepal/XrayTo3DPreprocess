@@ -56,7 +56,9 @@ def read_image(img_path):
 
 
 
-def write_image(img, out_path):
+def write_image(img, out_path,pixeltype=None):
     if isinstance(out_path, Path):
         out_path = str(out_path)
+    if pixeltype:
+        img = sitk.Cast(img,pixeltype)
     sitk.WriteImage(img, out_path)
