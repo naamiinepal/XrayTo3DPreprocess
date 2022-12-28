@@ -30,6 +30,19 @@ def dest_path(source_path, dest_dir,dest_format=None):
         dest_format = get_file_format_suffix(source_path)
     return Path(dest_dir)/f'{filename}.{dest_format}'
 
+
+def get_verse_subject_id(file_path):
+    """ verse subject id samples
+    sub-verse417_split-verse277_ct.nii.gz -> sub-verse417_split-verse277
+    sub-verse149_ct.nii.gz -> sub-verse149
+    """
+    file_stem = get_stem(file_path)
+    file_components = file_stem.split('_')
+    if len(file_components) > 1 and 'split' in file_components[1]:
+        return '_'.join(file_components[0:2])
+    else:
+        return file_components[0]
+        
 if __name__ == '__main__':
     print(get_file_format_suffix('/home/user/image.nii.gz'))
     print(dest_path('/home/user/image.nii.gz','/home/dest','png'))
