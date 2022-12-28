@@ -288,7 +288,7 @@ def extract_around_centroid(img, physical_size, centroid_index, padding_value, v
     return ROI
 
 
-def combine_seg(imgs: List[sitk.Image], ref_img: sitk.Image, fill_label=1):
+def combine_segmentations(imgs: List[sitk.Image], ref_img: sitk.Image, fill_label=1):
     """Combine multiple segmentation images into a single segmentation image.
 
     Precondition:
@@ -358,5 +358,5 @@ if __name__ == '__main__':
     rib_filenames = list(rib_paths.format(rib_side=j, rib_id=i)
                          for i in range(1, 12) for j in ('left', 'right'))
     images = list(map(read_image, rib_filenames))
-    fused_seg = combine_seg(images, ref_img=images[0])
+    fused_seg = combine_segmentations(images, ref_img=images[0])
     write_image(fused_seg, rib_out_path)
