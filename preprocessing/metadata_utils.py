@@ -1,4 +1,5 @@
 import SimpleITK as sitk
+from typing import Union,Sequence
 
 def set_image_metadata(img: sitk.Image, origin, direction, spacing):
     img.SetOrigin(origin)
@@ -29,5 +30,8 @@ def physical_size_to_voxel_size(img, physical_size):
     return tuple([int(p / sp) for p, sp in zip(physical_size, img.GetSpacing())])
 
 
-def get_orientation_code(img: sitk.Image):
-    return sitk.DICOMOrientImageFilter_GetOrientationFromDirectionCosines(img.GetDirection())
+def get_orientation_code(img_or_affine_mtrx: Union[sitk.Image,Sequence]):
+    if isinstance(img_or_affine_mtrx,sitk.Image):
+        return sitk.DICOMOrientImageFilter_GetOrientationFromDirectionCosines(img_or_affine_mtrx.GetDirection())
+    else:
+        return sitk.DICOMOrientImageFilter_GetOrientationFromDirectionCosines(img_or_affine_mtrx)
