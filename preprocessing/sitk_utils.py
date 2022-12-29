@@ -1,5 +1,6 @@
 import SimpleITK as sitk
 from .enumutils import ProjectionType
+from .metadata_utils import get_orientation_code
 
 def change_label(img: sitk.Image, mapping_dict) -> sitk.Image:
     """use SimplITK AggregateLabelMapFilter to merge all segmentation labels to first label. This is used to obtain the bounding box of all the labels """
@@ -12,7 +13,7 @@ def keep_only_label(segmentation:sitk.Image, label_id) -> sitk.Image:
     return sitk.Threshold(segmentation, label_id, label_id, 0)
 
 def simulate_projection(segmentation:sitk.Image,projectiontype:ProjectionType) -> sitk.Image:
-    orientation = sitk.DICOMOrientImageFilter_GetOrientationFromDirectionCosines(segmentation.GetDirection())
+    orientation = get_orientation_code(segmentation)
     orientation = list(orientation)
 
     if projectiontype == ProjectionType.ap:
