@@ -3,9 +3,11 @@ channels:
   - conda-forge
   - anaconda
 dependencies:
-  - simpleitk=2.0
+  - simpleitk<2.1.0 # temporary fix ITK ERROR: ITK only supports orthonormal direction cosines. No orthonormal definition found! 
   - python=3.8
   - numpy=1.22
   - matplotlib
   - pandas
   - nibabel
+  - tqdm
+  - pyyaml
