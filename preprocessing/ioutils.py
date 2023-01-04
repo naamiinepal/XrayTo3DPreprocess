@@ -3,11 +3,29 @@ from pathlib import Path
 from .enumutils import ImagePixelType
 import json
 import yaml
+import logging
+from logging.handlers import RotatingFileHandler
+import nibabel as nib
 
+def read_nibabel(image_path):
+    return nib.load(image_path)
+    
 def read_yaml(yaml_path):
     stream = open(yaml_path,'r')
     return yaml.safe_load(stream)
-    
+
+def strip_item(item,strip='\n'):
+    return item.strip(strip)
+
+def get_logger(name,level=logging.DEBUG):
+    logger = logging.getLogger(name)
+    logger.setLevel(level)
+    file_handler = logging.FileHandler(f'logs/{name}.log','w')
+    file_handler.setFormatter(logging.Formatter('%(message)s'))
+    logger.addHandler(file_handler)
+    return logger
+
+
 def load_centroids(ctd_path):
     # from https://github.com/anjany/verse/blob/main/utils/data_utilities.py
     """loads the json centroid file
