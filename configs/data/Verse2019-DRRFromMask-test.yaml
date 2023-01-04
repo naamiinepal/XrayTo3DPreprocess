@@ -1,0 +1,51 @@
+---
+# xray image properties
+ap:
+  rx: -90
+  ry: 0
+  rz: 90
+lat:
+  rx: -90
+  ry: 0
+  rz: 0
+res: 1.0
+size: 96
+drr_from_ct_mask: False
+drr_from_mask: True
+
+# ROI extraction properties
+# convert to common CT orientation 
+axcode: PIR
+extraction_ratio: 
+  'L': 0.5
+  'A': 0.7
+  'S': 0.5
+ct_padding: -1024
+seg_padding: 0
+
+
+# filename extensions
+
+## input filename format
+filename_convention:
+  input:
+    ct: '{id}_ct.nii.gz'
+    seg: '{id}_seg-vert_msk.nii.gz'
+    ctd: '{id}_seg-vb_ctd.json'
+## output filename format 
+  output:
+    suffix_ap: ap
+    suffix_lat: lat
+    vert_ct: '{id}_vert-{vert}_ct.nii.gz' # add 'vert' for vertebra
+    vert_seg: '{id}_vert-{vert}-seg-vert_msk.nii.gz'
+
+## output directories
+vertebra: vertebra
+seg_roi: seg_roi
+ct_roi: ct_roi
+xray_roi: xray_from_mask
+centroid_roi: centroid_roi
+
+# subject-list
+subject_basepath: VERSE2019/Verse2019-DRR/subjectwise_test/
+subject_list: VERSE2019/Verse2019-DRR/subjectwise_test/subjects_test.lst
