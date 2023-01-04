@@ -4,8 +4,8 @@ import numpy as np
 
 from .tuple_ops import *
 from .metadata_utils import *
-from typing import List
-
+from typing import List,Optional
+from logging import Logger
 
 def ROI_centroid_index_to_start_index(centroid_index, ROI_voxel_size):
     """Given a ROI of size `ROI_voxel_size` in voxel units and whose centroid index is centroid_index,
@@ -69,7 +69,7 @@ def dict_to_tuple(orientation_code, orientation_dict: dict):
 
 def required_padding_v2(img, voxel_size, centroid_index, extraction_ratio: dict, verbose=True):
     extraction_ratio_tuple = dict_to_tuple(
-        get_orientation_code(img), extraction_ratio)
+        get_orientation_code_itk(img), extraction_ratio)
     upperbound_index = add_tuple(centroid_index, multiply_tuple(
         voxel_size, extraction_ratio_tuple))
 
@@ -161,7 +161,7 @@ def extract_bbox(img, seg, label_id, physical_size, padding_value, verbose=True)
     return ROI
 
 
-def extract_around_centroid_v2(img, physical_size, centroid_index, extraction_ratio: dict, padding_value, verbose=True):
+def extract_around_centroid_v2(img, physical_size, centroid_index, extraction_ratio: dict, padding_value, verbose=True,logger:Optional[Logger]=None):
     """extract ROI from img of given physical size at a given ratio w.r.t the centroid_index
 
     Args:
@@ -179,9 +179,13 @@ def extract_around_centroid_v2(img, physical_size, centroid_index, extraction_ra
     assert isinstance(img, sitk.Image)
     voxel_size = physical_size_to_voxel_size(img, physical_size)
 
+
     lb, ub = required_padding_v2(
         img, voxel_size, centroid_index, extraction_ratio,verbose=verbose)
-    padded_img: sitk.Image = sitk.ConstantPad(img, lb, ub, padding_value)
+    lb_padded = add_tuple(lb,(10,)*3)
+    ub_padded = add_tuple(ub,(10,)*3) # the exact padding can be off due to floating point ops, hence add safety padding
+    padded_img: sitk.Image = sitk.ConstantPad(img, lb_padded, ub_padded, padding_value)
+
 
     # find the index of the centrod in the padded image
     original_centroid_coords = img.TransformContinuousIndexToPhysicalPoint(
@@ -191,10 +195,16 @@ def extract_around_centroid_v2(img, physical_size, centroid_index, extraction_ra
 
     # get the start of the ROI
     extraction_tuple = dict_to_tuple(
-        get_orientation_code(img), extraction_ratio)
+        get_orientation_code_itk(img), extraction_ratio)
 
     roi_start_index = ROI_centroid_index_to_start_index_v2(
         padded_centroid_index, voxel_size, extraction_tuple)
+
+    if logger:
+        # check ROI outside the largest possible region
+        roi_outside = [True if elem < 0 else False for elem in subtract_tuple(padded_img.GetSize(), add_tuple(roi_start_index,voxel_size))]
+        if np.any(roi_outside):
+            logger.debug(f'possibly requested ROI outside of region: origin {roi_start_index} to extract {voxel_size} from padded_img size {padded_img.GetSize()} by {subtract_tuple(padded_img.GetSize(), add_tuple(roi_start_index,voxel_size))}')
 
     ROI: sitk.Image = sitk.RegionOfInterest(
         padded_img, voxel_size, roi_start_index)
