@@ -1,5 +1,6 @@
 import SimpleITK as sitk
 from typing import Union,Sequence
+import nibabel as nib
 
 def set_image_metadata(img: sitk.Image, origin, direction, spacing):
     img.SetOrigin(origin)
@@ -30,8 +31,16 @@ def physical_size_to_voxel_size(img, physical_size):
     return tuple([int(p / sp) for p, sp in zip(physical_size, img.GetSpacing())])
 
 
-def get_orientation_code(img_or_affine_mtrx: Union[sitk.Image,Sequence]):
+def get_orientation_code_itk(img_or_affine_mtrx: Union[sitk.Image,Sequence]):
+    """Orientation is a tricky topic:
+    https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Orientation%20Explained
+    
+    """
     if isinstance(img_or_affine_mtrx,sitk.Image):
         return sitk.DICOMOrientImageFilter_GetOrientationFromDirectionCosines(img_or_affine_mtrx.GetDirection())
     else:
         return sitk.DICOMOrientImageFilter_GetOrientationFromDirectionCosines(img_or_affine_mtrx)
+
+def get_orientation_code_nifti(img:nib.Nifti1Image):
+    """get nibabel image and return nifti orientation"""
+    return ''.join(nib.aff2axcodes(img.affine))
