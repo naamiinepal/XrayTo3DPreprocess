@@ -5,9 +5,11 @@ import os
 def get_stem(path):
     """
     '/home/user/image.nii.gz' -> 'image'
+    1.3.6.1.4.1.14519.5.2.1.6279.6001.905371958588660410240398317235.nii.gz ->1.3.6.1.4.1.14519.5.2.1.6279.6001.905371958588660410240398317235
     """
     def _get_stem(path_string) -> str:
-        return Path(path_string).name.split('.')[0]
+        name_subparts = Path(path_string).name.split('.')
+        return '.'.join(name_subparts[:-2]) # get rid of nii.gz
     if isinstance(path, (str, os.PathLike)):
         return _get_stem(path)
 
