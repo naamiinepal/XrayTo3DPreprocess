@@ -4,3 +4,6 @@ from .tuple_ops import *
 from .ioutils import *
 from .enumutils import *
 from .pathutils import *
+from .sitk_utils import *
+from .analysis import *
+from .statistics_utils import *
