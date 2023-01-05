@@ -1,0 +1,4 @@
+dataset,url,md5,zip_filename
+VERSE20,https://s3.bonescreen.de/public/VerSe-complete/dataset-verse20training.zip,23129ea09cf6c1ae35bcd06b7a059ae0,dataset-verse20training.zip
+VERSE20,https://s3.bonescreen.de/public/VerSe-complete/dataset-verse20validation.zip,05bf893f1d8e80364683e257fce9c00b,dataset-verse20validation.zip
+VERSE20,https://s3.bonescreen.de/public/VerSe-complete/dataset-verse20test.zip,d4379909601f5c9638b55af0eb00229b,dataset-verse20test.zip
