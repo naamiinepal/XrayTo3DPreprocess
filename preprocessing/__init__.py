@@ -7,3 +7,5 @@ from .pathutils import *
 from .sitk_utils import *
 from .analysis import *
 from .statistics_utils import *
+from .preprocessing_utils import *
+from .config import *

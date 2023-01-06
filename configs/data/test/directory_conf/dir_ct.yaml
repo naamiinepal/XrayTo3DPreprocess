@@ -1,0 +1,7 @@
+## output directories
+derivatives: derivatives
+xray: xray_from_ct
+seg: seg_roi
+ct: ct_roi
+centroid: centroid_roi
+overlay: overlay

@@ -1,9 +1,22 @@
 ---
-
 # subject-list
 subjects:
-  subject_basepath: VERSE2019/Verse2019-DRR/subjectwise_test/
-  subject_list: VERSE2019/Verse2019-DRR/subjectwise_test/subjects_test.lst
+  subject_basepath: 2D-3D-Reconstruction-Datasets/LIDC-test/subjectwise
+  subject_list: workflow/data/lidc/subjects/subset0.lst
+
+# ROI extraction properties
+ROI_properties:
+  axcode: PIR
+  extraction_ratio: 
+    'L': 0.5
+    'A': 0.5
+    'S': 0.5
+  ct_padding: -1024
+  seg_padding: 0
+  drr_from_ct_mask: False
+  drr_from_mask: False
+  res: 1.0
+  size: 96
 
 # xray image properties
 xray_pose:
@@ -13,26 +26,13 @@ xray_pose:
 out_directories:
   _load: directory_conf/dir_ct.yaml
 
-# ROI extraction properties
-ROI_properties:
-  axcode: PIR
-  extraction_ratio:
-    L: 0.5
-    A: 0.7
-    S: 0.5
-  ct_padding: -1024
-  seg_padding: 0
-  drr_from_ct_mask: False
-  drr_from_mask: False
-  res: 1.0
-  size: 96
-
-# filename conventions
+## input filename format
 filename_convention:
   input:
-    ct: "{id}_ct.nii.gz"
-    seg: "{id}_seg-vert_msk.nii.gz"
-    std: "{id}_seg-vb_ctd.json"
+    ct: '{id:04d}.nii.gz'
+    seg: '{id:04d}_seg.nii.gz'
+    ctd: '{id:04d}_ctd.json'
+## output filename format 
   output:
     vert_xray_ap: "{id}_vert-{vert}_ap.png"
     vert_xray_lat: "{id}_vert-{vert}_lat.png"
@@ -43,3 +43,4 @@ filename_convention:
     vert_seg: '{id}_vert-{vert}-seg-vert_msk.nii.gz'
     vert_overlay_ap: "{id}_vert-{vert}_ap_overlay.png"
     vert_overlay_lat: "{id}_vert-{vert}_lat_overlay.png"
+
