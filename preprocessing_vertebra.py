@@ -86,20 +86,25 @@ if __name__ == '__main__':
 
     subject_basepath = config['subjects']['subject_basepath']
 
-    subject_list = pd.read_csv(config['subjects']['subject_list'],header=None).to_numpy().flatten()
+    subject_list = pd.read_csv(config['subjects']['subject_list'],header=None).to_numpy()
     
     logger.debug(f'found {len(subject_list)} subjects')
     logger.debug(subject_list)
 
 
     for subject_id in tqdm(subject_list, total=len(subject_list)):
-        ct_path = Path(subject_basepath)/subject_id/input_fileformat['ct'].format(id=subject_id)
-        seg_path = Path(subject_basepath)/subject_id/input_fileformat['seg'].format(id=subject_id)
-        centroid_path = Path(subject_basepath)/subject_id/input_fileformat['ctd'].format(id=subject_id)
+        if args.dataset == 'verse2020':
+            subject_id, input_filename_prefix = subject_id
+            ct_path = Path(subject_basepath)/subject_id/input_fileformat['ct'].format(id=input_filename_prefix)
+            seg_path = Path(subject_basepath)/subject_id/input_fileformat['seg'].format(id=input_filename_prefix)
+            centroid_path = Path(subject_basepath)/subject_id/input_fileformat['ctd'].format(id=input_filename_prefix)            
+        else:
+            ct_path = Path(subject_basepath)/subject_id/input_fileformat['ct'].format(id=subject_id)
+            seg_path = Path(subject_basepath)/subject_id/input_fileformat['seg'].format(id=subject_id)
+            centroid_path = Path(subject_basepath)/subject_id/input_fileformat['ctd'].format(id=subject_id)
         
         OUT_DIR_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}'
         OUT_PATH_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}/{{output_name}}'
 
-        logger.debug(OUT_PATH_TEMPLATE)
         create_directories(OUT_DIR_TEMPLATE, config)
         process_subject(subject_id, ct_path, seg_path, args.dataset, centroid_path, config, OUT_PATH_TEMPLATE)
