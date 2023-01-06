@@ -7,14 +7,25 @@ from .enumutils import ImageType, ProjectionType
 from pathlib import Path
 from .metadata_utils import get_orientation_code_itk
 from .roi_utils import extract_around_centroid_v2
+from shutil import which
 
+def command_exists(command_name):
+    """check if a command exists or is in path"""
+    return which(command_name)
+
+def get_DRR_command():
+    possible_commands = ['TwoProjectionRegistrationTestDriver GetDRRSiddonJacobsRayTracing','DRRSiddonJacobs']
+    for cmd in possible_commands:
+        if command_exists(cmd.split(' ')[0]):
+            return cmd
 
 def get_DRRSiddonJacobs_Command_string(input_filepath, output_filepath, orientation, config):
     # DRRSiddonJacobs has to be in path
     res = config['res']
     size = config['size']
+    drr_command_executable = get_DRR_command()
     rx, ry, rz = config[orientation]['rx'], config[orientation]['ry'], config[orientation]['rz']
-    command = f'DRRSiddonJacobs {input_filepath} -o {output_filepath} -rx {rx} -ry {ry} -rz {rz} -res {res} {res} -size {size} {size} > /dev/null 2>&1'
+    command = f'{drr_command_executable} {input_filepath} -o {output_filepath} -rx {rx} -ry {ry} -rz {rz} -res {res} {res} -size {size} {size} > /dev/null 2>&1'
 
     return command
 
