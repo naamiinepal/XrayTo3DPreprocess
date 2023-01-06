@@ -8,12 +8,12 @@ For example,
 mkdir external
 cd external
 wget https://github.com/InsightSoftwareConsortium/ITK/archive/refs/tags/v5.3.0.tar.gz
-tar -xzvf https://github.com/InsightSoftwareConsortium/ITK/archive/refs/tags/v5.3.0.tar.gz
+tar -xzvf v5.3.0.tar.gz
 cd ITK-5.3.0
 mkdir build
 cd build
 cmake .. -DModule_TwoProjectionRegistration=ON -DBUILD_TESTING=ON -DBUILD_EXAMPLES=ON 
-make -j 
+make -j 20
 ```
 3. Add the executable to Path
 
