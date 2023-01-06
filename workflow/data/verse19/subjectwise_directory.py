@@ -1,5 +1,5 @@
 from pathlib import Path
-from preprocessing import get_stem, get_verse_subject_id
+from preprocessing import get_nifti_stem, get_verse_subject_id
 import shutil
 from tqdm import tqdm
 
@@ -20,7 +20,7 @@ if __name__ == '__main__':
     print(image_files)
     for image_file, seg_file, json_file in tqdm(zip(image_files,seg_files,json_files),total=len(seg_files)):
         # extract subject id from file path
-        print(get_stem(image_file),get_verse_subject_id(image_file))
+        print(get_nifti_stem(image_file),get_verse_subject_id(image_file))
 
         subject_id = get_verse_subject_id(image_file)
 
