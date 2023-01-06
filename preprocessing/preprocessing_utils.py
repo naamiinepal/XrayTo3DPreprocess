@@ -56,22 +56,15 @@ def extract_ROI(config: Dict, img: sitk.Image, vertebra_level, vertebra_centroid
     return seg_roi, centroid_heatmap
 
 
-def generate_xray(input_image_path, projection_type: ProjectionType, mask_roi, config, OUT_XRAY_PATH_template, vb_id):
+def generate_xray(input_image_path, projection_type: ProjectionType, mask_roi, config, out_xray_path):
     drr_from_mask = config['drr_from_mask']
     orientation = 'ap' if projection_type == ProjectionType.ap else 'lat'
 
-    # generate output filepath
-    out_xray_path = OUT_XRAY_PATH_template.format(
-        id=id, vert=vb_id, xray_orientation=orientation)
-    Path(out_xray_path).parent.mkdir(exist_ok=True, parents=True)
-
     if drr_from_mask:
         lat_img = simulate_projection(
-            mask_roi, projectiontype=ProjectionType.lat)
+            mask_roi, projectiontype=projection_type)
         write_image(lat_img, out_xray_path)
     else:
         lat_command = get_DRRSiddonJacobs_Command_string(
             input_image_path, out_xray_path, orientation=orientation, config=config)
         os.system(lat_command)
-
-    return out_xray_path
