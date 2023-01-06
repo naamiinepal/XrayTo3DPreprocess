@@ -1,6 +1,5 @@
 from pathlib import Path
 import shutil
-from tqdm import tqdm
 import pandas as pd
 
 if __name__ == '__main__':
@@ -28,14 +27,14 @@ if __name__ == '__main__':
 
     def create_subjectwise_dir(subject_list):
         for subject_id, lidc_id in subject_list:
-            subject_dir = f'{dest_dir}/{subject_id:04d}'
+            subject_dir = f'{dest_dir}/LIDC-{subject_id:04d}'
             print(subject_dir)
             # create the subject dir if it does not exist
             Path(subject_dir).mkdir(exist_ok=True, parents=True)
 
             # copy image, seg and json files to destination dir
-            shutil.copy(image_name.format(lidc_id=lidc_id),Path(subject_dir)/f'{subject_id:04d}.nii.gz')
-            shutil.copy(seg_name.format(lidc_id=lidc_id),Path(subject_dir)/f'{subject_id:04d}_seg.nii.gz')
-            shutil.copy(json_name.format(lidc_id=lidc_id),Path(subject_dir)/f'{subject_id:04d}_ctd.json')
+            shutil.copy(image_name.format(lidc_id=lidc_id),Path(subject_dir)/f'LIDC-{subject_id:04d}.nii.gz')
+            shutil.copy(seg_name.format(lidc_id=lidc_id),Path(subject_dir)/f'LIDC-{subject_id:04d}_seg.nii.gz')
+            shutil.copy(json_name.format(lidc_id=lidc_id),Path(subject_dir)/f'LIDC-{subject_id:04d}_ctd.json')
     
     create_subjectwise_dir(df.to_numpy())
