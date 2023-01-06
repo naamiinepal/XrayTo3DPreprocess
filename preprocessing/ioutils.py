@@ -1,6 +1,6 @@
 import SimpleITK as sitk
 from pathlib import Path
-from .enumutils import ImagePixelType
+from .enumutils import ImageType
 import json
 import yaml
 import logging

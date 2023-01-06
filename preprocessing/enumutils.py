@@ -1,8 +1,8 @@
 from enum import Enum,auto
 
-class ImagePixelType(Enum):
-    ImageType = auto()
-    SegmentationType = auto()
+class ImageType(Enum):
+    Image = auto()
+    Segmentation = auto()
 
 class ProjectionType(Enum):
     ap = auto()
