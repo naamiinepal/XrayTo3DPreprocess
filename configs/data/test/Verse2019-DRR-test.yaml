@@ -8,7 +8,11 @@ subjects:
 # xray image properties
 xray_pose:
   _load: xray_pose_conf/${ROI_properties.axcode}_pose.yaml
-
+  res: ${ROI_properties.res}
+  size: ${ROI_properties.size}
+  drr_from_ct_mask: ${ROI_properties.drr_from_ct_mask}
+  drr_from_mask: ${ROI_properties.drr_from_mask}
+  
 # output directories
 out_directories:
   _load: directory_conf/dir_ct.yaml
@@ -32,7 +36,7 @@ filename_convention:
   input:
     ct: "{id}_ct.nii.gz"
     seg: "{id}_seg-vert_msk.nii.gz"
-    std: "{id}_seg-vb_ctd.json"
+    ctd: "{id}_seg-vb_ctd.json"
   output:
     vert_xray_ap: "{id}_vert-{vert}_ap.png"
     vert_xray_lat: "{id}_vert-{vert}_lat.png"

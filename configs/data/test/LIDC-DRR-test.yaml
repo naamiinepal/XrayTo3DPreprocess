@@ -2,7 +2,15 @@
 # subject-list
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/LIDC-test/subjectwise
-  subject_list: workflow/data/lidc/subjects/subset0.lst
+  subject_list: configs/data/test/lidc_subjects_test.lst
+
+# xray image properties
+xray_pose:
+  _load: xray_pose_conf/${ROI_properties.axcode}_pose.yaml
+  res: ${ROI_properties.res}
+  size: ${ROI_properties.size}
+  drr_from_ct_mask: ${ROI_properties.drr_from_ct_mask}
+  drr_from_mask: ${ROI_properties.drr_from_mask}
 
 # ROI extraction properties
 ROI_properties:
@@ -13,14 +21,12 @@ ROI_properties:
     'S': 0.5
   ct_padding: -1024
   seg_padding: 0
-  drr_from_ct_mask: False
-  drr_from_mask: False
+  drr_from_ct_mask: True
+  drr_from_mask: True
   res: 1.0
   size: 96
 
-# xray image properties
-xray_pose:
-  _load: xray_pose_conf/${ROI_properties.axcode}_pose.yaml
+
 
 # output directories
 out_directories:
@@ -29,9 +35,9 @@ out_directories:
 ## input filename format
 filename_convention:
   input:
-    ct: '{id:04d}.nii.gz'
-    seg: '{id:04d}_seg.nii.gz'
-    ctd: '{id:04d}_ctd.json'
+    ct: '{id}.nii.gz'
+    seg: '{id}_seg.nii.gz'
+    ctd: '{id}_ctd.json'
 ## output filename format 
   output:
     vert_xray_ap: "{id}_vert-{vert}_ap.png"
