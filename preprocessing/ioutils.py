@@ -20,7 +20,10 @@ def strip_item(item,strip='\n'):
 def get_logger(name,level=logging.DEBUG):
     logger = logging.getLogger(name)
     logger.setLevel(level)
-    file_handler = logging.FileHandler(f'logs/{name}.log','w')
+    filepath = f'logs/{name}.log'
+    Path(filepath).parent.mkdir(exist_ok=True,parents=True)
+    
+    file_handler = logging.FileHandler(filepath,'w')
     file_handler.setFormatter(logging.Formatter('%(message)s'))
     logger.addHandler(file_handler)
     return logger
