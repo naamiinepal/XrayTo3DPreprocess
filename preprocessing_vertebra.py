@@ -53,8 +53,8 @@ def generate_path(sub_dir:str, name:str, vb_id, subject_id, output_path_template
     output_fileformat = config['filename_convention']['output']
     out_dirs = config['out_directories']    
     filename = output_fileformat[name].format(id=subject_id,vert=vb_id)
-    out_seg_path = output_path_template.format(output_type=out_dirs[sub_dir],output_name=filename)
-    return out_seg_path
+    out_path = output_path_template.format(output_type=out_dirs[sub_dir],output_name=filename)
+    return out_path
 
 def create_directories(out_path_template, config):
     for key, out_dir in config['out_directories'].items():
@@ -87,6 +87,9 @@ if __name__ == '__main__':
     subject_basepath = config['subjects']['subject_basepath']
 
     subject_list = pd.read_csv(config['subjects']['subject_list'],header=None).to_numpy()
+
+    if args.dataset != 'lidc':
+        subject_list = subject_list.flatten()
     
     logger.debug(f'found {len(subject_list)} subjects')
     logger.debug(subject_list)
