@@ -2,7 +2,7 @@
 # subject-list
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/LIDC-test/subjectwise
-  subject_list: configs/data/test/lidc_subjects_test.lst
+  subject_list: configs/subjects_list/lidc_subjects_test.lst
 
 # xray image properties
 xray_pose:
@@ -21,8 +21,8 @@ ROI_properties:
     'S': 0.5
   ct_padding: -1024
   seg_padding: 0
-  drr_from_ct_mask: True
-  drr_from_mask: True
+  drr_from_ct_mask: False
+  drr_from_mask: False
   res: 1.0
   size: 96
 
