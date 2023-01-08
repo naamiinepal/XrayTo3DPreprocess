@@ -6,7 +6,13 @@ setup(name='xrayto3d_preprocess',
       url="https://github.com/naamiinepal/XrayTo3DPreprocess",
       author="Mahesh Shakya",
       author_email="mahesh.shakya@naamii.org.np",
-      packages=find_packages(),
+      packages=find_packages(exclude=['build','docs']),
+      install_requires=[
+            'simpleitk<2.1.0', # temporary fix ITK ERROR: ITK only supports orthonormal direction cosines. No orthonormal definition found! 
+            'omegaconf',
+            'nibabel',
+            'pandas'
+      ],
       keywords="Python utilities simpleitk biomedical",
       classifiers=['Development Status :: 3 - Alpha',
                    'Intended Audience :: Science/Research',
