@@ -58,9 +58,8 @@ def read_image(img_path):
     -----------
     pixeltype (ImagePixelType):
     """
-
-    if isinstance(img_path, Path):
-        img_path = str(img_path)
+    img_path = Path(img_path).resolve()
+    img_path = str(img_path)
 
     # if pixeltype == ImagePixelType.ImageType:
     #     pixeltype = sitk.sitkUInt16
