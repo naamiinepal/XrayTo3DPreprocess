@@ -1,5 +1,5 @@
 from pathlib import Path
-from preprocessing import get_nifti_stem, get_verse_subject_id
+from xrayto3d_preprocess import get_nifti_stem, get_verse_subject_id
 import shutil
 from tqdm import tqdm
 import sys

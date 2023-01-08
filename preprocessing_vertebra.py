@@ -1,8 +1,7 @@
-from preprocessing import *
+from xrayto3d_preprocess import *
 import numpy as np
 
 def process_subject(subject_id, ct_path, seg_path, dataset_name, centroid_path, config,output_path_template):
-
     # read inputs
     ct = read_image(ct_path)
     seg = read_image(seg_path)
@@ -78,6 +77,8 @@ if __name__ == '__main__':
     logger = get_logger(dataset_name)
 
     logger.debug(f'Generating dataset {dataset_name}')
+    if args.dataset:
+        logger.debug(f'args.dataset {args.dataset}')
     logger.debug(f'Configuration {config}')
 
     # define paths
@@ -88,11 +89,15 @@ if __name__ == '__main__':
 
     subject_list = pd.read_csv(config['subjects']['subject_list'],header=None).to_numpy()
     
+    if args.dataset == 'lidc':
+        subject_list = subject_list.flatten()
+
     logger.debug(f'found {len(subject_list)} subjects')
     logger.debug(subject_list)
 
 
     for subject_id in tqdm(subject_list, total=len(subject_list)):
+        logger.debug(f'subject {subject_id}')
         if args.dataset == 'verse2020':
             subject_id, input_filename_prefix = subject_id
             ct_path = Path(subject_basepath)/subject_id/input_fileformat['ct'].format(id=input_filename_prefix)

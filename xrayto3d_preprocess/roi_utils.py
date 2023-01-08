@@ -327,7 +327,7 @@ def combine_segmentations(imgs: List[sitk.Image], ref_img: sitk.Image, fill_labe
 
 
 if __name__ == '__main__':
-    from preprocessing import read_image, write_image, load_centroids
+    from xrayto3d_preprocess import read_image, write_image, load_centroids
 
     centroid_jsonpath = '2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse835/sub-verse835_dir-iso_seg-subreg_ctd.json'
     ct_path = '2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse835/sub-verse835_dir-iso_ct.nii.gz'

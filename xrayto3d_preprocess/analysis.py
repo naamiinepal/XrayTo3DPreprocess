@@ -1,5 +1,5 @@
 if __name__ == '__main__':
-    from preprocessing import read_image, load_centroids
+    from xrayto3d_preprocess import read_image, load_centroids
     import SimpleITK as sitk
     import matplotlib.pyplot as plt
     from mpl_toolkits import mplot3d

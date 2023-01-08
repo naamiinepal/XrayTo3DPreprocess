@@ -1,6 +1,6 @@
 from pathlib import Path
 import SimpleITK as sitk
-from preprocessing import get_orientation_code_itk, get_orientation_code_nifti,read_nibabel,get_verse_subject_id
+from xrayto3d_preprocess import get_orientation_code_itk, get_orientation_code_nifti,read_nibabel,get_verse_subject_id
 import pandas as pd
 
 def get_statistics_for_entire_dir(ct_file):
