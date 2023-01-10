@@ -30,16 +30,22 @@ def process_subject(subject_id, ct_path, seg_path, dataset_name, centroid_path, 
         out_centroid_path = generate_path('centroid','vert_centroid',vb_id,subject_id,output_path_template,config)
         write_image(centroid_heatmap,out_centroid_path)
         
-        out_xray_ap_path = generate_path('xray_from_ct','vert_xray_ap',vb_id,subject_id,output_path_template,config)
+        if config['ROI_properties']['drr_from_ct_mask']:
+            out_dir = 'xray_from_ctmask'
+        elif config['ROI_properties']['drr_from_mask']:
+            out_dir = 'xray_from_mask'
+        else:
+            out_dir = 'xray_from_ct'
+        out_xray_ap_path = generate_path(out_dir,'vert_xray_ap',vb_id,subject_id,output_path_template,config)
         generate_xray(out_ct_path, ProjectionType.ap, seg_roi, config['xray_pose'], out_xray_ap_path)
 
-        out_xray_lat_path = generate_path('xray_from_ct','vert_xray_lat',vb_id,subject_id,output_path_template,config)
+        out_xray_lat_path = generate_path(out_dir,'vert_xray_lat',vb_id,subject_id,output_path_template,config)
         generate_xray(out_ct_path, ProjectionType.lat, seg_roi, config['xray_pose'], out_xray_lat_path)
 
-        out_ctd_xray_ap_path = generate_path('xray_from_ct','vert_centroid_xray_ap',vb_id,subject_id,output_path_template,config) 
+        out_ctd_xray_ap_path = generate_path(out_dir,'vert_centroid_xray_ap',vb_id,subject_id,output_path_template,config) 
         generate_xray(out_centroid_path, ProjectionType.ap, centroid_heatmap, config['xray_pose'], out_ctd_xray_ap_path)
 
-        out_ctd_xray_lat_path = generate_path('xray_from_ct','vert_centroid_xray_lat',vb_id,subject_id,output_path_template,config)
+        out_ctd_xray_lat_path = generate_path(out_dir,'vert_centroid_xray_lat',vb_id,subject_id,output_path_template,config)
         generate_xray(out_centroid_path, ProjectionType.lat, centroid_heatmap, config['xray_pose'],out_ctd_xray_lat_path)
 
         # generate visualization overlays
