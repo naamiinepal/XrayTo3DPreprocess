@@ -13,6 +13,11 @@ def keep_only_label(segmentation:sitk.Image, label_id) -> sitk.Image:
     """If the segmentation contains more than one labels, keep only label_id"""
     return sitk.Threshold(segmentation, label_id, label_id, 0)
 
+def get_segmentation_labels(segmentation:sitk.Image):
+    fltr = sitk.LabelShapeStatisticsImageFilter()
+    fltr.Execute(segmentation)
+    return fltr.GetLabels()
+    
 def get_interpolator(interpolator: str):
     """Utility function to converte string representation of interpolator to sitk.sitkInterpolator type"""
     if interpolator == 'nearest':

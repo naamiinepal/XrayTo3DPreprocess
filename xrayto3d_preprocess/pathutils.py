@@ -46,6 +46,7 @@ def get_verse_subject_id(file_path):
         return '_'.join(file_components[0:2])
     else:
         return file_components[0]
+    
         
 if __name__ == '__main__':
     print(get_file_format_suffix('/home/user/image.nii.gz'))

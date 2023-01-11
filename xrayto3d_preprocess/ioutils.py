@@ -6,7 +6,7 @@ import yaml
 import logging
 from logging.handlers import RotatingFileHandler
 import nibabel as nib
-
+import pandas as pd
 def read_nibabel(image_path):
     return nib.load(image_path)
     
@@ -16,6 +16,9 @@ def read_yaml(yaml_path):
 
 def strip_item(item,strip='\n'):
     return item.strip(strip)
+
+def read_subject_list(subject_list_path):
+    return pd.read_csv(subject_list_path,header=None).to_numpy()
 
 def get_logger(name,level=logging.DEBUG):
     logger = logging.getLogger(name)
