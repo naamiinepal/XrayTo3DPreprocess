@@ -7,7 +7,7 @@ def process_subject(subject_id, ct_path, seg_path, dataset_name, centroid_path, 
     seg = read_image(seg_path)
     centroid_orientation, centroids = load_centroids(centroid_path)
 
-    logger.debug(f'Image Size {ct.GetSize()} Spacing {np.around(ct.GetSpacing())}')
+    logger.debug(f'Image Size {ct.GetSize()} Spacing {np.around(ct.GetSpacing(),3)}')
 
     for vb_id, *ctd in centroids:
         logger.debug(f'Vertebra {vb_id}')
