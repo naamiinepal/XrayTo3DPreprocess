@@ -182,8 +182,8 @@ def extract_around_centroid_v2(img, physical_size, centroid_index, extraction_ra
 
     lb, ub = required_padding_v2(
         img, voxel_size, centroid_index, extraction_ratio,verbose=verbose)
-    lb_padded = add_tuple(lb,(10,)*3)
-    ub_padded = add_tuple(ub,(10,)*3) # the exact padding can be off due to floating point ops, hence add safety padding
+    lb_padded = add_tuple(lb,(50,)*3)
+    ub_padded = add_tuple(ub,(50,)*3) # the exact padding can be off due to floating point ops, hence add safety padding
     padded_img: sitk.Image = sitk.ConstantPad(img, lb_padded, ub_padded, padding_value)
 
 
