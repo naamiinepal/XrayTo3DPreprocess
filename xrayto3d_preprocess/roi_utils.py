@@ -131,7 +131,9 @@ def extract_bbox(img, seg, label_id, physical_size, padding_value, verbose=True)
     centroid_index = img.TransformPhysicalPointToIndex(
         fltr.GetCentroid(label_id))
     lb, ub = required_padding(img, voxel_size, centroid_index, verbose=True)
-    padded_img: sitk.Image = sitk.ConstantPad(img, lb, ub, padding_value)
+    lb_padded = add_tuple(lb,(50,)*3)
+    ub_padded = add_tuple(ub,(50,)*3) # the exact padding can be off due to floating point ops, hence add safety padding    
+    padded_img: sitk.Image = sitk.ConstantPad(img, lb_padded, ub_padded, padding_value)
 
     # find the index of the centroid in the padded image
     padded_centroid_index = padded_img.TransformPhysicalPointToIndex(
