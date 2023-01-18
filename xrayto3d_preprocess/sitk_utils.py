@@ -17,6 +17,11 @@ def get_segmentation_labels(segmentation:sitk.Image):
     fltr = sitk.LabelShapeStatisticsImageFilter()
     fltr.Execute(segmentation)
     return fltr.GetLabels()
+
+def get_segmentation_stats(segmentation: sitk.Image)->sitk.LabelShapeStatisticsImageFilter:
+    fltr = sitk.LabelShapeStatisticsImageFilter()
+    fltr.Execute(segmentation)
+    return fltr
     
 def get_interpolator(interpolator: str):
     """Utility function to converte string representation of interpolator to sitk.sitkInterpolator type"""
