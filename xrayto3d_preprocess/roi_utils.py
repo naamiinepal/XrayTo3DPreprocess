@@ -85,16 +85,6 @@ def required_padding_v2(img, voxel_size, centroid_index, extraction_ratio: dict,
     # since we truncate the decimal part of the index, the volume may not be exact
     # we will handle this by Padding 1 px later on
 
-    # try:
-    #     np.testing.assert_array_equal(np.array(voxel_size), np.array(
-    #     subtract_tuple(upperbound_index, lowerbound_index)))
-    # except AssertionError as e:
-    #     obtained_size = subtract_tuple(upperbound_index,lowerbound_index)
-    #     expected_size = voxel_size
-    #     diff = subtract_tuple(expected_size, obtained_size)
-    #     print('diff',diff,'new_lb',lowerbound_index,)
-    #     upperbound_index = add_tuple(diff,upperbound_index)
-
     TRUNCATION_ERROR = 1 # add 1 voxel to account for truncation error         
     upperbound_pad = tuple([TRUNCATION_ERROR + int(max(0, ub_idx - im_idx))
                            for im_idx, ub_idx in zip(img.GetSize(), upperbound_index)])
