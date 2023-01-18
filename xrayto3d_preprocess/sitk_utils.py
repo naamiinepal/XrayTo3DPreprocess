@@ -72,15 +72,17 @@ def simulate_projection(segmentation:sitk.Image,projectiontype:ProjectionType) -
             projectionDimension = orientation.index('L')
         elif 'R' in orientation:
             projectionDimension = orientation.index('R')
+    else:
+        raise ValueError(f'Projection type should be one of {ProjectionType.ap} or {ProjectionType.lat}')
 
-    prj = sitk.MeanProjection(segmentation,projectionDimension=projectionDimension)
-    prj = sitk.Cast(sitk.RescaleIntensity(prj),sitk.sitkUInt8)
+    projection = sitk.MeanProjection(segmentation,projectionDimension=projectionDimension)
+    projection = sitk.Cast(sitk.RescaleIntensity(projection),sitk.sitkUInt8)
     if projectionDimension == 0:
-        return prj[0,:,:]
+        return projection[0,:,:]
     elif projectionDimension == 1:
-        return prj[:,0,:]
+        return projection[:,0,:]
     elif projectionDimension == 2:
-        return prj[:,:,0]
+        return projection[:,:,0]
 
 def rotate_about_image_center(img: sitk.Image, rx,ry,rz):
     """rotation angles are assumed to be given in degrees"""
