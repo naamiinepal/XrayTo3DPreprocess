@@ -1,0 +1,1205 @@
+﻿image_id;age;gender;institute;study_type;split
+s0000;32;f;H;ct pelvis;val
+s0001;59;f;H;ct abdomen-pelvis;train
+s0002;49;f;H;ct thorax-neck;train
+s0003;51;f;H;ct spine;train
+s0004;72;f;C;ct thorax-abdomen-pelvis;train
+s0006;48;m;H;ct abdomen-pelvis;train
+s0009;86;f;H;ct spine;train
+s0010;61;m;H;ct abdomen-pelvis;train
+s0011;45;m;C;ct neck-thorax-abdomen-pelvis;train
+s0012;51;f;C;ct abdomen-pelvis;train
+s0013;63;m;H;ct abdomen-pelvis;test
+s0014;73;f;H;ct abdomen-pelvis;train
+s0015;56;m;H;ct abdomen-pelvis;train
+s0016;80;m;H;ct angiography abdomen-pelvis-leg;train
+s0019;75;m;H;ct aortic valve;train
+s0021;45;m;H;ct neck;val
+s0022;50;m;H;ct abdomen-pelvis;train
+s0024;69;m;F;ct thorax-abdomen;train
+s0025;85;m;H;ct spine;train
+s0028;60;f;C;ct neck-thorax-abdomen-pelvis;train
+s0029;62;m;H;ct thorax-abdomen-pelvis;test
+s0030;75;f;H;ct abdomen-pelvis;train
+s0031;85;m;C;ct angiography abdomen-pelvis-leg;train
+s0032;42;f;H;ct heart-thorakale aorta;val
+s0034;58;f;H;ct angiography pelvis-leg;train
+s0035;58;m;H;ct upper limb both;train
+s0036;43;m;H;ct spine;train
+s0037;55;f;H;ct thorax-chest;train
+s0038;53;f;B;ct neck-thorax-abdomen-pelvis;test
+s0039;48;f;H;ct abdomen-pelvis;train
+s0040;52;m;C;ct thorax-abdomen-pelvis;test
+s0042;52;m;C;ct abdomen-pelvis;train
+s0043;49;f;C;ct neck;train
+s0044;47;f;H;ct neck;train
+s0045;69;m;H;ct angiography abdomen-pelvis-leg;val
+s0046;79;m;B;ct thorax-neck;train
+s0048;68;m;H;ct abdomen-pelvis;train
+s0049;64;m;H;ct aortic valve;train
+s0050;33;m;C;ct thorax-abdomen;train
+s0052;76;m;H;ct abdomen-pelvis;train
+s0053;30;m;H;ct abdomen-pelvis;train
+s0054;76;f;H;ct abdomen-pelvis;train
+s0056;85;m;H;ct neck;train
+s0057;65;m;H;ct thorax-chest;train
+s0058;70;f;H;ct thorax-abdomen-pelvis;train
+s0059;48;f;H;ct thorax-abdomen-pelvis;train
+s0061;58;m;C;ct neck;train
+s0062;60;m;C;ct pelvis;train
+s0063;72;m;H;ct neck;train
+s0065;78;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0066;54;f;H;ct abdomen-pelvis;train
+s0067;86;f;H;ct thorax-neck;train
+s0068;70;f;C;ct spine;train
+s0069;69;f;H;ct  intervention ;train
+s0070;24;f;C;ct neck-thorax-abdomen-pelvis;train
+s0071;82;f;C;ct thorax-abdomen-pelvis;train
+s0072;69;m;C;ct abdomen-pelvis;train
+s0073;70;m;H;ct abdomen-pelvis;train
+s0074;51;m;C;ct pelvis;train
+s0075;56;m;H;ct abdomen-pelvis;train
+s0076;45;m;H;ct aortic valve;train
+s0077;79;m;H;ct abdomen-pelvis;train
+s0078;74;m;H;ct abdomen-pelvis;train
+s0079;60;m;H;ct neck;train
+s0080;68;m;C;ct thorax-neck;train
+s0081;53;m;H;ct spine;train
+s0082;38;f;C;ct abdomen-pelvis;train
+s0083;55;m;H;ct coronary arteries;train
+s0084;61;f;H;ct coronary arteries;train
+s0085;47;f;H;ct coronary arteries;train
+s0086;72;m;C;ct neck-thorax-abdomen-pelvis;train
+s0088;73;m;H;ct abdomen-pelvis;train
+s0089;79;f;H;ct neck-thorax-abdomen-pelvis;train
+s0090;69;f;C;ct abdomen-pelvis;train
+s0091;82;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0092;25;m;H;ct abdomen-pelvis;train
+s0095;75;m;H;ct aortic valve;val
+s0096;84;m;H;ct angiography abdomen-pelvis-leg;train
+s0098;52;m;H;ct abdomen-pelvis;train
+s0099;70;m;H;ct spine;train
+s0100;63;f;H;ct spine;train
+s0101;22;m;H;ct orbita;train
+s0102;42;m;B;ct thorax-abdomen;train
+s0103;43;m;H;ct polytrauma head;train
+s0104;82;f;H;ct pelvis;train
+s0105;79;m;H;ct  intervention ;train
+s0106;54;m;H;ct abdomen-pelvis;train
+s0107;85;f;H;ct abdomen-pelvis;train
+s0108;52;m;H;ct neck-thorax-abdomen-pelvis;train
+s0109;74;m;C;ct abdomen-pelvis;train
+s0110;57;m;C;ct thorax-neck;train
+s0111;65;m;H;ct aortic valve;train
+s0112;71;f;C;ct neck;train
+s0114;61;f;H;ct thorax-neck;train
+s0115;52;m;H;ct angiography thorax;train
+s0117;50;m;H;ct abdomen-pelvis;train
+s0119;41;m;H;ct abdomen-pelvis;test
+s0120;61;m;C;ct abdomen-pelvis;train
+s0122;54;f;A;ct lower limb left;train
+s0123;79;m;C;ct neck-thorax-abdomen-pelvis;val
+s0124;68;m;H;ct angiography abdomen-pelvis-leg;train
+s0128;50;f;F;ct abdomen;train
+s0129;52;m;H;ct spine;train
+s0130;72;m;H;ct spine;train
+s0131;41;m;H;ct abdomen-pelvis;train
+s0132;54;m;H;ct abdomen-pelvis;train
+s0133;70;m;H;ct abdomen-pelvis;train
+s0135;68;m;C;ct thorax-chest;train
+s0136;59;m;H;ct spine;train
+s0137;66;f;H;ct abdomen-pelvis;train
+s0138;69;f;H;ct heart-thorakale aorta;train
+s0139;27;f;H;ct abdomen-pelvis;train
+s0140;64;m;H;ct thorax-neck;train
+s0141;55;f;H;ct neck-thorax-abdomen-pelvis;train
+s0143;25;m;H;ct abdomen-pelvis;train
+s0145;56;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0146;77;m;H;ct thorax-abdomen-pelvis;train
+s0147;55;m;H;ct chest;train
+s0149;51;m;H;ct spine;train
+s0150;79;m;B;ct abdomen;train
+s0151;68;m;C;ct abdomen-pelvis;train
+s0152;71;m;H;ct angiography head;train
+s0153;36;m;C;ct abdomen-pelvis;train
+s0154;48;m;H;ct spine;train
+s0156;60;f;H;ct abdomen-pelvis;train
+s0157;77;f;H;ct abdomen-pelvis;train
+s0158;47;m;C;ct abdomen-pelvis;train
+s0159;39;m;H;ct  operation;train
+s0160;54;f;H;ct abdomen-pelvis;train
+s0161;53;m;C;ct abdomen-pelvis;train
+s0162;59;m;H;ct thorax-abdomen-pelvis;train
+s0163;51;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0165;49;f;C;ct thorax-abdomen;train
+s0166;55;m;H;ct abdomen-pelvis;train
+s0167;35;f;H;ct neck;train
+s0168;64;f;H;ct abdomen;train
+s0169;75;m;H;ct spine;train
+s0170;55;m;H;ct neck;train
+s0171;78;f;H;ct angiography abdomen-pelvis-leg;train
+s0172;21;m;H;ct spine;train
+s0174;57;f;H;ct neck-thorax-abdomen-pelvis;train
+s0175;59;m;H;ct thorax-abdomen-pelvis;train
+s0178;61;m;H;ct abdomen-pelvis;train
+s0179;40;f;H;ct abdomen;train
+s0181;78;f;H;ct  intervention ;train
+s0182;48;m;H;ct abdomen-pelvis;train
+s0183;69;m;B;ct abdomen;train
+s0184;63;m;H;ct heart-thorakale aorta;train
+s0185;48;m;H;ct spine;train
+s0187;27;m;H;ct polytrauma head;train
+s0188;59;f;H;ct pelvis;train
+s0189;50;m;H;ct aortic valve;train
+s0190;58;f;H;ct thorax-abdomen-pelvis;train
+s0191;74;f;H;ct spine;train
+s0192;27;f;C;ct neck-thorax-abdomen-pelvis;train
+s0193;67;m;C;ct abdomen-pelvis;train
+s0194;67;f;B;ct abdomen;train
+s0196;75;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0197;54;f;C;ct thorax-neck;train
+s0199;61;m;H;ct thorax-abdomen-pelvis;train
+s0201;50;f;H;ct abdomen-pelvis;train
+s0204;35;m;C;ct abdomen-pelvis;train
+s0206;81;f;B;ct abdomen;train
+s0208;54;m;H;ct spine;train
+s0209;61;m;H;ct spine;train
+s0210;50;m;H;ct angiography abdomen-pelvis-leg;train
+s0211;83;m;H;ct abdomen-pelvis;train
+s0212;66;m;H;ct thorax-abdomen;train
+s0213;32;m;B;ct thorax-chest;train
+s0215;56;f;H;ct thorax-chest;train
+s0216;36;f;H;ct angiography abdomen-pelvis-leg;val
+s0217;85;m;H;ct neck;train
+s0218;69;f;H;ct abdomen-pelvis;train
+s0219;75;f;H;ct  intervention ;train
+s0220;29;f;H;ct thorax-chest;train
+s0221;60;f;C;ct spine;train
+s0222;66;m;H;ct abdomen-pelvis;train
+s0223;66;f;H;ct thorax-neck;train
+s0224;46;m;H;ct polytrauma;train
+s0226;56;f;H;ct neck;train
+s0227;63;f;H;ct thorax-abdomen-pelvis;train
+s0228;43;m;C;ct abdomen-pelvis;train
+s0229;54;m;H;ct  intervention ;train
+s0230;19;m;H;ct heart-thorakale aorta;test
+s0231;60;m;C;ct thorax-chest;train
+s0232;84;m;B;ct abdomen;train
+s0233;59;f;H;ct spine;train
+s0234;75;m;H;ct spine;train
+s0235;43;f;H;ct abdomen-pelvis;test
+s0236;77;m;C;ct abdomen-pelvis;test
+s0237;45;f;H;ct abdomen-pelvis;train
+s0238;17;m;H;ct abdomen-pelvis;train
+s0239;51;m;H;ct angiography abdomen-pelvis-leg;train
+s0240;63;m;H;ct thorax-neck;train
+s0241;65;f;H;ct thorax-abdomen-pelvis;train
+s0242;22;f;H;ct abdomen-pelvis;train
+s0243;55;m;C;ct abdomen-pelvis;train
+s0244;83;m;H;ct abdomen-pelvis;test
+s0245;77;m;H;ct abdomen-pelvis;train
+s0246;48;f;H;ct abdomen-pelvis;train
+s0247;51;f;H;ct abdomen-pelvis;train
+s0248;72;f;C;ct neck-thorax-abdomen-pelvis;train
+s0249;65;m;H;ct abdomen-pelvis;val
+s0250;68;m;H;ct neck-thorax-abdomen-pelvis;train
+s0252;39;f;H;ct abdomen-pelvis;train
+s0253;59;f;H;ct thorax-chest;train
+s0254;57;m;H;ct neck;train
+s0255;59;f;H;ct abdomen-pelvis;train
+s0256;42;f;H;ct thorax-chest;train
+s0257;81;f;H;ct angiography abdomen-pelvis-leg;train
+s0258;42;m;H;ct abdomen-pelvis;train
+s0259;57;f;H;ct neck;train
+s0260;48;f;H;ct neck-thorax-abdomen-pelvis;train
+s0261;55;m;H;ct abdomen;train
+s0262;30;m;H;ct abdomen-pelvis;train
+s0263;48;m;H;ct neck;train
+s0264;48;f;H;ct thorax-chest;train
+s0265;44;f;H;ct  intervention ;train
+s0266;52;m;H;ct thorax-chest;train
+s0270;66;m;H;ct heart;train
+s0271;62;m;H;ct angiography thorax;train
+s0275;48;m;H;ct abdomen-pelvis;train
+s0277;44;f;H;ct neck;train
+s0278;62;f;H;ct spine;train
+s0279;64;m;C;ct neck;train
+s0281;70;m;C;ct neck;train
+s0282;70;f;C;ct spine;train
+s0283;57;m;H;ct  intervention ;train
+s0285;71;f;H;ct thorax-abdomen-pelvis;train
+s0286;77;m;H;ct abdomen-pelvis;train
+s0287;77;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0288;67;m;H;ct spine;train
+s0289;52;f;H;ct angiography head;train
+s0290;54;f;H;ct  intervention ;train
+s0291;63;f;C;ct neck-thorax-abdomen-pelvis;test
+s0292;67;m;H;ct angiography head;train
+s0293;76;m;B;ct abdomen;train
+s0294;49;m;H;ct thorax-chest;train
+s0295;53;f;C;ct spine;test
+s0296;81;f;A;ct spine;train
+s0298;70;m;C;ct abdomen-pelvis;train
+s0299;79;m;C;ct thorax-abdomen;train
+s0300;76;m;C;ct thorax-abdomen-pelvis;train
+s0301;79;m;C;ct pelvis;train
+s0303;77;f;H;ct thorax-neck;train
+s0304;74;m;C;ct abdomen-pelvis;train
+s0305;68;m;H;ct angiography abdomen-pelvis-leg;train
+s0306;50;m;H;ct abdomen-pelvis;train
+s0307;66;f;B;ct neck-thorax-abdomen-pelvis;train
+s0308;59;m;H;ct angiography abdomen-pelvis-leg;test
+s0310;26;f;H;ct thorax-neck;train
+s0311;53;m;C;ct abdomen-pelvis;test
+s0312;78;f;H;ct spine;train
+s0313;72;f;H;ct spine;train
+s0314;83;m;H;ct abdomen-pelvis;train
+s0315;51;m;C;ct thorax-chest;train
+s0316;61;f;H;ct  intervention ;train
+s0319;70;m;H;ct abdomen-pelvis;train
+s0320;80;m;H;ct angiography abdomen-pelvis-leg;train
+s0321;60;f;C;ct neck-thorax-abdomen-pelvis;train
+s0322;65;m;C;ct thorax-abdomen-pelvis;train
+s0324;54;f;H;ct abdomen-pelvis;val
+s0325;63;f;H;ct abdomen-pelvis;train
+s0326;52;m;C;ct neck;train
+s0327;70;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0328;59;m;H;ct abdomen-pelvis;train
+s0329;42;m;C;ct abdomen-pelvis;train
+s0330;67;f;H;ct  intervention ;train
+s0331;47;m;B;ct thorax-abdomen;train
+s0332;69;m;H;ct thorax-abdomen-pelvis;train
+s0333;82;m;H;ct angiography head;train
+s0334;47;m;D;ct neck-thorax-abdomen-pelvis;train
+s0335;54;f;H;ct heart;train
+s0336;58;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0338;58;m;H;ct heart;train
+s0339;85;f;A;ct abdomen;train
+s0340;59;m;H;ct angiography head;train
+s0341;75;m;B;ct thorax-abdomen;train
+s0342;61;f;D;ct abdomen;train
+s0343;75;m;H;ct aortic valve;train
+s0344;59;m;H;ct thorax-abdomen-pelvis;train
+s0345;53;m;H;ct spine;train
+s0346;62;m;H;ct angiography head;val
+s0347;71;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0349;74;m;H;ct heart-thorakale aorta;train
+s0350;85;f;C;ct thorax-abdomen-pelvis;train
+s0352;56;f;H;ct angiography head;val
+s0353;69;m;F;ct thorax-abdomen;train
+s0354;59;m;D;ct thorax-abdomen;train
+s0355;56;m;D;ct thorax-abdomen;train
+s0356;63;f;H;ct heart;train
+s0357;67;f;H;ct thorax-neck;train
+s0358;87;f;H;ct pelvis;train
+s0359;91;f;H;ct neck;train
+s0360;67;f;H;ct  intervention ;train
+s0361;79;m;H;ct angiography pelvis-leg;train
+s0362;83;m;H;ct neck-thorax-abdomen-pelvis;train
+s0363;72;f;H;ct thorax;train
+s0364;34;m;H;ct thorax-neck;train
+s0365;44;f;H;ct thorax-neck;train
+s0366;48;f;H;ct abdomen;train
+s0367;43;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0368;64;m;H;ct heart;train
+s0369;70;m;H;ct neck-thorax-abdomen-pelvis;train
+s0370;63;m;A;ct thorax-abdomen-pelvis;train
+s0371;53;f;D;ct thorax-abdomen-pelvis;train
+s0372;46;f;H;ct thorax-chest;train
+s0373;83;f;H;ct thorax-neck;train
+s0374;78;f;H;ct heart-thorakale aorta;train
+s0375;48;m;H;ct thorax-abdomen-pelvis;train
+s0376;88;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0377;55;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0378;79;m;H;ct thorax-neck;train
+s0379;34;f;H;ct angiography neck;train
+s0380;61;m;H;ct heart-thorakale aorta;train
+s0381;75;f;H;ct pelvis;train
+s0382;85;m;H;ct neck;train
+s0383;80;f;C;ct thorax-abdomen-pelvis;train
+s0385;66;f;D;ct pelvis;train
+s0386;74;f;C;ct spine;train
+s0388;57;f;H;ct angiography head;train
+s0389;69;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0390;73;m;B;ct abdomen;train
+s0391;50;f;H;ct heart;train
+s0392;23;m;H;ct thorax-chest;train
+s0393;82;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0394;64;m;D;ct thorax-abdomen;train
+s0395;63;m;H;ct  intervention ;train
+s0396;56;m;H;ct neck;train
+s0398;56;m;H;ct angiography thorax;train
+s0399;51;f;H;ct pelvis;train
+s0400;54;m;H;ct neck;train
+s0401;69;f;D;ct thorax-abdomen;train
+s0402;74;f;H;ct thorax-abdomen-pelvis;train
+s0403;85;f;B;ct heart-thorakale aorta;train
+s0405;68;f;H;ct angiography thorax;train
+s0406;64;m;D;ct abdomen;train
+s0407;76;m;H;ct thorax-neck;train
+s0408;88;m;C;ct neck-thorax-abdomen-pelvis;train
+s0410;63;m;H;ct angiography head;train
+s0411;71;f;H;ct angiography head;train
+s0412;72;m;H;ct polytrauma;train
+s0413;58;f;H;ct thorax;train
+s0414;88;f;H;ct aortic valve;train
+s0416;27;m;D;ct abdomen;train
+s0417;53;m;H;ct  operation;train
+s0418;55;f;H;ct pelvis;train
+s0419;59;m;G;ct pelvis;train
+s0420;66;m;H;ct angiography neck-thx-abd-pelvis-leg;val
+s0421;64;m;H;ct thorax-abdomen-pelvis;train
+s0422;74;m;B;ct thorax-abdomen;train
+s0423;68;m;C;ct neck-thorax-abdomen-pelvis;test
+s0424;81;m;H;ct aortic valve;train
+s0425;65;m;H;ct thorax-neck;train
+s0426;42;m;H;ct pelvis;train
+s0428;28;m;B;ct thorax-abdomen;train
+s0429;49;f;H;ct thorax-abdomen-pelvis;train
+s0430;67;m;H;ct thorax-neck;train
+s0431;75;m;B;ct angiography neck-thx-abd-pelvis-leg;train
+s0433;40;m;B;ct thorax-abdomen;train
+s0435;84;m;H;ct aortic valve;train
+s0436;56;f;H;ct thorax-abdomen-pelvis;train
+s0437;61;m;B;ct thorax-abdomen;train
+s0438;45;f;D;ct thorax-abdomen;train
+s0439;50;m;H;ct heart-thorakale aorta;train
+s0440;57;f;H;ct thorax-abdomen-pelvis;test
+s0441;74;m;A;ct abdomen;test
+s0442;72;m;H;ct pelvis;train
+s0443;34;m;H;ct pelvis;train
+s0444;72;f;H;ct heart-thorakale aorta;train
+s0445;74;m;H;ct chest;train
+s0446;38;m;H;ct thorax-abdomen-pelvis;train
+s0447;73;f;H;ct thorax-abdomen-pelvis;train
+s0449;74;f;D;ct neck;train
+s0450;54;m;I;ct abdomen;test
+s0452;87;m;H;ct aortic valve;train
+s0453;64;m;H;ct neck;train
+s0454;83;f;H;ct pelvis;train
+s0455;72;m;B;ct thorax-abdomen;train
+s0456;65;f;C;ct neck-thorax-abdomen-pelvis;train
+s0457;60;m;H;ct angiography thorax;train
+s0458;83;f;B;ct abdomen;val
+s0459;65;m;D;ct thorax-neck;test
+s0460;25;f;H;ct angiography head;train
+s0461;56;m;C;ct neck-thorax-abdomen-pelvis;train
+s0462;80;f;H;ct spine;train
+s0463;48;m;H;ct heart-thorakale aorta;train
+s0465;77;m;H;ct heart;train
+s0466;71;f;H;ct neck;val
+s0467;52;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0468;76;m;D;ct angiography pelvis-leg;test
+s0469;37;f;D;ct thorax-chest;train
+s0470;50;m;D;ct thorax-abdomen;test
+s0471;66;f;B;ct abdomen;train
+s0472;64;f;C;ct thorax-abdomen-pelvis;train
+s0473;76;m;B;ct thorax-abdomen;train
+s0474;60;f;H;ct angiography head;train
+s0475;49;f;H;ct pelvis;train
+s0476;65;m;H;ct neck-thorax-abdomen-pelvis;train
+s0477;68;f;H;ct neck-thorax-abdomen-pelvis;train
+s0478;56;f;F;ct angiography head;train
+s0480;73;m;D;ct abdomen;train
+s0481;66;m;H;ct thorax-neck;train
+s0482;56;f;H;ct spine;test
+s0483;47;f;H;ct thorax-abdomen-pelvis;train
+s0484;60;m;H;ct thorax-abdomen-pelvis;train
+s0485;67;m;H;ct thorax-neck;train
+s0486;51;m;A;ct abdomen;train
+s0487;41;f;A;ct thorax-abdomen-pelvis;train
+s0488;46;f;H;ct heart-thorakale aorta;train
+s0490;66;f;H;ct thorax-neck;train
+s0491;54;m;C;ct neck;train
+s0492;62;f;H;ct  operation;train
+s0493;61;m;F;ct neck;train
+s0494;55;f;A;ct thorax-abdomen;train
+s0495;68;f;A;ct abdomen;train
+s0497;84;m;H;ct angiography head;train
+s0498;68;m;H;ct thorax-abdomen-pelvis;train
+s0499;61;f;D;ct thorax-abdomen;test
+s0500;49;m;B;ct neck-thorax-abdomen-pelvis;train
+s0501;76;m;H;ct angiography head;train
+s0502;71;m;D;ct thorax-abdomen-pelvis;train
+s0503;69;m;H;ct angiography head;train
+s0504;61;f;H;ct angiography neck;train
+s0505;74;m;B;ct abdomen;test
+s0506;55;m;H;ct pelvis;val
+s0507;66;m;H;ct neck-thorax-abdomen-pelvis;train
+s0508;65;m;H;ct angiography thorax;train
+s0509;49;m;B;ct thorax-abdomen;train
+s0510;63;f;C;ct neck-thorax-abdomen-pelvis;train
+s0511;39;m;H;ct polytrauma;train
+s0513;64;f;F;ct abdomen;train
+s0514;51;f;H;ct angiography head;train
+s0515;76;m;H;ct thorax-neck;train
+s0516;88;m;H;ct thorax-abdomen-pelvis;train
+s0517;78;m;H;ct thorax-neck;train
+s0518;48;m;D;ct neck;train
+s0519;66;m;H;ct thorax-abdomen-pelvis;train
+s0520;52;f;H;ct  intervention ;train
+s0521;54;m;H;ct angiography head;train
+s0522;85;m;H;ct thorax;train
+s0523;76;m;H;ct  intervention ;train
+s0525;75;m;F;ct abdomen;train
+s0526;45;m;H;ct angiography head;train
+s0527;26;m;H;ct angiography neck;train
+s0528;75;m;H;ct aortic valve;train
+s0529;34;f;F;ct abdomen;train
+s0530;70;f;H;ct thorax-neck;train
+s0531;65;f;H;ct heart-thorakale aorta;train
+s0532;53;m;H;ct heart;train
+s0535;68;m;D;ct neck;train
+s0536;65;m;H;ct neck-thorax-abdomen-pelvis;train
+s0537;43;m;H;ct neck;train
+s0539;64;m;H;ct  operation;train
+s0541;70;m;H;ct abdomen;train
+s0542;71;m;B;ct thorax-abdomen;train
+s0543;54;f;H;ct thorax-abdomen-pelvis;test
+s0544;67;m;B;ct abdomen;val
+s0545;43;f;D;ct abdomen;train
+s0546;61;m;C;ct thorax-abdomen-pelvis;val
+s0548;64;m;B;ct neck-thorax-abdomen-pelvis;train
+s0549;66;m;C;ct thorax-abdomen-pelvis;train
+s0550;63;m;C;ct neck-thorax-abdomen-pelvis;train
+s0551;81;f;D;ct neck-thorax-abdomen-pelvis;train
+s0552;62;f;H;ct neck;train
+s0553;41;f;D;ct thorax-abdomen;train
+s0555;71;m;B;ct thorax-abdomen;train
+s0556;49;m;H;ct polytrauma;train
+s0557;62;m;H;ct heart-thorakale aorta;train
+s0559;63;m;H;ct neck;train
+s0560;45;f;B;ct abdomen;train
+s0561;78;m;C;ct neck-thorax-abdomen-pelvis;test
+s0563;47;m;H;ct angiography head;train
+s0564;63;f;H;ct pelvis;train
+s0565;63;m;H;ct thorax-neck;train
+s0566;46;m;B;ct thorax-abdomen;train
+s0567;62;m;H;ct angiography head;train
+s0568;55;f;D;ct neck;train
+s0571;56;f;H;ct thorax-abdomen-pelvis;train
+s0572;59;m;C;ct thorax-neck;val
+s0573;86;f;H;ct pelvis;train
+s0574;52;m;H;ct neck-thorax-abdomen-pelvis;train
+s0575;75;f;D;ct neck;train
+s0576;54;f;H;ct neck;train
+s0577;40;m;H;ct thorax-abdomen-pelvis;train
+s0578;66;f;H;ct thorax-abdomen-pelvis;train
+s0579;53;m;H;ct spine;train
+s0580;72;f;B;ct thorax-abdomen;train
+s0581;73;f;D;ct pelvis;train
+s0582;86;f;H;ct thorax;train
+s0583;50;m;D;ct thorax-abdomen;train
+s0584;71;f;D;ct abdomen;train
+s0585;79;m;H;ct aortic valve;train
+s0586;55;m;A;ct thorax-abdomen;train
+s0587;86;f;C;ct neck-thorax-abdomen-pelvis;train
+s0588;45;m;D;ct polytrauma;train
+s0589;55;f;C;ct thorax-abdomen-pelvis;train
+s0590;76;m;B;ct abdomen;train
+s0591;78;m;H;ct polytrauma;train
+s0592;87;f;H;ct polytrauma;train
+s0593;54;f;H;ct neck-thorax-abdomen-pelvis;train
+s0594;62;m;H;ct left artrium;train
+s0595;79;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0597;76;m;H;ct aortic valve;train
+s0598;67;m;F;ct thorax-abdomen;train
+s0600;62;m;B;ct thorax-abdomen-pelvis;train
+s0601;55;m;B;ct pelvis;train
+s0602;46;f;C;ct thorax-abdomen-pelvis;train
+s0603;76;f;D;ct angiography pelvis-leg;train
+s0604;59;m;C;ct thorax-neck;train
+s0605;54;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0606;82;m;C;ct thorax-neck;train
+s0607;57;m;B;ct thorax-abdomen;val
+s0608;79;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0610;90;m;H;ct angiography head;train
+s0611;63;m;H;ct pelvis;train
+s0612;75;f;C;ct neck-thorax-abdomen-pelvis;train
+s0613;67;m;C;ct neck-thorax-abdomen-pelvis;train
+s0614;61;m;H;ct pelvis;val
+s0615;59;f;B;ct thorax-abdomen;train
+s0616;58;m;H;ct polytrauma;train
+s0617;56;m;H;ct thorax-abdomen-pelvis;train
+s0618;67;f;C;ct thorax-abdomen-pelvis;val
+s0619;80;f;C;ct thorax-abdomen-pelvis;train
+s0620;66;m;D;ct abdomen;train
+s0621;83;m;C;ct thorax-abdomen-pelvis;train
+s0622;93;f;H;ct neck;train
+s0623;90;m;H;ct neck-thorax-abdomen-pelvis;train
+s0624;80;m;H;ct aortic valve;train
+s0625;58;m;H;ct neck-thorax-abdomen-pelvis;val
+s0626;58;f;D;ct thorax-abdomen;train
+s0627;41;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0628;61;f;H;ct thorax-abdomen-pelvis;train
+s0629;66;m;H;ct thorax-abdomen-pelvis;train
+s0632;79;f;H;ct thorax-neck;train
+s0633;76;f;H;ct upper leg left;train
+s0635;79;f;H;ct thorax-abdomen-pelvis;train
+s0636;62;f;H;ct thorax-abdomen;train
+s0637;69;m;H;ct thorax-abdomen-pelvis;train
+s0638;49;f;D;ct polytrauma;train
+s0639;59;f;C;ct neck-thorax-abdomen-pelvis;train
+s0640;74;f;H;ct  intervention ;train
+s0641;69;f;H;ct thorax-neck;train
+s0642;33;f;H;ct neck;train
+s0643;68;m;H;ct angiography head;train
+s0644;65;f;C;ct neck-thorax-abdomen-pelvis;train
+s0645;55;m;C;ct thorax-neck;train
+s0646;78;m;H;ct pelvis;train
+s0647;16;f;F;ct abdomen;train
+s0648;68;f;C;ct neck-thorax-abdomen-pelvis;train
+s0649;62;f;H;ct thorax-abdomen-pelvis;train
+s0650;65;m;H;ct thorax-abdomen-pelvis;val
+s0651;83;m;B;ct thorax-abdomen;train
+s0652;57;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0653;80;f;F;ct heart;train
+s0654;80;m;H;ct angiography thorax;train
+s0655;71;f;H;ct heart;val
+s0656;71;f;C;ct thorax-abdomen-pelvis;train
+s0657;56;m;H;ct neck-thorax-abdomen-pelvis;train
+s0658;67;m;B;ct thorax-abdomen;train
+s0659;70;m;H;ct heart-thorakale aorta;train
+s0660;75;m;H;ct angiography head;train
+s0661;91;f;C;ct neck-thorax-abdomen-pelvis;train
+s0662;54;m;H;ct neck-thorax-abdomen-pelvis;train
+s0663;62;f;H;ct neck-thorax-abdomen-pelvis;train
+s0664;70;f;H;ct thorax-abdomen;train
+s0665;64;f;H;ct aortic valve;train
+s0666;51;m;H;ct  intervention ;train
+s0667;69;m;C;ct neck-thorax-abdomen-pelvis;test
+s0668;50;f;D;ct abdomen;train
+s0669;86;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0670;86;f;H;ct neck-thorax-abdomen-pelvis;train
+s0671;73;m;H;ct left artrium;train
+s0672;84;f;H;ct thorax-neck;train
+s0673;54;m;H;ct pelvis;test
+s0674;61;m;H;ct thorax-neck;train
+s0675;69;f;H;ct angiography neck-thx-abd-pelvis-leg;val
+s0676;57;f;H;ct  intervention ;train
+s0677;57;m;H;ct chest;train
+s0679;49;m;F;ct abdomen;train
+s0680;73;m;C;ct thorax-abdomen-pelvis;train
+s0681;66;m;H;ct heart-thorakale aorta;train
+s0682;46;m;B;ct thorax-abdomen;train
+s0683;75;m;F;ct thorax-abdomen;train
+s0684;61;m;H;ct heart;test
+s0685;48;m;H;ct angiography pelvis-leg;train
+s0686;75;m;H;ct neck-thorax-abdomen-pelvis;train
+s0687;64;f;H;ct thorax-abdomen-pelvis;test
+s0688;67;m;F;ct thorax-abdomen;train
+s0690;94;f;H;ct polytrauma;train
+s0691;68;m;H;ct neck-thorax-abdomen-pelvis;train
+s0692;65;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0693;64;m;H;ct  intervention ;train
+s0694;30;m;D;ct thorax-abdomen;train
+s0695;80;m;H;ct aortic valve;train
+s0696;63;m;H;ct thorax-neck;train
+s0697;57;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0698;74;m;H;ct heart-thorakale aorta;val
+s0699;82;f;D;ct neck-thorax-abdomen-pelvis;train
+s0700;90;f;B;ct spine;train
+s0702;78;m;F;ct heart;train
+s0703;79;m;H;ct thorax-abdomen-pelvis;train
+s0704;62;f;D;ct thorax-chest;train
+s0705;65;m;B;ct thorax-abdomen;train
+s0706;50;f;H;ct angiography head;train
+s0707;74;m;B;ct angiography neck-thx-abd-pelvis-leg;train
+s0708;33;f;H;ct neck-thorax-abdomen-pelvis;train
+s0709;69;m;D;ct thorax-abdomen-pelvis;train
+s0710;62;f;H;ct heart;train
+s0711;65;m;A;ct thorax-abdomen;train
+s0712;81;f;H;ct pelvis;train
+s0713;72;f;H;ct  operation;train
+s0714;61;m;H;ct thorax-chest;train
+s0715;80;f;H;ct  intervention ;train
+s0716;77;m;H;ct thorax-neck;train
+s0717;73;m;H;ct heart-thorakale aorta;train
+s0718;60;f;H;ct thorax-chest;train
+s0719;72;m;H;ct thorax-neck;train
+s0720;32;m;I;ct neck-thorax-abdomen-pelvis;train
+s0721;33;f;H;ct abdomen;train
+s0723;74;f;C;ct neck-thorax-abdomen-pelvis;train
+s0724;74;m;H;ct angiography pelvis-leg;train
+s0726;67;f;H;ct thorax-abdomen-pelvis;train
+s0727;88;f;H;ct polytrauma;train
+s0728;51;f;D;ct thorax-abdomen;train
+s0729;69;f;H;ct angiography thorax;train
+s0730;82;f;H;ct pelvis;train
+s0731;56;f;C;ct thorax-abdomen-pelvis;train
+s0732;67;m;H;ct thorax-chest;train
+s0733;65;m;H;ct neck-thorax-abdomen-pelvis;train
+s0734;70;m;C;ct neck;train
+s0735;68;f;B;ct thorax-abdomen;test
+s0736;67;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0737;71;f;C;ct thorax-abdomen;train
+s0738;60;m;H;ct heart;train
+s0739;34;m;H;ct thorax-abdomen-pelvis;train
+s0740;72;f;F;ct angiography neck-thx-abd-pelvis-leg;train
+s0741;29;m;H;ct  intervention ;train
+s0743;57;m;C;ct thorax-neck;train
+s0744;47;m;H;ct angiography neck;train
+s0746;63;m;D;ct abdomen;train
+s0747;82;m;H;ct thorax-neck;val
+s0748;56;m;H;ct angiography head;train
+s0749;74;m;B;ct abdomen;train
+s0750;74;f;H;ct thorax-chest;train
+s0751;62;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0752;64;m;D;ct thorax-neck;train
+s0753;72;m;C;ct thorax-neck;test
+s0754;59;m;H;ct polytrauma;train
+s0756;66;m;H;ct angiography head;train
+s0759;82;f;A;ct neck-thorax-abdomen-pelvis;train
+s0760;42;f;H;ct thorax-abdomen-pelvis;val
+s0762;69;m;H;ct thorax-abdomen-pelvis;train
+s0763;60;m;H;ct polytrauma;train
+s0764;77;f;A;ct neck-thorax-abdomen-pelvis;train
+s0765;55;f;H;ct thorax-abdomen-pelvis;train
+s0766;62;m;H;ct angiography head;train
+s0767;68;f;H;ct heart;train
+s0768;72;f;A;ct abdomen;train
+s0769;74;m;H;ct neck;train
+s0770;79;m;A;ct neck-thorax-abdomen-pelvis;train
+s0771;55;m;H;ct thorax-neck;train
+s0772;68;m;H;ct pelvis;train
+s0773;48;m;H;ct heart;train
+s0774;75;f;H;ct angiography pelvis-leg;train
+s0775;76;m;A;ct neck-thorax-abdomen-pelvis;train
+s0776;86;f;H;ct pelvis;train
+s0777;75;m;H;ct polytrauma;train
+s0778;57;m;A;ct thorax-abdomen-pelvis;train
+s0780;80;f;H;ct thorax-neck;train
+s0781;57;m;H;ct heart;train
+s0782;58;m;H;ct heart;train
+s0783;59;m;H;ct upper leg left;train
+s0784;72;f;H;ct angiography thorax;train
+s0785;59;f;A;ct thorax-abdomen-pelvis;train
+s0786;28;f;H;ct polytrauma;train
+s0787;83;m;H;ct left artrium;train
+s0788;64;f;H;ct thorax-chest;train
+s0789;52;m;H;ct thorax-neck;train
+s0790;38;f;H;ct polytrauma;train
+s0791;77;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0792;85;m;H;ct angiography head;val
+s0793;64;f;H;ct thorax-neck;train
+s0794;61;f;H;ct thorax-abdomen-pelvis;val
+s0795;57;f;A;ct thorax-abdomen-pelvis;train
+s0796;83;m;H;ct neck-thorax-abdomen-pelvis;train
+s0797;61;f;H;ct neck-thorax-abdomen-pelvis;train
+s0798;55;f;A;ct neck-thorax-abdomen-pelvis;train
+s0800;81;m;H;ct  intervention ;train
+s0801;54;m;A;ct thorax-abdomen-pelvis;train
+s0802;62;m;A;ct neck-thorax-abdomen-pelvis;test
+s0804;42;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0805;64;f;H;ct thorax-neck;train
+s0806;73;m;H;ct neck-thorax-abdomen-pelvis;train
+s0807;68;m;A;ct thorax-abdomen-pelvis;train
+s0808;80;f;A;ct neck-thorax-abdomen-pelvis;val
+s0809;52;f;H;ct neck;train
+s0810;74;m;H;ct thorax-neck;train
+s0811;28;m;H;ct thorax;train
+s0812;59;m;H;ct polytrauma;train
+s0813;67;f;H;ct heart-thorakale aorta;train
+s0814;47;f;H;ct neck;train
+s0815;89;m;H;ct pelvis;train
+s0816;66;f;A;ct thorax-abdomen-pelvis;train
+s0818;34;m;H;ct pelvis;train
+s0819;82;f;H;ct pelvis;train
+s0820;82;m;H;ct angiography head;train
+s0821;44;m;H;ct neck-thorax-abdomen-pelvis;train
+s0822;73;m;H;ct heart-thorakale aorta;train
+s0824;77;m;A;ct neck-thorax-abdomen-pelvis;val
+s0825;69;f;H;ct heart-thorakale aorta;train
+s0826;58;m;H;ct left artrium;train
+s0829;63;f;A;ct neck-thorax-abdomen-pelvis;test
+s0830;83;m;A;ct neck-thorax-abdomen-pelvis;train
+s0831;59;m;H;ct angiography pelvis-leg;train
+s0832;85;m;H;ct heart;val
+s0833;80;f;A;ct thorax-abdomen-pelvis;train
+s0834;69;f;H;ct heart-thorakale aorta;train
+s0835;52;f;H;ct neck-thorax-abdomen-pelvis;train
+s0836;63;f;H;ct thorax-abdomen-pelvis;train
+s0837;74;f;H;ct upper leg left;train
+s0838;80;m;H;ct aortic valve;train
+s0839;60;f;H;ct heart;val
+s0840;75;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0842;65;f;H;ct thorax-abdomen-pelvis;train
+s0843;55;f;H;ct neck;train
+s0844;49;f;A;ct neck-thorax-abdomen-pelvis;train
+s0845;23;f;H;ct thorax-neck;train
+s0846;68;f;H;ct heart;train
+s0847;81;m;H;ct thorax-neck;train
+s0848;47;m;H;ct heart;train
+s0849;82;m;H;ct angiography head;train
+s0850;61;f;H;ct upper leg left;train
+s0851;62;m;H;ct thorax-neck;train
+s0852;67;f;H;ct  intervention ;train
+s0853;67;f;H;ct neck;train
+s0855;56;m;H;ct angiography head;train
+s0857;41;f;H;ct angiography head;train
+s0858;78;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0859;70;f;H;ct thorax-abdomen-pelvis;train
+s0860;56;m;H;ct polytrauma;train
+s0861;64;f;H;ct  operation;train
+s0862;70;m;H;ct pelvis;train
+s0863;57;f;H;ct neck-thorax-abdomen-pelvis;train
+s0864;55;f;A;ct thorax-abdomen-pelvis;train
+s0865;84;f;H;ct angiography head;train
+s0866;76;m;H;ct thorax;train
+s0867;77;f;H;ct thorax-neck;val
+s0868;78;f;H;ct neck;train
+s0869;77;m;H;ct neck-thorax-abdomen-pelvis;train
+s0870;80;m;H;ct thorax-neck;train
+s0871;75;f;H;ct angiography thorax;train
+s0873;66;f;H;ct pelvis;train
+s0874;75;m;H;ct neck;val
+s0875;69;m;H;ct neck;train
+s0876;56;m;H;ct heart;train
+s0877;49;f;H;ct heart;train
+s0878;68;m;A;ct neck-thorax-abdomen-pelvis;train
+s0879;73;m;H;ct heart;train
+s0880;72;m;H;ct thorax-abdomen-pelvis;train
+s0881;75;f;H;ct aortic valve;train
+s0883;80;m;H;ct heart-thorakale aorta;train
+s0884;56;m;H;ct thorax-abdomen-pelvis;train
+s0885;65;m;H;ct thorax-abdomen-pelvis;train
+s0889;56;m;H;ct thorax-neck;train
+s0890;79;f;H;ct thorax-neck;train
+s0891;77;f;H;ct aortic valve;train
+s0892;82;m;H;ct aortic valve;train
+s0894;39;m;H;ct polytrauma;train
+s0895;53;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0896;25;f;H;ct neck-thorax-abdomen-pelvis;train
+s0897;39;f;H;ct thorax-neck;train
+s0898;84;f;H;ct thorax-neck;train
+s0899;70;m;H;ct thorax-abdomen-pelvis;train
+s0901;76;m;H;ct heart-thorakale aorta;train
+s0903;89;m;H;ct polytrauma;train
+s0904;86;m;H;ct thorax-abdomen-pelvis;train
+s0907;72;m;H;ct pelvis;test
+s0908;92;m;H;ct thorax;train
+s0909;78;f;H;ct angiography neck;train
+s0910;52;f;A;ct thorax-abdomen-pelvis;train
+s0911;68;f;H;ct left artrium;train
+s0912;67;m;H;ct neck-thorax-abdomen-pelvis;train
+s0913;31;m;H;ct neck-thorax-abdomen-pelvis;train
+s0914;54;f;H;ct thorax-neck;train
+s0915;70;m;H;ct thorax-abdomen-pelvis;train
+s0916;66;m;A;ct thorax-abdomen-pelvis;train
+s0918;69;m;H;ct neck-thorax-abdomen-pelvis;val
+s0919;65;f;H;ct aortic valve;train
+s0921;48;m;H;ct pelvis;train
+s0922;75;m;H;ct angiography head;train
+s0923;42;f;H;ct neck-thorax-abdomen-pelvis;test
+s0924;64;m;H;ct neck-thorax-abdomen-pelvis;train
+s0925;79;f;H;ct neck;train
+s0927;94;f;H;ct polytrauma;train
+s0928;74;f;A;ct thorax-abdomen-pelvis;train
+s0930;52;f;A;ct thorax-abdomen-pelvis;train
+s0931;86;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s0933;51;f;H;ct polytrauma;test
+s0934;83;m;H;ct thorax-chest;train
+s0935;76;m;H;ct aortic valve;train
+s0936;67;m;H;ct heart-thorakale aorta;train
+s0937;81;m;H;ct angiography pelvis-leg;train
+s0938;81;f;H;ct  operation;train
+s0939;75;m;A;ct thorax-abdomen-pelvis;train
+s0940;78;m;H;ct neck-thorax-abdomen-pelvis;train
+s0941;79;m;H;ct thorax-neck;train
+s0943;68;m;H;ct upper leg left;train
+s0944;59;f;H;ct pelvis;train
+s0945;69;f;H;ct thorax-abdomen-pelvis;train
+s0946;69;f;H;ct heart-thorakale aorta;train
+s0947;26;m;H;ct pelvis;train
+s0949;79;m;H;ct angiography head;train
+s0950;78;f;H;ct thorax-abdomen-pelvis;train
+s0951;74;f;H;ct pelvis;test
+s0952;93;f;H;ct spine;train
+s0953;54;f;H;ct neck-thorax-abdomen-pelvis;train
+s0954;62;m;H;ct heart-thorakale aorta;train
+s0955;52;m;H;ct  intervention ;train
+s0956;63;m;H;ct heart;train
+s0957;51;f;H;ct neck-thorax-abdomen-pelvis;train
+s0958;70;m;H;ct heart-thorakale aorta;train
+s0959;47;f;H;ct thorax-abdomen-pelvis;train
+s0960;57;m;H;ct angiography head;train
+s0961;55;m;A;ct thorax-abdomen-pelvis;train
+s0962;79;f;H;ct  operation;train
+s0963;62;f;H;ct thorax-abdomen-pelvis;train
+s0965;61;f;H;ct thorax-abdomen-pelvis;train
+s0968;73;f;H;ct  intervention ;train
+s0970;50;f;H;ct polytrauma;train
+s0971;70;m;H;ct pelvis;train
+s0972;73;m;H;ct heart-thorakale aorta;train
+s0973;54;f;A;ct thorax-neck;train
+s0974;80;f;H;ct angiography head;train
+s0975;72;m;H;ct thorax-neck;train
+s0976;58;m;A;ct thorax-abdomen-pelvis;train
+s0977;69;m;H;ct heart;train
+s0978;58;m;H;ct heart-thorakale aorta;train
+s0979;73;m;E;ct abdomen ;train
+s0980;76;f;H;ct heart;train
+s0981;96;m;H;ct pelvis;train
+s0982;55;m;H;ct thorax-abdomen-pelvis;train
+s0983;66;m;H;ct thorax-abdomen-pelvis;train
+s0984;48;m;H;ct angiography head;train
+s0985;76;f;H;ct neck-thorax-abdomen-pelvis;train
+s0986;88;f;H;ct polytrauma;train
+s0987;63;m;H;ct heart-thorakale aorta;train
+s0988;78;m;H;ct polytrauma;train
+s0989;82;f;A;ct abdomen;train
+s0991;72;f;A;ct thorax-abdomen-pelvis;val
+s0992;51;f;H;ct neck-thorax-abdomen-pelvis;train
+s0993;61;m;H;ct angiography head;train
+s0994;82;m;A;ct neck-thorax-abdomen-pelvis;test
+s0995;72;m;H;ct  intervention ;train
+s0996;65;f;H;ct  intervention ;train
+s0997;93;f;B;ct head ;train
+s0999;58;f;H;ct thorax-neck;train
+s1000;48;m;H;ct upper leg left;train
+s1001;85;f;H;ct neck;train
+s1002;66;m;H;ct aortic valve;val
+s1003;66;m;H;ct angiography head;train
+s1004;74;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1005;54;m;H;ct pelvis;train
+s1006;64;f;H;ct thorax-abdomen-pelvis;train
+s1007;77;m;H;ct heart-thorakale aorta;train
+s1008;74;f;H;ct thorax-abdomen-pelvis;train
+s1009;76;m;H;ct pelvis;train
+s1010;45;m;H;ct neck;train
+s1011;48;m;F;ct head ;train
+s1012;43;m;H;ct thorax-abdomen-pelvis;train
+s1013;81;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1014;72;f;H;ct angiography head;train
+s1015;80;m;H;ct angiography head;train
+s1016;76;m;H;ct polytrauma;train
+s1017;83;f;H;ct spine;val
+s1018;82;f;H;ct aortic valve;train
+s1020;59;m;H;ct  operation;train
+s1021;69;f;H;ct left artrium;train
+s1022;88;m;H;ct aortic valve;train
+s1023;65;m;H;ct thorax-neck;train
+s1024;29;m;H;ct thorax-abdomen-pelvis;val
+s1025;64;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1026;75;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1028;66;m;H;ct thorax-chest;train
+s1029;68;m;H;ct polytrauma;train
+s1031;70;m;H;ct neck-thorax-abdomen-pelvis;train
+s1032;63;m;H;ct angiography head;train
+s1033;80;m;H;ct heart;train
+s1034;65;f;H;ct angiography head;train
+s1035;21;f;H;ct thorax-neck;train
+s1036;77;f;H;ct neck;train
+s1037;72;f;D;ct abdomen ;train
+s1038;56;m;H;ct neck-thorax-abdomen-pelvis;train
+s1039;61;f;H;ct thorax-neck;train
+s1040;43;m;H;ct angiography head;train
+s1041;91;f;H;ct pelvis;train
+s1042;42;m;H;ct thorax;train
+s1043;29;m;H;ct neck;train
+s1044;70;m;H;ct thorax-abdomen-pelvis;train
+s1045;64;m;H;ct polytrauma;train
+s1046;71;m;H;ct thorax-abdomen-pelvis;val
+s1047;51;f;H;ct angiography head;train
+s1048;39;f;H;ct  intervention ;train
+s1049;65;m;H;ct left artrium;train
+s1050;83;f;H;ct pelvis;train
+s1051;78;f;H;ct neck;test
+s1052;70;m;H;ct heart-thorakale aorta;train
+s1053;60;f;H;ct upper leg left;test
+s1055;52;m;H;ct orbita;train
+s1056;49;m;H;ct angiography head;train
+s1057;73;f;A;ct pelvis;test
+s1058;61;m;A;ct thorax-chest;train
+s1059;68;m;H;ct neck;val
+s1060;66;m;H;ct thorax-neck;train
+s1061;45;f;H;ct thorax-abdomen-pelvis;train
+s1062;76;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1063;51;f;A;ct thorax-abdomen-pelvis;train
+s1065;48;m;H;ct  operation;train
+s1066;53;m;H;ct thorax-neck;train
+s1067;41;f;H;ct thorax-neck;train
+s1068;22;f;H;ct pelvis;train
+s1069;71;m;H;ct thorax-abdomen-pelvis;train
+s1070;37;f;H;ct thorax-abdomen-pelvis;train
+s1071;68;m;H;ct neck;train
+s1072;85;f;H;ct angiography head;train
+s1073;73;m;H;ct heart-thorakale aorta;train
+s1075;64;f;H;ct angiography head;test
+s1077;77;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1079;64;m;H;ct thorax-neck;train
+s1082;72;m;H;ct polytrauma;train
+s1083;84;f;H;ct heart-thorakale aorta;train
+s1084;43;m;H;ct heart;train
+s1085;78;m;H;ct neck-thorax-abdomen-pelvis;train
+s1086;44;m;A;ct neck-thorax-abdomen-pelvis;train
+s1088;88;m;H;ct polytrauma;train
+s1089;65;m;H;ct polytrauma;train
+s1090;80;m;A;ct thorax-abdomen-pelvis;train
+s1093;65;f;H;ct neck;train
+s1094;71;f;H;ct angiography neck-thx-abd-pelvis-leg;test
+s1096;83;m;H;ct  intervention ;test
+s1097;63;f;H;ct left artrium;train
+s1098;57;f;A;ct pelvis;train
+s1099;52;f;H;ct neck-thorax-abdomen-pelvis;train
+s1100;59;f;H;ct thorax-chest;train
+s1101;77;f;A;ct thorax-abdomen-pelvis;train
+s1102;22;m;H;ct thorax-chest;train
+s1103;67;m;H;ct angiography pelvis-leg;train
+s1104;58;m;H;ct angiography pelvis-leg;train
+s1105;80;f;H;ct aortic valve;train
+s1106;47;m;H;ct heart;val
+s1107;57;m;H;ct angiography head;train
+s1109;74;f;H;ct  intervention ;train
+s1110;49;m;H;ct thorax-neck;train
+s1111;70;m;H;ct thorax-abdomen-pelvis;train
+s1112;76;f;H;ct angiography neck;test
+s1113;81;m;H;ct angiography head;train
+s1114;59;m;H;ct neck;train
+s1115;63;m;H;ct angiography head;train
+s1119;50;m;A;ct neck-thorax-abdomen-pelvis;test
+s1120;52;f;H;ct thorax-abdomen-pelvis;train
+s1121;31;f;H;ct angiography pelvis-leg;test
+s1122;65;f;H;ct left artrium;train
+s1123;48;m;H;ct polytrauma;train
+s1124;72;m;H;ct polytrauma;train
+s1125;92;m;H;ct angiography pelvis-leg;train
+s1127;68;f;I;ct neck-thorax-abdomen-pelvis;train
+s1128;84;f;H;ct pelvis;train
+s1129;84;m;H;ct angiography head;train
+s1130;86;m;B;ct abdomen ;train
+s1131;43;f;E;ct abdomen ;train
+s1132;67;f;A;ct thorax-abdomen-pelvis;train
+s1133;82;f;H;ct heart-thorakale aorta;val
+s1134;64;m;H;ct heart-thorakale aorta;train
+s1135;54;m;H;ct thorax-abdomen-pelvis;train
+s1136;73;f;H;ct pelvis;train
+s1137;54;m;H;ct pelvis;train
+s1138;54;f;H;ct angiography head;train
+s1140;72;m;H;ct thorax-neck;train
+s1141;86;f;H;ct pelvis;train
+s1142;68;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1143;68;m;A;ct neck-thorax-abdomen-pelvis;train
+s1144;77;m;H;ct thorax-neck;train
+s1145;53;f;A;ct neck-thorax-abdomen-pelvis;train
+s1146;75;f;A;ct thorax-abdomen-pelvis;train
+s1147;37;f;H;ct angiography head;train
+s1148;83;f;H;ct angiography head;train
+s1149;80;m;D;ct abdomen ;train
+s1150;42;f;D;ct head ;train
+s1151;53;m;H;ct angiography pelvis-leg;train
+s1152;74;f;H;ct polytrauma;test
+s1153;42;f;D;ct abdomen ;train
+s1154;68;m;H;ct angiography head;train
+s1155;67;f;A;ct thorax-abdomen-pelvis;train
+s1156;55;m;H;ct upper leg left;train
+s1157;40;f;H;ct thorax;train
+s1158;53;m;H;ct thorax-neck;train
+s1159;50;f;H;ct polytrauma;train
+s1161;52;m;H;ct polytrauma;val
+s1162;42;f;A;ct thorax-chest;train
+s1163;75;m;H;ct angiography head;train
+s1164;69;m;H;ct thorax-neck;train
+s1165;77;f;H;ct spine;train
+s1167;68;f;H;ct thorax;train
+s1168;53;m;A;ct neck-thorax-abdomen-pelvis;train
+s1169;70;m;H;ct neck;train
+s1170;92;f;H;ct upper leg left;train
+s1171;24;m;H;ct polytrauma;train
+s1172;22;m;H;ct angiography thorax;train
+s1173;70;f;A;ct thorax-chest;train
+s1174;59;m;H;ct thorax-abdomen-pelvis;test
+s1175;62;m;H;ct  intervention ;train
+s1176;41;f;H;ct thorax-abdomen-pelvis;test
+s1177;52;m;H;ct orbita;train
+s1178;58;f;H;ct neck-thorax-abdomen-pelvis;train
+s1179;94;f;H;ct angiography thorax;train
+s1182;77;f;H;ct neck-thorax-abdomen-pelvis;train
+s1183;62;m;D;ct abdomen ;train
+s1184;77;m;H;ct angiography head;test
+s1185;21;f;H;ct neck;train
+s1187;62;m;D;ct abdomen ;train
+s1189;42;f;D;ct polytrauma;train
+s1190;61;m;H;ct heart-thorakale aorta;train
+s1191;66;m;A;ct neck-thorax-abdomen-pelvis;train
+s1192;72;m;H;ct angiography head;test
+s1194;22;m;A;ct head ;train
+s1195;52;m;H;ct neck;test
+s1196;68;f;H;ct chest;train
+s1197;85;f;H;ct thorax-abdomen-pelvis;val
+s1199;68;m;A;ct thorax-chest;val
+s1201;79;m;H;ct angiography thorax;train
+s1203;82;m;H;ct thorax-chest;train
+s1205;45;m;F;ct abdomen ;train
+s1206;62;m;H;ct polytrauma;train
+s1207;84;f;H;ct thorax-abdomen-pelvis;train
+s1208;69;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1209;73;m;H;ct thorax-abdomen-pelvis;train
+s1210;78;m;H;ct thorax-abdomen-pelvis;train
+s1212;68;f;E;ct abdomen ;test
+s1215;59;m;H;ct polytrauma;train
+s1216;58;f;A;ct thorax-chest;train
+s1218;33;f;A;ct neck-thorax-abdomen-pelvis;train
+s1220;23;m;H;ct neck;train
+s1221;75;m;H;ct thorax;train
+s1222;61;m;H;ct neck-thorax-abdomen-pelvis;train
+s1223;56;f;H;ct thorax-abdomen-pelvis;val
+s1224;73;m;H;ct thorax-abdomen-pelvis;train
+s1225;70;f;H;ct angiography thorax;train
+s1226;74;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1227;61;f;H;ct  operation;train
+s1228;62;f;A;ct thorax-abdomen-pelvis;train
+s1230;80;m;H;ct aortic valve;train
+s1231;69;f;H;ct angiography head;train
+s1233;88;f;H;ct thorax-abdomen-pelvis;val
+s1234;56;f;H;ct angiography pelvis-leg;train
+s1235;72;f;H;ct thorax-chest;train
+s1236;69;f;H;ct  intervention ;train
+s1237;82;f;H;ct heart;train
+s1238;62;m;H;ct thorax-abdomen-pelvis;val
+s1239;50;m;H;ct left artrium;train
+s1240;62;f;A;ct thorax-chest;test
+s1241;70;f;E;ct abdomen ;train
+s1242;58;m;A;ct neck-thorax-abdomen-pelvis;train
+s1243;64;m;H;ct left artrium;train
+s1244;70;m;D;ct abdomen ;train
+s1245;73;f;H;ct thorax;train
+s1246;63;m;H;ct  operation;train
+s1247;29;f;A;ct neck-thorax-abdomen-pelvis;train
+s1248;81;f;H;ct aortic valve;test
+s1249;94;f;H;ct polytrauma;test
+s1250;73;m;H;ct aortic valve;train
+s1251;77;m;H;ct angiography pelvis-leg;train
+s1252;50;f;H;ct angiography pelvis-leg;train
+s1254;61;m;H;ct heart-thorakale aorta;train
+s1255;76;m;A;ct neck-thorax-abdomen-pelvis;train
+s1256;58;m;H;ct pelvis;train
+s1257;67;f;B;ct thorax-chest;train
+s1258;63;m;H;ct left artrium;train
+s1259;63;m;H;ct heart-thorakale aorta;train
+s1260;30;m;H;ct angiography head;val
+s1261;79;f;A;ct thorax-abdomen-pelvis;train
+s1262;84;f;H;ct aortic valve;train
+s1264;71;f;H;ct thorax-chest;train
+s1267;59;m;H;ct thorax-abdomen-pelvis;train
+s1268;82;m;A;ct thorax-abdomen-pelvis;train
+s1269;73;m;H;ct heart-thorakale aorta;train
+s1270;64;m;B;ct thorax-abdomen;train
+s1271;64;f;H;ct  intervention ;train
+s1272;56;m;H;ct heart-thorakale aorta;train
+s1273;55;m;H;ct thorax-abdomen-pelvis;train
+s1274;68;m;H;ct  intervention ;train
+s1275;64;m;A;ct thorax-abdomen-pelvis;train
+s1276;49;f;H;ct neck-thorax-abdomen-pelvis;test
+s1277;22;m;H;ct heart-thorakale aorta;train
+s1278;59;m;H;ct thorax-chest;val
+s1279;61;f;H;ct upper leg left;train
+s1280;63;f;H;ct left artrium;train
+s1281;63;f;H;ct thorax;train
+s1283;73;f;H;ct neck-thorax-abdomen-pelvis;train
+s1285;60;m;D;ct thorax-abdomen;train
+s1286;37;f;H;ct  intervention ;val
+s1287;79;m;I;ct neck-thorax-abdomen-pelvis;val
+s1288;55;m;H;ct chest;train
+s1289;74;m;H;ct spine;train
+s1290;48;m;H;ct  intervention ;train
+s1291;71;f;A;ct abdomen;train
+s1292;57;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1293;79;f;B;ct thorax-abdomen;train
+s1294;24;f;F;ct thorax-abdomen;train
+s1295;29;f;H;ct neck;train
+s1296;67;m;H;ct thorax-chest;train
+s1297;81;m;H;ct neck-thorax-abdomen-pelvis;train
+s1298;79;m;H;ct thorax-abdomen-pelvis;train
+s1299;53;f;H;ct neck;train
+s1300;79;m;E;ct neck;train
+s1301;75;m;H;ct pelvis;train
+s1303;78;m;H;ct upper leg left;train
+s1304;68;m;H;ct polytrauma;train
+s1305;96;f;H;ct aortic valve;val
+s1307;52;m;H;ct thorax-abdomen-pelvis;train
+s1308;56;m;A;ct neck-thorax-abdomen-pelvis;train
+s1309;66;m;D;ct abdomen;train
+s1310;86;f;H;ct aortic valve;train
+s1311;67;m;D;ct thorax-neck;train
+s1312;58;m;H;ct  intervention ;train
+s1314;59;f;H;ct polytrauma;train
+s1315;57;f;H;ct  intervention ;train
+s1316;69;f;A;ct thorax-chest;train
+s1317;73;f;H;ct  intervention ;train
+s1318;52;m;A;ct neck-thorax-abdomen-pelvis;train
+s1319;81;f;H;ct spine;train
+s1321;52;m;H;ct polytrauma;train
+s1322;53;m;A;ct abdomen;test
+s1323;72;m;H;ct thorax-neck;test
+s1325;79;m;H;ct orbita;train
+s1326;79;m;F;ct heart-thorakale aorta;train
+s1327;83;m;F;ct heart-thorakale aorta;train
+s1328;66;f;H;ct angiography head;train
+s1329;77;f;B;ct thorax-abdomen;train
+s1330;79;m;H;ct heart-thorakale aorta;train
+s1331;74;m;A;ct abdomen;train
+s1332;94;f;H;ct aortic valve;train
+s1333;75;m;H;ct heart;train
+s1334;78;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1335;43;f;A;ct neck;train
+s1336;80;m;I;ct neck-thorax-abdomen-pelvis;train
+s1337;63;m;I;ct thorax-neck;val
+s1338;85;m;H;ct spine;train
+s1339;55;f;E;ct abdomen;train
+s1340;78;m;A;ct thorax-abdomen-pelvis;train
+s1341;17;m;D;ct thorax-abdomen;train
+s1342;83;m;H;ct  intervention ;train
+s1343;61;m;D;ct thorax-neck;train
+s1344;64;f;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1345;60;m;H;ct heart;train
+s1346;45;m;H;ct  intervention ;train
+s1347;79;m;D;ct abdomen;test
+s1348;66;m;H;ct thorax-abdomen-pelvis;train
+s1349;67;m;H;ct angiography neck-thx-abd-pelvis-leg;train
+s1350;63;f;H;ct polytrauma;train
+s1352;54;m;H;ct angiography head;train
+s1353;56;m;H;ct thorax;train
+s1354;30;m;H;ct polytrauma;train
+s1355;59;f;H;ct angiography abdomen-pelvis;test
+s1357;83;f;H;ct hip right;test
+s1358;70;f;H;ct angiography abdomen-pelvis;train
+s1359;46;m;H;ct hip right;train
+s1361;81;m;H;ct angiography thorax-abdomen-pelvis;train
+s1362;85;m;H;ct angiography thorax-abdomen-pelvis;train
+s1363;63;m;H;ct angiography thorax-abdomen-pelvis;train
+s1364;74;m;H;ct angiography thorax-abdomen-pelvis;train
+s1365;70;f;H;ct angiography thorax-abdomen-pelvis;train
+s1366;50;f;H;ct polytrauma;train
+s1367;38;m;H;ct angiography thorax-abdomen-pelvis;train
+s1368;42;m;H;ct angiography abdomen-pelvis;train
+s1369;71;f;H;ct whole body;train
+s1370;81;m;H;ct angiography thorax-abdomen-pelvis;train
+s1371;71;m;A;ct whole body;train
+s1372;81;f;I;ct angiography thorax-abdomen-pelvis;train
+s1373;80;m;H;ct angiography abdomen-pelvis;train
+s1374;76;m;H;ct angiography abdomen-pelvis;train
+s1375;76;m;H;ct angiography thorax-abdomen-pelvis;train
+s1377;67;m;H;ct angiography thorax-abdomen-pelvis;test
+s1378;58;f;H;ct hip right;train
+s1379;65;m;H;ct angiography thorax-abdomen-pelvis;train
+s1380;77;f;H;ct whole body;train
+s1382;76;m;H;ct angiography thorax-abdomen-pelvis;train
+s1383;75;m;H;ct angiography abdomen-pelvis;train
+s1384;63;f;H;ct whole body;train
+s1385;71;f;H;ct angiography abdomen-pelvis;train
+s1386;83;m;H;ct angiography thorax-abdomen-pelvis;test
+s1387;71;m;H;ct angiography thorax-abdomen-pelvis;train
+s1388;68;f;H;ct whole body;train
+s1389;68;m;A;ct angiography abdomen-pelvis;train
+s1390;61;m;H;ct angiography abdomen-pelvis;train
+s1391;64;m;H;ct angiography abdomen-pelvis;train
+s1394;56;m;H;ct angiography abdomen-pelvis;train
+s1395;74;m;I;ct angiography thorax-abdomen-pelvis;train
+s1397;72;m;H;ct whole body;train
+s1399;58;f;H;ct hip right;train
+s1400;67;m;H;ct angiography thorax-abdomen-pelvis;train
+s1401;49;f;H;ct angiography abdomen-pelvis;train
+s1403;59;m;H;ct angiography abdomen-pelvis;train
+s1404;61;f;H;ct angiography thorax-abdomen-pelvis;train
+s1405;74;m;H;ct angiography abdomen-pelvis;train
