@@ -108,7 +108,7 @@ def get_largest_connected_component(binary_image:sitk.Image):
     largest_component_binary_image = sorted_component_image == 1
     return largest_component_binary_image
 
-def extract_bbox_topleft(img, seg, label_id, physical_size, padding_value, verbose=True):
+def extract_bbox_topleft(img, seg, label_id, physical_size, padding_value, add_topleft_space_in_voxels=3, verbose=True):
     """extract ROI from img of given physical size by finding the bounding box with label id from seg image
     and then extracting certain volume starting from top-left of the bounding box
     This is for a specific use-case of extracting femur bones of certain length from varying crops. 
@@ -139,11 +139,12 @@ def extract_bbox_topleft(img, seg, label_id, physical_size, padding_value, verbo
     if bbox_size[2] >= voxel_size[2]: # if the bone size is larger than requested size along Inferior-Superior axis
         # change the origin of the bounding box along Inferior-Superior axis
         if is_Superior_to_Inferior(orientation):
-            bbox_origin[2] = bbox_size[2] - voxel_size[2] + 3 # add 4.5mm of head room above femoral head
+            bbox_origin[2] = bbox_size[2] - voxel_size[2] + add_topleft_space_in_voxels # add 4.5mm of head room above femoral head
             # bbox_origin[2] = 3
         else:
             # is inferior to superior axis:
             pass
+            #TODO: handle the inferior to superior axis
 
 
     # pad the image and obtain the bbox origin index in padded image
@@ -156,7 +157,7 @@ def extract_bbox_topleft(img, seg, label_id, physical_size, padding_value, verbo
         print(f'Centroid {filtr.GetCentroid(label_id)}')
         print(f'origin {bbox_origin} padded origin {padded_bbox_origin_index} padded imagesize {padded_img.GetSize()} Extent {add_tuple(voxel_size,padded_bbox_origin_index)}') 
     ROI = sitk.RegionOfInterest(padded_img,voxel_size,padded_bbox_origin_index)
-    return ROI, bbox_origin, bbox_size
+    return ROI
 
 def extract_bbox(img, seg, label_id, physical_size, padding_value, verbose=True):
     """extract ROI from img of given physical size by finding the bounding box with label id from seg image
