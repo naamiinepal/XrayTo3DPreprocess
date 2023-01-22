@@ -102,16 +102,23 @@ def required_padding_v2(img, voxel_size, centroid_index, extraction_ratio: dict,
 
     return lowerbound_pad, upperbound_pad
 
+def get_largest_connected_component(binary_image:sitk.Image):
+    component_image = sitk.ConnectedComponent(binary_image)
+    sorted_component_image = sitk.RelabelComponent(component_image, sortByObjectSize=True)
+    largest_component_binary_image = sorted_component_image == 1
+    return largest_component_binary_image
+
 def extract_bbox_topleft(img, seg, label_id, physical_size, padding_value, verbose=True):
     """extract ROI from img of given physical size by finding the bounding box with label id from seg image
     and then extracting certain volume starting from top-left of the bounding box
     This is for a specific use-case of extracting femur bones of certain length from varying crops. 
     """
-    assert isinstance(img, sitk.Image)
+    assert isinstance(img,sitk.Image)
     assert isinstance(seg, sitk.Image)
 
-    voxel_size = physical_size_to_voxel_size(img, physical_size)
+    voxel_size = physical_size_to_voxel_size(seg, physical_size)
 
+    
     # execute filter to obtain bounding box and centroid of given segmentation label
     filtr = sitk.LabelShapeStatisticsImageFilter()
     filtr.Execute(seg)
@@ -122,6 +129,34 @@ def extract_bbox_topleft(img, seg, label_id, physical_size, padding_value, verbo
     assert label_id in labels
 
     bbox = filtr.GetBoundingBox(label_id)
+    centroid_index = img.TransformPhysicalPointToIndex(filtr.GetCentroid(label_id))
+    bbox_origin, bbox_size = list(bbox[:3]),list(bbox[3:])
+    bbox_origin[0] = int(centroid_index[0] - voxel_size[0] // 2)
+    bbox_origin[1] = int(centroid_index[1] - voxel_size[1] // 2)
+
+    orientation = get_orientation_code_itk(seg)
+    # crop along the Inferior-Superior axis 
+    if bbox_size[2] >= voxel_size[2]: # if the bone size is larger than requested size along Inferior-Superior axis
+        # change the origin of the bounding box along Inferior-Superior axis
+        if is_Superior_to_Inferior(orientation):
+            bbox_origin[2] = bbox_size[2] - voxel_size[2] + 3 # add 4.5mm of head room above femoral head
+            # bbox_origin[2] = 3
+        else:
+            # is inferior to superior axis:
+            pass
+
+
+    # pad the image and obtain the bbox origin index in padded image
+    lb_padded = (50,)*3
+    ub_padded = (50,)*3
+    padded_img:sitk.Image = sitk.ConstantPad(img,lb_padded, ub_padded,padding_value)
+    physical_coords_bbox_origin = img.TransformIndexToPhysicalPoint(bbox_origin)
+    padded_bbox_origin_index = padded_img.TransformPhysicalPointToIndex(physical_coords_bbox_origin)
+    if verbose:
+        print(f'Centroid {filtr.GetCentroid(label_id)}')
+        print(f'origin {bbox_origin} padded origin {padded_bbox_origin_index} padded imagesize {padded_img.GetSize()} Extent {add_tuple(voxel_size,padded_bbox_origin_index)}') 
+    ROI = sitk.RegionOfInterest(padded_img,voxel_size,padded_bbox_origin_index)
+    return ROI, bbox_origin, bbox_size
 
 def extract_bbox(img, seg, label_id, physical_size, padding_value, verbose=True):
     """extract ROI from img of given physical size by finding the bounding box with label id from seg image
