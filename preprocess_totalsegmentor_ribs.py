@@ -49,7 +49,6 @@ def generate_path(sub_dir:str, name:str, subject_id, output_path_template, confi
 def process_totalsegmentor_subject_helper(subject_id:str):
     # define paths
     input_fileformat = config['filename_convention']['input']
-    output_fileformat = config['filename_convention']['output']
 
     subject_basepath = config['subjects']['subject_basepath']
 
