@@ -33,10 +33,9 @@ def get_subject_femur_stats(subject_seg_dir,femur_filenames):
         voxels[femur_position] = np.sum(label_voxels,dtype=np.int32)
     return voxels
 
-def save_total_voxel_stats_for_whole_dataset(base_path, subjects_path, femur_filenames):
+def save_total_voxel_stats_for_whole_dataset(base_path, subjects_path, femur_filenames,stats_out_path):
     femur_meta_dict = {}
     header = ['left','right']
-    femur_meta_path = Path(base_path)/'femur_stats.csv'    
     
     for sample_subject_path in tqdm(subjects_path,total=len(subjects_path)):
         ct_path = f'{sample_subject_path}/ct.nii.gz'
@@ -47,8 +46,7 @@ def save_total_voxel_stats_for_whole_dataset(base_path, subjects_path, femur_fil
         
         femur_meta_dict[subject_id] = [voxels['left'],voxels['right']]
 
-        write_csv(femur_meta_dict,header,femur_meta_path)
-    return femur_meta_path
+        write_csv(femur_meta_dict,header,stats_out_path)
 
 def analyze_stats(metadata_path):
     df = pd.read_csv(metadata_path)
@@ -70,12 +68,12 @@ def analyze_stats(metadata_path):
 
 
     # save subjects with both left and right femur annotated
-    full_femur_df.to_csv(Path(__file__).with_name('subjects_with_both_femur.csv'),columns=['subject_id'],index=False)    
+    full_femur_df.to_csv(Path(__file__).with_name('subjects_with_both_femur.csv'),columns=['subject_id'],index=False,header=False)    
     
     # save subjects with sizable volume of left femur 
-    full_femur_left_nonpartial.to_csv(Path(__file__).with_name('subjects_with_left_femur.csv'),columns=['subject_id'],index=False)    
+    full_femur_left_nonpartial.to_csv(Path(__file__).with_name('subjects_with_left_femur.csv'),columns=['subject_id'],index=False, header=False)    
 
-    full_femur_right_nonpartial.to_csv(Path(__file__).with_name('subjects_with_right_femur.csv'),columns=['subject_id'],index=False)
+    full_femur_right_nonpartial.to_csv(Path(__file__).with_name('subjects_with_right_femur.csv'),columns=['subject_id'],index=False,header=False)
 
 if __name__ == '__main__':
         base_path = '2D-3D-Reconstruction-Datasets/TotalSegmentor-full/'
@@ -89,7 +87,8 @@ if __name__ == '__main__':
         ANALYZE_STATS = True
 
         if OBTAIN_STATS:
-            save_total_voxel_stats_for_whole_dataset(base_path, subjects_path, femur_filenames)
+            stats_out_path = Path(base_path)/'femur_stats.csv'
+            save_total_voxel_stats_for_whole_dataset(base_path, subjects_path, femur_filenames,stats_out_path)
         
         if ANALYZE_STATS:
             analyze_stats(Path(base_path)/'femur_stats.csv')

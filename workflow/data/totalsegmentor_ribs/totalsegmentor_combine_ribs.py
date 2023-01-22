@@ -70,7 +70,7 @@ def get_ribs_stats(seg_dir):
 
 if __name__ == '__main__':
 
-    base_path = '2D-3D-Reconstruction-Datasets/TotalSegmentor-full/'
+    base_path = '2D-3D-Reconstruction-Datasets/Totalsegmentator-full/'
     subjects_path = get_totalsegmentor_subjects(base_path)
     ribs_filenames = get_totasegmentor_ribs_filenames()
     rib_meta_dict = {}
@@ -78,8 +78,8 @@ if __name__ == '__main__':
     print(f'subjects {len(subjects_path)}')
     total_subjects = len(subjects_path)
 
-    GENERATE_RIB_SEG = False
-    OBTAIN_STATS = False
+    GENERATE_RIB_SEG = True
+    OBTAIN_STATS = True
 
     if GENERATE_RIB_SEG:
         num_workers = os.cpu_count()
@@ -99,5 +99,5 @@ if __name__ == '__main__':
 
             rib_meta_dict[subject_id] = [total_voxels,*voxels]
 
-            rib_meta_path = Path(base_path)/'rib_meta.csv'    
+            rib_meta_path = Path(base_path)/'rib_stats.csv'    
             write_csv(rib_meta_dict,['total_voxels',*labels],rib_meta_path)

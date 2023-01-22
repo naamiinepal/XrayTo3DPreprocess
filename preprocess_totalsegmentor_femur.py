@@ -15,17 +15,23 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
     roi_properties = config['ROI_properties']
     size = (roi_properties['size'],)*ct.GetDimension()
 
-    ct_roi = extract_bbox_topleft(ct, seg,label_id=1,physical_size=size,padding_value=roi_properties['ct_padding'])
+
+
+    ct_roi = extract_bbox_topleft(ct, seg,label_id=1,physical_size=size,padding_value=roi_properties['ct_padding'],verbose=False)
   
     if get_orientation_code_itk(ct_roi) != roi_properties['axcode']:
         ct_roi = reorient_to(ct_roi,axcodes_to=roi_properties['axcode'])
-    out_ct_path = generate_path('ct','ct_roi',subject_id,output_path_template,config)
-    write_image(ct_roi,out_ct_path)
 
-    seg_roi = extract_bbox_topleft(seg,seg,label_id=1,physical_size=size,padding_value=roi_properties['seg_padding'])
+
+
+    seg_roi = extract_bbox_topleft(seg,seg,label_id=1,physical_size=size,padding_value=roi_properties['seg_padding'],verbose=False)
     if get_orientation_code_itk(seg_roi) != roi_properties['axcode']:
         seg_roi = reorient_to(seg_roi,axcodes_to=roi_properties['axcode'])
 
+
+    out_ct_path = generate_path('ct','ct_roi',subject_id,output_path_template,config)
+    write_image(ct_roi,out_ct_path)
+    
     out_seg_path = generate_path('seg','seg_roi',subject_id,output_path_template,config)
     write_image(seg_roi,out_seg_path)
 
