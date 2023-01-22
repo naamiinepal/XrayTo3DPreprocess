@@ -71,7 +71,6 @@ def get_ribs_stats(seg_dir):
 if __name__ == '__main__':
 
     base_path = '2D-3D-Reconstruction-Datasets/TotalSegmentor-full/'
-    import os
     subjects_path = get_totalsegmentor_subjects(base_path)
     ribs_filenames = get_totasegmentor_ribs_filenames()
     rib_meta_dict = {}
