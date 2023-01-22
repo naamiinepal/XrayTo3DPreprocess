@@ -31,6 +31,20 @@ def physical_size_to_voxel_size(img, physical_size):
     return tuple([int(p / sp) for p, sp in zip(physical_size, img.GetSpacing())])
 
 
+def get_Superior_Inferior_axis(orientation:str):
+    assert len(list(orientation)) == 3, f'invalid orientation string {orientation}'
+    if 'I' in list(orientation):
+        return list(orientation).index('I')
+    elif 'S' in list(orientation):
+        return list(orientation).index('S')
+    else:
+        raise ValueError(f'invalid orientation string {orientation}')
+
+def is_Superior_to_Inferior(orientation:str):
+    """RAS -> True, RAI ->False, PSR->True, PIR ->False"""
+    axis_index = get_Superior_Inferior_axis(orientation)
+    return list(orientation)[axis_index] == 'S'
+
 def get_orientation_code_itk(img_or_affine_mtrx: Union[sitk.Image,Sequence]):
     """Orientation is a tricky topic:
     https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/Orientation%20Explained
