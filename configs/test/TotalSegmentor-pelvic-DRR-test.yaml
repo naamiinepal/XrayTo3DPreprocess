@@ -3,7 +3,7 @@
 # subject-list
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/TotalSegmentor-full
-  subject_list: configs/subjects_list/left_femur_nonpartial_full.lst
+  subject_list: configs/subjects_list/left_femur_nonpartial_test.lst
 
 # xray image properties
 xray_pose:
@@ -15,12 +15,11 @@ xray_pose:
   
 # output directories
 out_directories:
-  _load: directory_conf/dir_ct.yaml
+  _load: directory_conf/femur_dir_ct.yaml
 
 # ROI extraction properties
 ROI_properties:
   axcode: PIR
-  extraction_type: top_left_bbox
   extraction_ratio:
     L: 0.5
     A: 0.5
@@ -30,16 +29,18 @@ ROI_properties:
   drr_from_ct_mask: False
   drr_from_mask: False
   res: 1.0
-  size: 128
+  size: 256
 
 # filename conventions
 filename_convention:
   input:
     ct: "ct.nii.gz"
-    seg: "segmentations/femur_left.nii.gz"
+    seg: 
+      - "segmentations/hip_left.nii.gz"
+      - "segmentations/hip_right.nii.gz"
     ctd: ""
   output:
-    xray_ap: "{id}_femur-ap.png"
-    xray_lat: "{id}_femur-lat.png"
-    ct_roi: '{id}_femur-ct.nii.gz' 
-    seg_roi: '{id}_femur_msk.nii.gz'
+    xray_ap: "{id}_hip-ap.png"
+    xray_lat: "{id}_hip-lat.png"
+    ct_roi: '{id}_hip-ct.nii.gz' 
+    seg_roi: '{id}_hip_msk.nii.gz'

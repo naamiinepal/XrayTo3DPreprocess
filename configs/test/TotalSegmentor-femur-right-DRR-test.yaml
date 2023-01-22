@@ -20,10 +20,7 @@ out_directories:
 # ROI extraction properties
 ROI_properties:
   axcode: PIR
-  extraction_ratio:
-    L: 0.5
-    A: 0.5
-    S: 0.5
+  is_left: False
   ct_padding: -1024
   seg_padding: 0
   drr_from_ct_mask: False
@@ -35,10 +32,10 @@ ROI_properties:
 filename_convention:
   input:
     ct: "ct.nii.gz"
-    seg: "segmentations/femur_left.nii.gz"
+    seg: "segmentations/femur_right.nii.gz"
     ctd: ""
   output:
-    xray_ap: "{id}_femur-ap.png"
-    xray_lat: "{id}_femur-lat.png"
-    ct_roi: '{id}_femur-ct.nii.gz' 
-    seg_roi: '{id}_femur_msk.nii.gz'
+    xray_ap: "{id}_femur_right-ap.png"
+    xray_lat: "{id}_femur_right-lat.png"
+    ct_roi: '{id}_femur_right-ct.nii.gz' 
+    seg_roi: '{id}_femur_right_msk.nii.gz'

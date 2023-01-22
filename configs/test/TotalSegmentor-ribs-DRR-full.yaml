@@ -2,7 +2,7 @@
 
 # subject-list
 subjects:
-  subject_basepath: 2D-3D-Reconstruction-Datasets/TotalSegmentor-full
+  subject_basepath: 2D-3D-Reconstruction-Datasets/Totalsegmentator-full
   subject_list: configs/subjects_list/rib_full_subjects.lst
 
 # xray image properties
