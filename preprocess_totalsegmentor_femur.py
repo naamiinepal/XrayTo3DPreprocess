@@ -22,7 +22,7 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
 
     if get_orientation_code_itk(ct_roi) != roi_properties['axcode']:
         ct_roi = reorient_to(ct_roi,axcodes_to=roi_properties['axcode'])
-    out_ct_path = generate_path('femur_ct','ct_roi',subject_id,output_path_template,config)
+    out_ct_path = generate_path('ct','ct_roi',subject_id,output_path_template,config)
     write_image(ct_roi,out_ct_path)
 
     # seg_roi = extract_bbox(seg,seg,label_id=1,physical_size=size,padding_value=roi_properties['seg_padding'])
@@ -30,13 +30,13 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
     if get_orientation_code_itk(seg_roi) != roi_properties['axcode']:
         seg_roi = reorient_to(seg_roi,axcodes_to=roi_properties['axcode'])
 
-    out_seg_path = generate_path('femur_seg','seg_roi',subject_id,output_path_template,config)
+    out_seg_path = generate_path('seg','seg_roi',subject_id,output_path_template,config)
     write_image(seg_roi,out_seg_path)
 
-    out_xray_ap_path = generate_path('xray_from_femur_ct','xray_ap',subject_id,output_path_template,config)
+    out_xray_ap_path = generate_path('xray_from_ct','xray_ap',subject_id,output_path_template,config)
     generate_xray(out_ct_path, ProjectionType.ap, seg_roi, config['xray_pose'], out_xray_ap_path)
 
-    out_xray_lat_path = generate_path('xray_from_femur_ct','xray_lat',subject_id,output_path_template,config)
+    out_xray_lat_path = generate_path('xray_from_ct','xray_lat',subject_id,output_path_template,config)
     generate_xray(out_ct_path, ProjectionType.lat, seg_roi, config['xray_pose'], out_xray_lat_path)
 
 def create_directories(out_path_template, config):

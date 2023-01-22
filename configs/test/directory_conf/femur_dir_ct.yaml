@@ -1,9 +1,0 @@
-## output directories
-derivatives: derivatives
-xray_from_femur_ct: xray_from_femur_ct
-xray_from_femur_mask: xray_from_femur_mask
-xray_rom_femur_ctmask: xray_rom_femur_ctmask
-femur_seg: seg_roi
-femur_ct: ct_roi
-centroid: centroid_roi
-overlay: overlay

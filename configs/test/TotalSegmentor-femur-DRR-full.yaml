@@ -15,7 +15,7 @@ xray_pose:
   
 # output directories
 out_directories:
-  _load: directory_conf/femur_dir_ct.yaml
+  _load: directory_conf/dir_ct.yaml
 
 # ROI extraction properties
 ROI_properties:
