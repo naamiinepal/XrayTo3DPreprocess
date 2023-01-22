@@ -102,6 +102,26 @@ def required_padding_v2(img, voxel_size, centroid_index, extraction_ratio: dict,
 
     return lowerbound_pad, upperbound_pad
 
+def extract_bbox_topleft(img, seg, label_id, physical_size, padding_value, verbose=True):
+    """extract ROI from img of given physical size by finding the bounding box with label id from seg image
+    and then extracting certain volume starting from top-left of the bounding box
+    This is for a specific use-case of extracting femur bones of certain length from varying crops. 
+    """
+    assert isinstance(img, sitk.Image)
+    assert isinstance(seg, sitk.Image)
+
+    voxel_size = physical_size_to_voxel_size(img, physical_size)
+
+    # execute filter to obtain bounding box and centroid of given segmentation label
+    filtr = sitk.LabelShapeStatisticsImageFilter()
+    filtr.Execute(seg)
+
+    labels = filtr.GetLabels()
+
+    # make sure the label being asked for exists in the segmentation map
+    assert label_id in labels
+
+    bbox = filtr.GetBoundingBox(label_id)
 
 def extract_bbox(img, seg, label_id, physical_size, padding_value, verbose=True):
     """extract ROI from img of given physical size by finding the bounding box with label id from seg image
