@@ -6,7 +6,7 @@ import os
 def process_subject(subject_id, ct_path, seg_path, config, output_path_template):
     ct = read_image(ct_path)
     seg = read_image(seg_path)
-    seg = get_largest_connected_component(seg)
+    seg = get_largest_connected_component(seg) # some of the segmentations have islands in irrelevant places
 
     logger.debug(f'Image Size {ct.GetSize()} Spacing {np.around(ct.GetSpacing(),3)}')  
 
@@ -14,19 +14,15 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
     # extract ROI and orient to particular orientation
     roi_properties = config['ROI_properties']
     size = (roi_properties['size'],)*ct.GetDimension()
-    # ct_roi = extract_bbox(ct,seg,label_id=1,physical_size=size,padding_value=roi_properties['ct_padding'])
 
-    ct_roi, bounding_box_origin, bounding_box_size = extract_bbox_topleft(ct, seg,label_id=1,physical_size=size,padding_value=roi_properties['ct_padding'])
+    ct_roi = extract_bbox_topleft(ct, seg,label_id=1,physical_size=size,padding_value=roi_properties['ct_padding'])
   
-    logger.debug(f'Bounding box {bounding_box_origin} {bounding_box_size}')
-
     if get_orientation_code_itk(ct_roi) != roi_properties['axcode']:
         ct_roi = reorient_to(ct_roi,axcodes_to=roi_properties['axcode'])
     out_ct_path = generate_path('ct','ct_roi',subject_id,output_path_template,config)
     write_image(ct_roi,out_ct_path)
 
-    # seg_roi = extract_bbox(seg,seg,label_id=1,physical_size=size,padding_value=roi_properties['seg_padding'])
-    seg_roi,bounding_box_origin, bounding_box_size = extract_bbox_topleft(seg,seg,label_id=1,physical_size=size,padding_value=roi_properties['seg_padding'])
+    seg_roi = extract_bbox_topleft(seg,seg,label_id=1,physical_size=size,padding_value=roi_properties['seg_padding'])
     if get_orientation_code_itk(seg_roi) != roi_properties['axcode']:
         seg_roi = reorient_to(seg_roi,axcodes_to=roi_properties['axcode'])
 
@@ -46,7 +42,6 @@ def create_directories(out_path_template, config):
 def process_total_segmentor_subject_helper(subject_id:str):
     # define paths
     input_fileformat = config['filename_convention']['input']
-    output_fileformat = config['filename_convention']['output']
 
     subject_basepath = config['subjects']['subject_basepath']
 
