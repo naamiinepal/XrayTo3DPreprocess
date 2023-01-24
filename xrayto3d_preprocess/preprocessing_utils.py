@@ -11,13 +11,14 @@ from shutil import which
 
 def command_exists(command_name):
     """check if a command exists or is in path"""
-    return which(command_name)
+    return which(command_name) is not None
 
 def get_DRR_command():
     possible_commands = ['TwoProjectionRegistrationTestDriver GetDRRSiddonJacobsRayTracing','DRRSiddonJacobs']
     for cmd in possible_commands:
         if command_exists(cmd.split(' ')[0]):
             return cmd
+    raise ValueError(f'DRR not found')
 
 def get_DRRSiddonJacobs_Command_string(input_filepath, output_filepath, orientation, config):
     # DRRSiddonJacobs has to be in path
