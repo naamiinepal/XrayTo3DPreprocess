@@ -70,16 +70,25 @@ def get_ribs_stats(seg_dir):
 
 if __name__ == '__main__':
 
-    base_path = '2D-3D-Reconstruction-Datasets/Totalsegmentator-full/'
-    subjects_path = get_totalsegmentor_subjects(base_path)
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    base_path = '2D-3D-Reconstruction-Datasets/totalsegmentator/Totalsegmentator_dataset'
+    parser.add_argument('--base_path',default=base_path)
+    parser.add_argument('--generate-ribs',default=False,action='store_true')
+    parser.add_argument('--generate_stats',default=False,action='store_true')
+
+    args = parser.parse_args()
+
+    subjects_path = get_totalsegmentor_subjects(args.base_path)
     ribs_filenames = get_totasegmentor_ribs_filenames()
     rib_meta_dict = {}
     
     print(f'subjects {len(subjects_path)}')
     total_subjects = len(subjects_path)
 
-    GENERATE_RIB_SEG = True
-    OBTAIN_STATS = True
+    GENERATE_RIB_SEG = args.generate_ribs
+    GENERATE_STATS = args.generate_stats
 
     if GENERATE_RIB_SEG:
         num_workers = os.cpu_count()
@@ -88,7 +97,7 @@ if __name__ == '__main__':
             print('done')
 
 
-    if OBTAIN_STATS:
+    if GENERATE_STATS:
         for sample_subject_path in tqdm(subjects_path,total=len(subjects_path)):
             ct_path = f'{sample_subject_path}/ct.nii.gz'
             seg_dir = f'{sample_subject_path}/segmentations'
@@ -99,5 +108,5 @@ if __name__ == '__main__':
 
             rib_meta_dict[subject_id] = [total_voxels,*voxels]
 
-            rib_meta_path = Path(base_path)/'rib_stats.csv'    
+            rib_meta_path = Path(__file__).parent/'rib_stats.csv'    
             write_csv(rib_meta_dict,['total_voxels',*labels],rib_meta_path)
