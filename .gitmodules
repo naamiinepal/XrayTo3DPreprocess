@@ -1,3 +1,6 @@
 [submodule "external/TotalSegmentator"]
 	path = external/TotalSegmentator
 	url = https://github.com/wasserth/TotalSegmentator.git
+[submodule "external/MeshVisualizer"]
+	path = external/MeshVisualizer
+	url = git@github.com:naamiinepal/MeshVisualizer.git
