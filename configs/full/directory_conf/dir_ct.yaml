@@ -1,0 +1,9 @@
+## output directories
+derivatives: derivatives
+xray_from_ct: xray_from_ct
+xray_from_mask: xray_from_mask
+xray_from_ctmask: xray_rom_ctmask
+seg: seg_roi
+ct: ct_roi
+centroid: centroid_roi
+overlay: overlay
