@@ -8,8 +8,12 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
     seg = read_image(seg_path)
     seg = get_largest_connected_component(seg) # some of the segmentations have islands in irrelevant places
 
-    logger.debug(f'Image Size {ct.GetSize()} Spacing {np.around(ct.GetSpacing(),3)}')  
+    logger.debug(f' {subject_id} Image Size {ct.GetSize()} Spacing {np.around(ct.GetSpacing(),3)}')  
 
+    if config['ROI_properties'].is_left == False:
+        # flip image
+        ct = mirror_image(ct,flip_along=2)
+        seg = mirror_image(seg,flip_along=2)
 
     # extract ROI and orient to particular orientation
     roi_properties = config['ROI_properties']
@@ -18,7 +22,9 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
 
 
     ct_roi = extract_bbox_topleft(ct, seg,label_id=1,physical_size=size,padding_value=roi_properties['ct_padding'],verbose=False)
-  
+    
+    logger.debug(f' CT ROI {ct_roi.GetSize()} Spacing {np.around(ct_roi.GetSpacing(),3)}')
+
     if get_orientation_code_itk(ct_roi) != roi_properties['axcode']:
         ct_roi = reorient_to(ct_roi,axcodes_to=roi_properties['axcode'])
 
@@ -27,12 +33,14 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
     seg_roi = extract_bbox_topleft(seg,seg,label_id=1,physical_size=size,padding_value=roi_properties['seg_padding'],verbose=False)
     if get_orientation_code_itk(seg_roi) != roi_properties['axcode']:
         seg_roi = reorient_to(seg_roi,axcodes_to=roi_properties['axcode'])
+    logger.debug(f' Seg ROI {seg_roi.GetSize()} Spacing {np.around(seg_roi.GetSpacing(),3)}')
 
 
-    out_ct_path = generate_path('ct','ct_roi',subject_id,output_path_template,config)
+    out_ct_path = generate_path('ct_roi','ct_roi',subject_id,output_path_template,config)
+    logger.debug(f'writing ct roi to {out_ct_path}')
     write_image(ct_roi,out_ct_path)
     
-    out_seg_path = generate_path('seg','seg_roi',subject_id,output_path_template,config)
+    out_seg_path = generate_path('seg_roi','seg_roi',subject_id,output_path_template,config)
     write_image(seg_roi,out_seg_path)
 
     out_xray_ap_path = generate_path('xray_from_ct','xray_ap',subject_id,output_path_template,config)
@@ -45,7 +53,7 @@ def create_directories(out_path_template, config):
     for key, out_dir in config['out_directories'].items():
         Path(out_path_template.format(output_type=out_dir)).mkdir(exist_ok=True,parents=True)
 
-def process_total_segmentor_subject_helper(subject_id:str):
+def process_total_segmentor_subject_helper(subject_id:str,verbose=False):
     # define paths
     input_fileformat = config['filename_convention']['input']
 
@@ -54,6 +62,7 @@ def process_total_segmentor_subject_helper(subject_id:str):
     ct_path = Path(subject_basepath)/subject_id/input_fileformat['ct']
     seg_path = Path(subject_basepath)/subject_id/input_fileformat['seg']
 
+    logger.debug(f'reading ct and seg from {ct_path} {seg_path}')
     OUT_DIR_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}'
     OUT_PATH_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}/{{output_name}}'
 
@@ -61,6 +70,7 @@ def process_total_segmentor_subject_helper(subject_id:str):
     process_subject(subject_id,ct_path,seg_path,config,OUT_PATH_TEMPLATE)
 
 def generate_path(sub_dir:str, name:str, subject_id, output_path_template, config):
+
     output_fileformat = config['filename_convention']['output']
     out_dirs = config['out_directories']    
     filename = output_fileformat[name].format(id=subject_id)
@@ -90,7 +100,8 @@ if __name__ == '__main__':
     logger.debug(f'found {len(subject_list)} subjects')
     logger.debug(subject_list)
 
-    num_workers = os.cpu_count()
+    # num_workers = os.cpu_count()
+    num_workers = 1
     def initialize_config_for_all_workers():
         global config
         config = read_config_and_load_components(args.config_file)

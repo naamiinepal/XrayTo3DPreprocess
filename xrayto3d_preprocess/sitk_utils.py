@@ -1,3 +1,4 @@
+import numpy as np
 import SimpleITK as sitk
 from .enumutils import ProjectionType
 from .tuple_ops import all_elements_equal
@@ -175,3 +176,10 @@ def reorient_centroids_to(ctd_list, target_axcodes,image_shape, decimals=1, verb
         print("[*] Centroids reoriented from", nio.ornt2axcodes(ornt_fr), "to", target_axcodes)
     return out_list
 
+def mirror_image(image:sitk.Image,flip_along=0):
+    """used to mirror the proximal femur ct so that the right femur looks similar in orientation to the left femur"""
+    array_image = sitk.GetArrayFromImage(image)
+    flipped_array_image = np.flip(array_image, flip_along)
+    flippped_image = sitk.GetImageFromArray(flipped_array_image)
+    flippped_image.CopyInformation(image)
+    return flippped_image
