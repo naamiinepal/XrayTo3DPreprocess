@@ -23,17 +23,17 @@ def get_femur_position_from_filename(filepath) -> str:
 def get_subject_femur_stats(subject_seg_dir,femur_filenames):
     full_paths = [str(Path(subject_seg_dir)/p) for p in femur_filenames]
 
-    voxels = {}
+    voxel_count = {}
     for sample_femur_path in full_paths:
         sample_femur = read_image(sample_femur_path)
         sample_femur = get_largest_connected_component(sample_femur) # some segmentations have islands of spurious segmentations
         stats_obj = get_segmentation_stats(sample_femur)
         label_voxels = [ stats_obj.GetNumberOfPixels(l) for l in stats_obj.GetLabels()]
         femur_position = get_femur_position_from_filename(sample_femur_path)
-        voxels[femur_position] = np.sum(label_voxels,dtype=np.int32)
-    return voxels
+        voxel_count[femur_position] = np.sum(label_voxels,dtype=np.int32)
+    return voxel_count
 
-def save_total_voxel_stats_for_whole_dataset(base_path, subjects_path, femur_filenames,stats_out_path):
+def save_total_voxel_stats_for_whole_dataset(subjects_path, femur_filenames,stats_out_path):
     femur_meta_dict = {}
     header = ['left','right']
     
@@ -42,10 +42,11 @@ def save_total_voxel_stats_for_whole_dataset(base_path, subjects_path, femur_fil
         subject_seg_dir = f'{sample_subject_path}/segmentations'
 
         subject_id = str(Path(sample_subject_path).name)
-        voxels = get_subject_femur_stats(subject_seg_dir,femur_filenames)
+        voxel_count = get_subject_femur_stats(subject_seg_dir,femur_filenames)
         
-        femur_meta_dict[subject_id] = [voxels['left'],voxels['right']]
+        femur_meta_dict[subject_id] = [voxel_count['left'],voxel_count['right']]
 
+        # overwrite csv once a new row of data is available 
         write_csv(femur_meta_dict,header,stats_out_path)
 
 def analyze_stats(metadata_path):
@@ -76,20 +77,22 @@ def analyze_stats(metadata_path):
     full_femur_right_nonpartial.to_csv(Path(__file__).with_name('subjects_with_right_femur.csv'),columns=['subject_id'],index=False,header=False)
 
 if __name__ == '__main__':
-        base_path = '2D-3D-Reconstruction-Datasets/TotalSegmentor-full/'
-        subjects_path = get_totalsegmentor_subjects(base_path)
+        # base_path = '2D-3D-Reconstruction-Datasets/TotalSegmentor-full/'
+        dataset_base_path = '2D-3D-Reconstruction-Datasets/totalsegmentator/Totalsegmentator_dataset'
+        subjects_path = get_totalsegmentor_subjects(dataset_base_path)
         femur_filenames = get_totalsegmentor_femur_filenames()
 
         print(f'subjects {len(subjects_path)}')
         total_subjects = len(subjects_path)
 
-        OBTAIN_STATS = False
+        OBTAIN_STATS = True
         ANALYZE_STATS = True
 
+        stats_save_dir = 'external/XrayTo3DPreprocess/workflow/data/totalsegmentor_femur'
         if OBTAIN_STATS:
-            stats_out_path = Path(base_path)/'femur_stats.csv'
-            save_total_voxel_stats_for_whole_dataset(base_path, subjects_path, femur_filenames,stats_out_path)
+            stats_out_path = Path(stats_save_dir)/'femur_stats.csv'
+            save_total_voxel_stats_for_whole_dataset(subjects_path, femur_filenames,stats_out_path)
         
         if ANALYZE_STATS:
-            analyze_stats(Path(base_path)/'femur_stats.csv')
+            analyze_stats(Path(stats_save_dir)/'femur_stats.csv')
         
