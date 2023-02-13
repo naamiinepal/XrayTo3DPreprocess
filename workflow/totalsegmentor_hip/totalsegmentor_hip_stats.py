@@ -11,13 +11,14 @@ def get_totalsegmentor_subjects(base_path:str)-> List[str]:
     subfolders = [ f.path for f in os.scandir(base_path) if f.is_dir() ]
     return subfolders
 
-hip_bones = ['hip_left.nii.gz', 'hip_right.nii.gz']
+hip_bones_with_sacrum = ['hip_left.nii.gz', 'hip_right.nii.gz', 'sacrum.nii.gz']
+hip_bones_without_sacrum = ['hip_left.nii.gz', 'hip_right.nii.gz']
 
 def get_hip_position_from_filename(filepath):
     anatomy,position = get_nifti_stem(filepath).split('_')
     return position
 
-def get_hip_stats(seg_dir,file_patterns = hip_bones):
+def get_hip_stats(seg_dir,file_patterns = hip_bones_with_sacrum):
     full_paths = [str(Path(seg_dir)/p) for p in file_patterns]
 
     labels = []
@@ -31,8 +32,8 @@ def get_hip_stats(seg_dir,file_patterns = hip_bones):
         labels.append('_'.join(get_hip_position_from_filename(sample_path)))
     return labels,voxels
 
-def process_totalsegmentor_subject(ct_path, seg_dir,file_patterns=hip_bones,out_name='hip.nii.gz'):
-    full_paths = [str(Path(seg_dir)/p) for p in hip_bones]
+def process_totalsegmentor_subject(ct_path, seg_dir,file_patterns=hip_bones_with_sacrum,out_name='hip.nii.gz'):
+    full_paths = [str(Path(seg_dir)/p) for p in file_patterns]
     
     seg_sitk = [read_image(p) for p in full_paths]
 
@@ -51,7 +52,8 @@ def process_totalsegmentor_subject_helper(subject_path):
     ct_path = f'{subject_path}/ct.nii.gz'
     seg_dir = f'{subject_path}/segmentations'
 
-    process_totalsegmentor_subject(ct_path,seg_dir)
+    process_totalsegmentor_subject(ct_path,seg_dir,file_patterns=hip_bones_with_sacrum,out_name='hip_sacrum.nii.gz')
+    process_totalsegmentor_subject(ct_path,seg_dir,file_patterns=hip_bones_without_sacrum,out_name='hip_no_sacrum.nii.gz')
 
 def analyze_stats(stats_path):
     import pandas as pd
