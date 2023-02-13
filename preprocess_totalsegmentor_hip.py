@@ -23,14 +23,14 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
 
     if get_orientation_code_itk(ct_roi) != roi_properties['axcode']:
         ct_roi = reorient_to(ct_roi,axcodes_to=roi_properties['axcode'])
-    out_ct_path = generate_path('ct','ct_roi',subject_id,output_path_template,config)
+    out_ct_path = generate_path('ct_roi','ct_roi',subject_id,output_path_template,config)
     write_image(ct_roi,out_ct_path)
 
     seg_roi = extract_bbox(seg,seg,label_id=1,physical_size=size,padding_value=roi_properties['seg_padding'])
     if get_orientation_code_itk(seg_roi) != roi_properties['axcode']:
         seg_roi = reorient_to(seg_roi,axcodes_to=roi_properties['axcode'])
 
-    out_seg_path = generate_path('seg','seg_roi',subject_id,output_path_template,config)
+    out_seg_path = generate_path('seg_roi','seg_roi',subject_id,output_path_template,config)
     write_image(seg_roi,out_seg_path)
 
     out_xray_ap_path = generate_path('xray_from_ct','xray_ap',subject_id,output_path_template,config)
@@ -48,10 +48,12 @@ def generate_path(sub_dir:str, name:str, subject_id, output_path_template, confi
     output_fileformat = config['filename_convention']['output']
     out_dirs = config['out_directories']    
     filename = output_fileformat[name].format(id=subject_id)
+    logger.debug(filename)
     out_path = output_path_template.format(output_type=out_dirs[sub_dir],output_name=filename)
     return out_path
 
 def process_totalsegmentor_subject_helper(subject_id:str):
+    logger.debug(f'{subject_id}')
     # define paths
     input_fileformat = config['filename_convention']['input']
 
@@ -91,6 +93,7 @@ if __name__ == '__main__':
     logger.debug(subject_list)
 
     num_workers = os.cpu_count()
+    # num_workers = 1
     def initialize_config_for_all_workers():
         global config
         config = read_config_and_load_components(args.config_file)
