@@ -85,3 +85,13 @@ def write_image(img, out_path,pixeltype=None):
     if pixeltype:
         img = sitk.Cast(img,pixeltype)
     sitk.WriteImage(img, out_path)
+
+def read_dicom(dicom_dir_path)->sitk.Image:
+    if isinstance(dicom_dir_path,Path):
+        dicom_dir_path = str(dicom_dir_path)
+    reader = sitk.ImageSeriesReader()
+    dicom_names = reader.GetGDCMSeriesFileNames(dicom_dir_path)
+    reader.SetFileNames(dicom_names)
+
+    image = reader.Execute()
+    return image
