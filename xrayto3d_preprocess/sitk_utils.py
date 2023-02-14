@@ -23,6 +23,15 @@ def get_segmentation_stats(segmentation: sitk.Image)->sitk.LabelShapeStatisticsI
     fltr = sitk.LabelShapeStatisticsImageFilter()
     fltr.Execute(segmentation)
     return fltr
+
+def rsna_flip_mirror(img:sitk.Image,flip_axes)->sitk.Image:
+    """flip in Z axis and mirror in X axis"""
+    
+    img_arr = sitk.GetArrayFromImage(img)
+    flipped_img_arr = np.flip(img_arr, axis=flip_axes)
+    flipped_img:sitk.Image = sitk.GetImageFromArray(flipped_img_arr)
+    flipped_img.CopyInformation(img)
+    return flipped_img
     
 def get_interpolator(interpolator: str):
     """Utility function to converte string representation of interpolator to sitk.sitkInterpolator type"""
