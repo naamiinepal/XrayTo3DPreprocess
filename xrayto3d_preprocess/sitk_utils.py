@@ -1,5 +1,6 @@
 import numpy as np
 import SimpleITK as sitk
+from typing import Optional,Union
 from .enumutils import ProjectionType
 from .tuple_ops import all_elements_equal
 from .metadata_utils import get_orientation_code_itk
@@ -120,7 +121,7 @@ def rotate_about_image_center(img: sitk.Image, rx,ry,rz):
     return sitk.Resample(img,transform=transform)
 
 
-def reorient_to(img, axcodes_to='PIR', verb=False):
+def reorient_to(img, axcodes_to:Union[sitk.Image,str]='PIR', verb=False):
     """Reorients the Image from its original orientation to another specified orientation
     
     Parameters:
@@ -133,6 +134,9 @@ def reorient_to(img, axcodes_to='PIR', verb=False):
     new_img: The reoriented SimpleITK image 
     
     """
+    if isinstance(axcodes_to,sitk.Image):
+        axcodes_to = get_orientation_code_itk(axcodes_to)
+        
     new_img = sitk.DICOMOrient(img,axcodes_to)
 
     if verb:
