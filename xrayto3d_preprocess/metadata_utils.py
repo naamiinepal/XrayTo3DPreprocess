@@ -2,6 +2,17 @@ import SimpleITK as sitk
 from typing import Union,Sequence
 import nibabel as nib
 
+def get_metadata(img_path):
+    """read metadata without loading the image array"""
+    reader = sitk.ImageFileReader()
+
+    reader.SetFileName( img_path )
+    reader.LoadPrivateTagsOn();
+
+    reader.ReadImageInformation();
+    return reader
+    
+
 def set_image_metadata(img: sitk.Image, origin, direction, spacing):
     img.SetOrigin(origin)
     img.SetSpacing(spacing)
