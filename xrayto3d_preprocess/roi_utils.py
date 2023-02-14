@@ -397,7 +397,7 @@ if __name__ == '__main__':
     seg = read_image(seg_path)
     ctd = load_centroids(centroid_jsonpath)
 
-    vb_id, *centroid = ctd[5]
+    vb_id, *centroid = ctd[0]
 
     # required_padding_v2(img, (100,100,100),centroid,{'L': 0.5, 'A': 0.5, 'S' :0.5})
     # ROI,centroid_heatmap = extract_around_centroid_v2(img, (96,96,96),centroid,{'L': 0.5, 'A': 0.7, 'S' :0.5},-1024)
