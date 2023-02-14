@@ -10,3 +10,4 @@ from .statistics_utils import *
 from .preprocessing_utils import *
 from .config import *
 from .misc import *
+from .plot_utils import *
