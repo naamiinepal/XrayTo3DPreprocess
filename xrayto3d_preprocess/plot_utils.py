@@ -5,10 +5,16 @@ from typing import Dict, List
 from math import floor,log10
 import numpy as np
 
-matplotlib.style.use('ggplot')
-matplotlib.rcParams['font.size'] = 16
-matplotlib.rcParams['lines.linewidth'] = 3
-matplotlib.rcParams['lines.markersize'] = 10
+
+
+def set_style():
+    matplotlib.style.use('ggplot')
+    matplotlib.rcParams['font.size'] = 16
+    matplotlib.rcParams['lines.linewidth'] = 3
+    matplotlib.rcParams['lines.markersize'] = 10
+
+def reset_style():
+    matplotlib.rcParams.update(matplotlib.rcParamsDefault)
 
 def get_barplot(data:Dict):
 
