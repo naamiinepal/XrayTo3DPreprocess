@@ -17,12 +17,12 @@ def keep_only_label(segmentation:sitk.Image, label_id) -> sitk.Image:
 
 def get_segmentation_labels(segmentation:sitk.Image):
     fltr = sitk.LabelShapeStatisticsImageFilter()
-    fltr.Execute(segmentation)
+    fltr.Execute(sitk.Cast(segmentation,sitk.sitkUInt8))
     return fltr.GetLabels()
 
 def get_segmentation_stats(segmentation: sitk.Image)->sitk.LabelShapeStatisticsImageFilter:
     fltr = sitk.LabelShapeStatisticsImageFilter()
-    fltr.Execute(segmentation)
+    fltr.Execute(sitk.Cast(segmentation,sitk.sitkUInt8))
     return fltr
 
 def rsna_flip_mirror(img:sitk.Image,flip_axes)->sitk.Image:
