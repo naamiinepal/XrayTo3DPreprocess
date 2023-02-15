@@ -1,5 +1,7 @@
 from xrayto3d_preprocess import *
 import numpy as np
+from multiprocessing import Pool
+import os
 
 def process_subject(subject_id, ct_path, seg_path, config,output_path_template):
     # read inputs
@@ -86,6 +88,22 @@ def create_directories(out_path_template, config):
     for key, out_dir in config['out_directories'].items():
         Path(out_path_template.format(output_type=out_dir)).mkdir(exist_ok=True,parents=True)
 
+def process_vertebra_subject_helper(subject_id:str):
+    logger.debug(f'{subject_id}')
+    # define paths
+    input_fileformat = config['filename_convention']['input']
+
+    subject_basepath = config['subjects']['subject_basepath']
+
+    ct_path = Path(subject_basepath)/subject_id/input_fileformat['ct']
+    seg_path = Path(subject_basepath)/subject_id/input_fileformat['seg']
+
+    OUT_DIR_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}'
+    OUT_PATH_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}/{{output_name}}'
+
+    create_directories(OUT_DIR_TEMPLATE,config)
+    process_subject(subject_id,ct_path,seg_path,config,OUT_PATH_TEMPLATE)
+
 if __name__ == '__main__':
     import argparse
     from tqdm import tqdm
@@ -121,15 +139,10 @@ if __name__ == '__main__':
     logger.debug(f'found {len(subject_list)} subjects')
     logger.debug(subject_list)
 
+    num_workers = os.cpu_count()
+    def initialize_config_for_all_workers():
+        global config
+        config = read_config_and_load_components(args.config_file)
 
-    for subject_id in tqdm(subject_list, total=len(subject_list)):
-        logger.debug(f'subject {subject_id}')
-
-        ct_path = Path(subject_basepath)/subject_id/input_fileformat['ct'].format(id=subject_id)
-        seg_path = Path(subject_basepath)/subject_id/input_fileformat['seg'].format(id=subject_id)
-        
-        OUT_DIR_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}'
-        OUT_PATH_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}/{{output_name}}'
-
-        create_directories(OUT_DIR_TEMPLATE, config)
-        process_subject(subject_id, ct_path, seg_path, config, OUT_PATH_TEMPLATE)   
+    with Pool(processes=num_workers, initializer=initialize_config_for_all_workers) as p:
+        results = tqdm(p.map(process_vertebra_subject_helper,sorted(subject_list)),total=len(subject_list))
