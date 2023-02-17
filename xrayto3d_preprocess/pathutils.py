@@ -2,6 +2,10 @@ from pathlib import Path
 import os
 # from torchio/utils.py
 
+def mkdir_or_exist(out_dir):
+    # print(out_dir)
+    os.makedirs(out_dir, exist_ok=True)
+
 def get_nifti_stem(path):
     """
     '/home/user/image.nii.gz' -> 'image'
