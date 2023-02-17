@@ -11,3 +11,4 @@ from .preprocessing_utils import *
 from .config import *
 from .misc import *
 from .plot_utils import *
+from .download_utils import *
