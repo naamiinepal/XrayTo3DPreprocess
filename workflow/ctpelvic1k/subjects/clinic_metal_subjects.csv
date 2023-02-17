@@ -1,0 +1,15 @@
+subject-id,image-filename,segmentation-filename
+CLINIC_metal_0003,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0003_data.nii.gz,./CLINIC_metal_0003_mask_4label.nii.gz
+CLINIC_metal_0011,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0011_data.nii.gz,./CLINIC_metal_0011_mask_4label.nii.gz
+CLINIC_metal_0006,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0006_data.nii.gz,./CLINIC_metal_0006_mask_4label.nii.gz
+CLINIC_metal_0004,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0004_data.nii.gz,./CLINIC_metal_0004_mask_4label.nii.gz
+CLINIC_metal_0000,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0000_data.nii.gz,./CLINIC_metal_0000_mask_4label.nii.gz
+CLINIC_metal_0002,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0002_data.nii.gz,./CLINIC_metal_0002_mask_4label.nii.gz
+CLINIC_metal_0009,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0009_data.nii.gz,./CLINIC_metal_0009_mask_4label.nii.gz
+CLINIC_metal_0012,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0012_data.nii.gz,./CLINIC_metal_0012_mask_4label.nii.gz
+CLINIC_metal_0013,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0013_data.nii.gz,./CLINIC_metal_0013_mask_4label.nii.gz
+CLINIC_metal_0007,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0007_data.nii.gz,./CLINIC_metal_0007_mask_4label.nii.gz
+CLINIC_metal_0005,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0005_data.nii.gz,./CLINIC_metal_0005_mask_4label.nii.gz
+CLINIC_metal_0008,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0008_data.nii.gz,./CLINIC_metal_0008_mask_4label.nii.gz
+CLINIC_metal_0010,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0010_data.nii.gz,./CLINIC_metal_0010_mask_4label.nii.gz
+CLINIC_metal_0001,./CTPelvic1K_dataset7_data/dataset7_CLINIC_metal_0001_data.nii.gz,./CLINIC_metal_0001_mask_4label.nii.gz
