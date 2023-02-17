@@ -1,0 +1,3 @@
+dataset,url,md5,zip_filename
+CLINIC,https://zenodo.org/record/4588403/files/CTPelvic1K_dataset6_data.tar.gz?download=1,6b6121e3094cb97bc452db99dd1abf56,CTPelvic1K_dataset6_data.tar.gz
+CLINIC-METAL,https://zenodo.org/record/4588403/files/CTPelvic1K_dataset7_data.tar.gz?download=1,7dc3b2223ab8c618c746fe90ced299f6,CTPelvic1K_dataset7_data.tar.gz

@@ -1,0 +1,8 @@
+dataset,url,md5,zip_filename
+ABDOMEN,https://zenodo.org/record/4588403/files/CTPelvic1K_dataset1_mask_mappingback.tar.gz?download=1,d82eb3428e4121cb855ce93f898faaf2,CTPelvic1K_dataset1_mask_mappingback.tar.gz
+COLONOG,https://zenodo.org/record/4588403/files/CTPelvic1K_dataset2_mask_mappingback.tar.gz?download=1,c1a9c576dba087c08f3d92ea1bfc2e42,CTPelvic1K_dataset2_mask_mappingback.tar.gz
+MSD-T10,https://zenodo.org/record/4588403/files/CTPelvic1K_dataset3_mask_mappingback.tar.gz?download=1,348173abc9296d93c6399da2de15847a,CTPelvic1K_dataset3_mask_mappingback.tar.gz
+KITS19,https://zenodo.org/record/4588403/files/CTPelvic1K_dataset4_mask_mappingback.tar.gz?download=1,9f2466e4356e1873dddd4d7c2f87b229,CTPelvic1K_dataset4_mask_mappingback.tar.gz
+CERVIX,https://zenodo.org/record/4588403/files/CTPelvic1K_dataset5_mask_mappingback.tar.gz?download=1,299326c05f4b674e758dffb5a2a83f86,CTPelvic1K_dataset5_mask_mappingback.tar.gz
+CLINIC,https://zenodo.org/record/4588403/files/CTPelvic1K_dataset6_Anonymized_mask.tar.gz?download=1,7696eb7c4da91f989d6842d7b422efd9,CTPelvic1K_dataset6_Anonymized_mask.tar.gz
+CLINIC-METAL,https://zenodo.org/record/4588403/files/CTPelvic1K_dataset7_mask.tar.gz?download=1,d706d26ca3820165c6e883a3777a78a2,CTPelvic1K_dataset7_mask.tar.gz
