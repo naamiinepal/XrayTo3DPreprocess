@@ -180,12 +180,14 @@ def download_colonog_raw():
                     shutil.rmtree(defaultTempDir)
 def main():
     makedirs(CTPELVIC1K_PATH)
-    download_kits_raw()
-    download_clinic_raw()
-    download_segmentations()
-    download_msdt10_raw()
-    download_cervix_raw()
     download_abdomen_raw()
+
+    download_kits_raw()
+    download_cervix_raw()
+
+    # download_clinic_raw()
+    # download_segmentations()
+    # download_msdt10_raw()
 
 
 if __name__ == '__main__':
