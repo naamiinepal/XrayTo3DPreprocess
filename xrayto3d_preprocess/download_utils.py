@@ -108,8 +108,8 @@ def getImageMetaData_TCIA_restAPI_URL(Series_UID: str):
     return f'https://services.cancerimagingarchive.net/nbia-api/services/v1/getSeriesMetaData?SeriesInstanceUID={Series_UID}'
 
 
-def call_rest_api(url: str):
-    response = requests.get(url)
+def call_rest_api(url: str,timeout=10000):
+    response = requests.get(url,timeout=timeout)
     return response.json()
 
 
