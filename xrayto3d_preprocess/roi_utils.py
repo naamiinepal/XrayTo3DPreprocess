@@ -103,7 +103,7 @@ def required_padding_v2(img, voxel_size, centroid_index, extraction_ratio: dict,
     return lowerbound_pad, upperbound_pad
 
 def get_largest_connected_component(binary_image:sitk.Image):
-    component_image = sitk.ConnectedComponent(binary_image)
+    component_image = sitk.ConnectedComponent(sitk.Cast(binary_image,sitk.sitkUInt8))
     sorted_component_image = sitk.RelabelComponent(component_image, sortByObjectSize=True)
     largest_component_binary_image = sorted_component_image == 1
     return largest_component_binary_image
