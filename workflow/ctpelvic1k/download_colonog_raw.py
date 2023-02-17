@@ -27,6 +27,7 @@ def parse_args():
     description = 'download COLONOG images and save nifti to dir'
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('--out-path')
+    parser.add_argument('--start-from',type=int)
 
     args = parser.parse_args()
 
@@ -67,11 +68,12 @@ def generate_aux_metadata():
 def main():
     args = parse_args()
     OUTPUT_DIR = args.out_path
-
+    START_FROM = args.start_from
     seg_csv = 'external/XrayTo3DPreprocess/workflow/ctpelvic1k/colonog_seg.csv'
     df = pd.read_csv(seg_csv)
-    for index, row in tqdm(df.iterrows(), total=len(df)):
-
+    for current_row, (index, row) in enumerate(tqdm(df.iterrows(), total=len(df))):
+        if current_row < START_FROM:
+            continue 
         patient_id = str(row['Patient Id'])
         segmentation_filename = str(row['segmentation-filename'])
         for sid in get_series_ID(patient_id):
