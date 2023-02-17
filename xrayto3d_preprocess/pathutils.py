@@ -1,5 +1,9 @@
 from pathlib import Path
 import os
+import pandas as pd
+from tqdm import tqdm
+import shutil
+
 # from torchio/utils.py
 
 def mkdir_or_exist(out_dir):
@@ -50,7 +54,44 @@ def get_verse_subject_id(file_path):
         return '_'.join(file_components[0:2])
     else:
         return file_components[0]
-    
+
+def save_subjects_individual_dir(subjects_csv, src_img_basepath, src_seg_basepath, dest_basepath):
+    """copy source and segmentation into its own subject directory, rename to consistent format subject_suffix"""
+    if isinstance(src_img_basepath, str):
+        src_img_basepath = Path(src_img_basepath)
+
+    if isinstance(src_seg_basepath, str):
+        src_seg_basepath = Path(src_seg_basepath)
+
+    if isinstance(dest_basepath, str):
+        dest_basepath = Path(dest_basepath)
+
+    df = pd.read_csv(subjects_csv)
+    dest_img_file_pattern = '{subject_id}_img.nii.gz'
+    dest_seg_file_pattern = '{subject_id}_seg.nii.gz'
+
+    for index, row in tqdm(df.iterrows(), total=len(df)):
+        subject_id, img_filename, seg_filename = row[
+            'subject-id'], row['image-filename'], row['segmentation-filename']
+        subject_path = dest_basepath/str(subject_id)
+
+        src_path = src_img_basepath/img_filename
+        dest_path = subject_path / \
+            dest_img_file_pattern.format(subject_id=subject_id)
+
+        dest_path.parent.mkdir(exist_ok=True, parents=True)
+        shutil.copy(src_path, dest_path)
+
+        src_path = src_seg_basepath/seg_filename
+        dest_path = subject_path / \
+            dest_seg_file_pattern.format(subject_id=subject_id)
+
+        # directory where AP, LAT and segmentations are stored
+        derivatives_path = subject_path/'derivatives'
+        derivatives_path.mkdir(exist_ok=True, parents=True)
+
+        dest_path.parent.mkdir(exist_ok=True, parents=True)
+        shutil.copy(src_path, dest_path)
         
 if __name__ == '__main__':
     print(get_file_format_suffix('/home/user/image.nii.gz'))
