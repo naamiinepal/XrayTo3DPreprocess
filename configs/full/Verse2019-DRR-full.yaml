@@ -1,0 +1,49 @@
+---
+
+# subject-list
+subjects:
+  subject_basepath: 2D-3D-Reconstruction-Datasets/verse19/subjectwise/
+  subject_list: configs/subjects_list/verse19_subjects_test.lst
+
+# xray image properties
+xray_pose:
+  _load: xray_pose_conf/${ROI_properties.axcode}_pose.yaml
+  res: ${ROI_properties.res}
+  size: ${ROI_properties.size}
+  drr_from_ct_mask: ${ROI_properties.drr_from_ct_mask}
+  drr_from_mask: ${ROI_properties.drr_from_mask}
+  
+# output directories
+out_directories:
+  _load: directory_conf/dir_ct.yaml
+
+# ROI extraction properties
+ROI_properties:
+  axcode: PIR
+  extraction_ratio:
+    L: 0.5
+    A: 0.5
+    S: 0.5
+  ct_padding: -1024
+  seg_padding: 0
+  drr_from_ct_mask: False
+  drr_from_mask: False
+  res: 1.0
+  size: 96
+
+# filename conventions
+filename_convention:
+  input:
+    ct: ct.nii.gz
+    seg: seg.nii.gz
+    ctd: ctd.json
+  output:
+    vert_xray_ap: "{id}_vert-{vert}_ap.png"
+    vert_xray_lat: "{id}_vert-{vert}_lat.png"
+    vert_centroid: "{id}_vert-{vert}_centroid.nii.gz"
+    vert_centroid_xray_ap: "{id}_vert-{vert}_ap_centroid.png"
+    vert_centroid_xray_lat: "{id}_vert-{vert}_lat_centroid.png"
+    vert_ct: '{id}_vert-{vert}_ct.nii.gz' # add 'vert' for vertebra
+    vert_seg: '{id}_vert-{vert}-seg-vert_msk.nii.gz'
+    vert_overlay_ap: "{id}_vert-{vert}_ap_overlay.png"
+    vert_overlay_lat: "{id}_vert-{vert}_lat_overlay.png"
