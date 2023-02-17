@@ -11,7 +11,9 @@ setup(name='xrayto3d_preprocess',
             'simpleitk<2.1.0', # temporary fix ITK ERROR: ITK only supports orthonormal direction cosines. No orthonormal definition found! 
             'omegaconf',
             'nibabel',
-            'pandas'
+            'pandas',
+            "synapseclient", # tools to download dataset from synapse.org
+            "gdown" #tool to download from google drive
       ],
       keywords="Python utilities simpleitk biomedical",
       classifiers=['Development Status :: 3 - Alpha',
