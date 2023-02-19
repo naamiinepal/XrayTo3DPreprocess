@@ -27,7 +27,7 @@ def parse_args():
     description = 'download COLONOG images and save nifti to dir'
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('--out-path')
-    parser.add_argument('--start-from',type=int)
+    parser.add_argument('--start-from',type=int,default=0)
 
     args = parser.parse_args()
 
@@ -69,39 +69,23 @@ def main():
     args = parse_args()
     OUTPUT_DIR = args.out_path
     START_FROM = args.start_from
-    seg_csv = 'external/XrayTo3DPreprocess/workflow/ctpelvic1k/colonog_seg.csv'
-    df = pd.read_csv(seg_csv)
-    for current_row, (index, row) in enumerate(tqdm(df.iterrows(), total=len(df))):
+    seg_meta_csv = 'external/XrayTo3DPreprocess/workflow/ctpelvic1k/colonog_seg_metadata.csv'
+    df = pd.read_csv(seg_meta_csv)
+    for current_row, (index, row) in enumerate(tqdm(df.iterrows(),total=len(df) - START_FROM)):
         if current_row < START_FROM:
-            continue 
-        patient_id = str(row['Patient Id'])
-        segmentation_filename = str(row['segmentation-filename'])
-        for sid in get_series_ID(patient_id):
-            target_image_path = Path(OUTPUT_DIR)/f'{patient_id}.nii.gz'
-            if not target_image_path.exists():
-                url = getImageMetaData_TCIA_restAPI_URL(sid)
-                try:
-                    out_json = call_rest_api(url)
-                except JSONDecodeError as e:
-                    print(e)
-                    continue
-                series_number = int(float(out_json[0]['Series Number']))
-                if series_number == get_segmentation_series_number(segmentation_filename):
-                    with tempfile.TemporaryDirectory() as defaultTempDir:
-                        print(defaultTempDir)
-
-                        image_url = getImage_TCIA_restAPI_URL(sid)
-                        dicom_filepath = f'{defaultTempDir}/{patient_id}.zip'
-                        try:
-                            download_wget(image_url, dicom_filepath, '.')
-                            zipDICOMtoNifti(dicom_filepath, output_dir=OUTPUT_DIR)
-                        except RuntimeError as e:
-                            print(e)
-
-                        # remove the temporary downloaded DICOM
-                        shutil.rmtree(defaultTempDir)
+            continue
+        Patient_Id,Series_UID = row['Patient Id'],row['Series UID']
+        url = getImage_TCIA_restAPI_URL(Series_UID=Series_UID)
+        with tempfile.TemporaryDirectory() as defaultTempDir:
+            dicom_filepath = f'{defaultTempDir}/{Patient_Id}.zip'
+            try:
+                download_wget(url,dicom_filepath,'.')
+                zipDICOMtoNifti(dicom_filepath,output_dir=OUTPUT_DIR)
+            except RuntimeError as e:
+                print(f'{e}')
+            shutil.rmtree(defaultTempDir)
 
 
 if __name__ == '__main__':
     main()
-    generate_aux_metadata()
+    # generate_aux_metadata()

@@ -57,19 +57,19 @@ def bids_clinic_metal():
 def bids_colonog():
     colonog_bids_csv = 'external/XrayTo3DPreprocess/workflow/ctpelvic1k/subjects/colonog_subjects.csv'
     COLONOG_BIDS_PATH = CTPELVIC1K_PATH/'raw'/'COLONOG'/'BIDS'
-    COLONOG_RAW_IMG_BASEPATH = CTPELVIC1K_PATH/'raw'/'COLONOG'/'img'
-    COLONOG_RAW_SEG_BASEPATH = CTPELVIC1K_PATH/'raw'/'COLONOG'/'seg'/'CTPelvic1K_dataset2_mask_mappingback'
+    COLONOG_RAW_IMG_BASEPATH = CTPELVIC1K_PATH/'zips'/'COLONOG'/'img'
+    COLONOG_RAW_SEG_BASEPATH = CTPELVIC1K_PATH/'zips'/'COLONOG'/'seg'/'CTPelvic1K_dataset2_mask_mappingback'
     save_subjects_individual_dir(colonog_bids_csv,COLONOG_RAW_IMG_BASEPATH,COLONOG_RAW_SEG_BASEPATH,COLONOG_BIDS_PATH)
 
 
 def main():
-    bids_abdomen()
-    bids_cervix()
-    bids_msd()
-    bids_clinic()
-    bids_clinic_metal()
-    bids_kits()
-    # bids_colonog()
+    # bids_abdomen()
+    # bids_cervix()
+    # bids_msd()
+    # bids_clinic()
+    # bids_clinic_metal()
+    # bids_kits()
+    bids_colonog()
 
 
 
