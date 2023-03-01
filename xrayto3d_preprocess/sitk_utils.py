@@ -5,6 +5,14 @@ from .enumutils import ProjectionType
 from .tuple_ops import all_elements_equal
 from .metadata_utils import get_orientation_code_itk
 
+# relax global tolerance (by default ~1e-7) to avoid this error:
+#itk::ERROR: itk::ERROR:  Inputs do not occupy the same physical space! 
+sitk.ProcessObject.SetGlobalDefaultCoordinateTolerance(0.001)
+sitk.ProcessObject.SetGlobalDefaultDirectionTolerance(0.001)
+
+def mask_ct_with_seg(img:sitk.Image,seg:sitk.Image):
+    return sitk.LabelMapMask(sitk.Cast(seg,sitk.sitkLabelUInt8),img)
+
 def change_label(img: sitk.Image, mapping_dict) -> sitk.Image:
     """use SimplITK AggregateLabelMapFilter to merge all segmentation labels to first label. This is used to obtain the bounding box of all the labels """
     fltr = sitk.ChangeLabelImageFilter()
