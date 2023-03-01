@@ -40,5 +40,9 @@ filename_convention:
   output:
     xray_ap: "{id}_hip-ap.png"
     xray_lat: "{id}_hip-lat.png"
-    ct_roi: '{id}_hip-ct.nii.gz' 
+    xray_mask_ap: "{id}_hip_mask-ap.png"
+    xray_mask_lat: "{id}_hip_mask-lat.png"    
+    ct_roi: '{id}_hip-ct.nii.gz'
+    ct_mask_roi: '{id}_hip-ct-mask.nii.gz' 
     seg_roi: '{id}_hip_msk.nii.gz'
+
