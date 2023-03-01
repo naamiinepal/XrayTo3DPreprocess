@@ -39,7 +39,7 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
     out_seg_path = generate_path('seg_roi','seg_roi',subject_id,output_path_template,config)
     write_image(seg_roi,out_seg_path)
 
-    ct_mask_roi = extract_bbox(ct_mask,seg,label_id=1,physical_size=size,padding_value=roi_properties['seg_padding'])
+    ct_mask_roi = extract_bbox(ct_mask,seg,label_id=1,physical_size=size,padding_value=roi_properties['ct_padding'])
     if get_orientation_code_itk(ct_mask_roi) != roi_properties['axcode']:
         ct_mask_roi = reorient_to(ct_mask_roi,axcodes_to=roi_properties['axcode'])    
     out_ct_mask_path = generate_path('ct_mask_roi','ct_mask_roi',subject_id,output_path_template,config)
@@ -93,6 +93,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('config_file')
+    parser.add_argument('--num_workers',default=4,type=int)
     
     args  = parser.parse_args()
     config = read_config_and_load_components(args.config_file)
@@ -110,7 +111,7 @@ if __name__ == '__main__':
     logger.debug(f'found {len(subject_list)} subjects')
     logger.debug(subject_list)
 
-    num_workers = os.cpu_count()
+    num_workers = args.num_workers
     # num_workers = 1
     def initialize_config_for_all_workers():
         global config

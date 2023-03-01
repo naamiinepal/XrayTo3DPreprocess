@@ -10,10 +10,13 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
 
     logger.debug(f' {subject_id} Image Size {ct.GetSize()} Spacing {np.around(ct.GetSpacing(),3)}')  
 
+
     if config['ROI_properties'].is_left == False:
         # flip image
         ct = mirror_image(ct,flip_along=2)
         seg = mirror_image(seg,flip_along=2)
+
+    ct_mask = mask_ct_with_seg(ct,seg)
 
     # extract ROI and orient to particular orientation
     roi_properties = config['ROI_properties']
@@ -43,11 +46,23 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
     out_seg_path = generate_path('seg_roi','seg_roi',subject_id,output_path_template,config)
     write_image(seg_roi,out_seg_path)
 
+    ct_mask_roi = extract_bbox_topleft(ct_mask,seg,label_id=1,physical_size=size,padding_value=roi_properties['ct_padding'],verbose=False)
+    if get_orientation_code_itk(ct_mask_roi) != roi_properties['axcode']:
+        ct_mask_roi = reorient_to(ct_mask_roi,axcodes_to=roi_properties['axcode'])
+    out_ct_mask_path = generate_path('ct_mask_roi','ct_mask_roi',subject_id,output_path_template,config)
+    write_image(ct_mask_roi,out_ct_mask_path)
+
     out_xray_ap_path = generate_path('xray_from_ct','xray_ap',subject_id,output_path_template,config)
     generate_xray(out_ct_path, ProjectionType.ap, seg_roi, config['xray_pose'], out_xray_ap_path)
 
     out_xray_lat_path = generate_path('xray_from_ct','xray_lat',subject_id,output_path_template,config)
     generate_xray(out_ct_path, ProjectionType.lat, seg_roi, config['xray_pose'], out_xray_lat_path)
+
+    out_xray_ap_path = generate_path('xray_from_ctmask','xray_mask_ap',subject_id,output_path_template,config)
+    generate_xray(out_ct_mask_path, ProjectionType.ap, seg_roi, config['xray_pose'], out_xray_ap_path)
+
+    out_xray_lat_path = generate_path('xray_from_ctmask','xray_mask_lat',subject_id,output_path_template,config)
+    generate_xray(out_ct_mask_path, ProjectionType.lat, seg_roi, config['xray_pose'], out_xray_lat_path)
 
 def create_directories(out_path_template, config):
     for key, out_dir in config['out_directories'].items():
@@ -84,6 +99,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('config_file')
+    parser.add_argument('--num_workers',default=4,type=int)
 
     args = parser.parse_args()
     config = read_config_and_load_components(args.config_file)
@@ -100,8 +116,7 @@ if __name__ == '__main__':
     logger.debug(f'found {len(subject_list)} subjects')
     logger.debug(subject_list)
 
-    # num_workers = os.cpu_count()
-    num_workers = 1
+    num_workers = args.num_workers
     def initialize_config_for_all_workers():
         global config
         config = read_config_and_load_components(args.config_file)

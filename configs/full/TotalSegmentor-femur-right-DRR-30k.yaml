@@ -3,7 +3,7 @@
 # subject-list
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/totalsegmentator/Totalsegmentator_dataset
-  subject_list: external/XrayTo3DPreprocess/workflow/data/totalsegmentor_femur/subjects_30k.csv
+  subject_list: external/XrayTo3DPreprocess/workflow/totalsegmentor_femur/subjects_30k.csv
 
 # xray image properties
 xray_pose:
@@ -37,5 +37,8 @@ filename_convention:
   output:
     xray_ap: "{id}_femur_right-ap.png"
     xray_lat: "{id}_femur_right-lat.png"
+    xray_mask_ap: "{id}_femur_right_mask-ap.png"
+    xray_mask_lat: "{id}_femur_right_mask-lat.png"        
     ct_roi: '{id}_femur_right-ct.nii.gz' 
+    ct_mask_roi: '{id}_femur_right-ct-mask.nii.gz' 
     seg_roi: '{id}_femur_right_msk.nii.gz'
