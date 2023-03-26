@@ -196,15 +196,11 @@ if __name__ == "__main__":
 
     subject_basepath = config["subjects"]["subject_basepath"]
 
-    subject_list = pd.read_csv(
-        config["subjects"]["subject_list"], header=None
-    ).to_numpy()
-
-    if args.dataset != "lidc":
-        subject_list = subject_list.flatten()
-
-    if args.dataset == "lidc":
-        subject_list = subject_list.flatten()
+    subject_list = (
+        pd.read_csv(config["subjects"]["subject_list"], header=None)
+        .to_numpy()
+        .flatten()
+    )
 
     logger.debug(f"found {len(subject_list)} subjects")
     logger.debug(subject_list)
