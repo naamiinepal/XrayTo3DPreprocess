@@ -15,57 +15,69 @@ from .metadata_utils import (
 from .tuple_ops import add_tuple, divide_tuple_scalar, multiply_tuple, subtract_tuple
 
 
-def roi_centroid_index_to_start_index(centroid_index, roi_voxel_size):
-    """Given a ROI of size `ROI_voxel_size` in voxel units and whose centroid index is centroid_index,
-    return the corresponding starting index of the ROI in the image"""
-
-    roi_start_index = tuple(
-        [int(c - s // 2) for c, s in zip(centroid_index, roi_voxel_size)]
-    )
-    return roi_start_index
-
-
-def roi_centroid_index_to_start_index_v2(
-    centroid_index, roi_voxel_size, extraction_ratio: tuple
-):
-    """Given a ROI of size ROI_voxel_size in voxel units and whose centroid index is centroid_index,
-    return the corresponding starting index of the ROI in the image.
-    We want to extract ROI_voxel_size at given extraction_ration wr.t. the centroid index
+def infer_roi_origin_from_center(centre, roi_size):
+    """Given a ROI of size `roi_size` in voxel units and whose centroid index is `centre`,
+    return the corresponding starting index of the ROI in the image
+    +-------------------------+  |
+    |t(tx,ty,tz)              |  |
+    |                         |  |
+    |                         |  |
+    |          c              |  sy
+    |                         |  |
+    |                         |  |
+    |                         |  |
+    +-------------------------+  |
+    ------------sx-------------
     """
 
-    roi_start_index = tuple(
-        [
-            (c - s * r)
-            for c, s, r in zip(centroid_index, roi_voxel_size, extraction_ratio)
-        ]
-    )
-    roi_start_index = list(map(int, roi_start_index))
-    return roi_start_index
+    t = tuple([int(c - s // 2) for c, s in zip(centre, roi_size)])
+    return t
 
 
-def required_padding(img, voxel_size, centroid_index, verbose=True):
-    """how much padding is required to be able to extract ROI of voxel_size whose centroid index is at centroid_index?"""
+def infer_roi_origin_from_center_v2(centre, roi_size, extraction_ratio: tuple):
+    """Given a ROI of size roi_size in voxel units and whose centroid index is centre,
+            return the corresponding starting index of the ROI in the image.
+            We want to extract ROI_voxel_size at given extraction_ration wr.t. the centroid index
+            +-------------------------+  |
+            |t(tx,ty,tz)              |  |
+            |                         |  |
+    -       |---------                |  |
+            |   rx     c              |  sy
+            |          ---------------|  |
+            |                1-rx     |  |
+            |                         |  |
+            +-------------------------+  |
+            ------------sx-------------
+    """
+
+    t = tuple([(c - s * r) for c, s, r in zip(centre, roi_size, extraction_ratio)])
+    t = list(map(int, t))
+    return t
+
+
+def required_padding(volume, volume_size, centroid_index, verbose=True):
+    """how much padding is required to be able to extract ROI of voxel_size whose centroid index is at centroid_index"""
     upperbound_index: tuple = add_tuple(
-        centroid_index, divide_tuple_scalar(voxel_size, 2)
+        centroid_index, divide_tuple_scalar(volume_size, 2)
     )
     lowerbound_index: tuple = subtract_tuple(
-        centroid_index, divide_tuple_scalar(voxel_size, 2)
+        centroid_index, divide_tuple_scalar(volume_size, 2)
     )
 
     upperbound_pad = tuple(
         [
             int(max(0, ub_idx - im_idx))
-            for im_idx, ub_idx in zip(img.GetSize(), upperbound_index)
+            for im_idx, ub_idx in zip(volume.GetSize(), upperbound_index)
         ]
     )
     lowerbound_pad = tuple([int(max(0, -lb_idx)) for lb_idx in lowerbound_index])
 
     if verbose:
         print(
-            f"target voxel {voxel_size} lowerbound {lowerbound_pad} upperbound {upperbound_pad}"
+            f"target voxel {volume_size} lowerbound {lowerbound_pad} upperbound {upperbound_pad}"
         )
     np.testing.assert_array_equal(
-        np.array(voxel_size),
+        np.array(volume_size),
         np.array(subtract_tuple(upperbound_index, lowerbound_index)),
     )
 
@@ -89,20 +101,22 @@ def update_extraction_ratio(orientation_code, orientation_dict: dict):
 
 
 def required_padding_v2(
-    volume, voxel_size, centroid_index, extraction_ratio: dict, verbose=True
+    volume, volume_size, centroid_index, extraction_ratio: dict, verbose=True
 ):
     extraction_ratio_tuple = update_extraction_ratio(
         get_orientation_code_itk(volume), extraction_ratio
     )
+    # c + s/2
     upperbound_index = add_tuple(
-        centroid_index, multiply_tuple(voxel_size, extraction_ratio_tuple)
+        centroid_index, multiply_tuple(volume_size, extraction_ratio_tuple)
     )
 
     extraction_ratio_tuple = subtract_tuple(
         (1,) * volume.GetDimension(), extraction_ratio_tuple
     )
+    # c - s/2
     lowerbound_index = subtract_tuple(
-        centroid_index, multiply_tuple(voxel_size, extraction_ratio_tuple)
+        centroid_index, multiply_tuple(volume_size, extraction_ratio_tuple)
     )
 
     lowerbound_index = list(map(int, lowerbound_index))
@@ -126,7 +140,7 @@ def required_padding_v2(
     if verbose:
         if np.any(upperbound_pad) or np.any(lowerbound_pad):
             print(
-                f"Padding Required to extract {voxel_size} lower index padding {lowerbound_pad} upper index padding {upperbound_pad}"
+                f"Padding Required to extract {volume_size} lower index padding {lowerbound_pad} upper index padding {upperbound_pad}"
             )
             extracted_voxel_size = subtract_tuple(upperbound_index, lowerbound_index)
             print(f"The extracted voxel size is going to be {extracted_voxel_size}")
@@ -149,6 +163,9 @@ def extract_bbox_topleft(
     """extract ROI from img of given physical size by finding the bounding box with label id from seg image
     and then extracting certain volume starting from top-left of the bounding box
     This is for a specific use-case of extracting femur bones of certain length from varying crops.
+    This code only works for Totalsegmentator.
+    Various assumptions are built into the code (refactor/generalize!!)
+    1. Assume: The 3rd dim represents Superior-Inferior axis
     """
     assert isinstance(img, sitk.Image)
     assert isinstance(seg, sitk.Image)
@@ -244,9 +261,7 @@ def extract_bbox(img, seg, label_id, physical_size, padding_value, verbose=True)
     )
 
     # get the start of the ROI
-    roi_start_index = roi_centroid_index_to_start_index(
-        padded_centroid_index, voxel_size
-    )
+    roi_start_index = infer_roi_origin_from_center(padded_centroid_index, voxel_size)
     region_of_interest: sitk.Image = sitk.RegionOfInterest(
         padded_img, voxel_size, roi_start_index
     )
@@ -295,7 +310,7 @@ def extract_around_centroid_v2(
     )  # the exact padding can be off due to floating point ops, hence add safety padding
     padded_vol: sitk.Image = sitk.ConstantPad(img, lb_padded, ub_padded, padding_value)
 
-    # find the index of the centrod in the padded image
+    # find the index of the centroid in the padded image
     original_centroid_coords = img.TransformContinuousIndexToPhysicalPoint(
         centroid_index
     )
@@ -308,7 +323,7 @@ def extract_around_centroid_v2(
         get_orientation_code_itk(img), extraction_ratio
     )
 
-    roi_start_index = roi_centroid_index_to_start_index_v2(
+    roi_start_index = infer_roi_origin_from_center_v2(
         padded_centroid_index, voxel_size, extraction_tuple
     )
 
@@ -321,8 +336,12 @@ def extract_around_centroid_v2(
             )
         ]
         if np.any(roi_outside):
+            spilled_volume = subtract_tuple(
+                padded_vol.GetSize(), add_tuple(roi_start_index, voxel_size)
+            )
             logger.debug(
-                f"possibly requested ROI outside of region: origin {roi_start_index} to extract {voxel_size} from padded_img size {padded_vol.GetSize()} by {subtract_tuple(padded_vol.GetSize(), add_tuple(roi_start_index,voxel_size))}"
+                f"possibly requested ROI outside of region: origin {roi_start_index} to extract {voxel_size}\
+                  from padded_img size {padded_vol.GetSize()} by {spilled_volume}"
             )
 
     region_of_interest: sitk.Image = sitk.RegionOfInterest(
@@ -343,9 +362,10 @@ def extract_around_centroid_v2(
 
 
 def generate_gaussian_heatmap(centroid_index, reference_image, sigma=5):
-    """Generate a Centroid Landmark Image represented by a Gaussian at the centroid index with same physical attributes as the reference image
+    """Generate a Centroid Landmark Image represented by a Gaussian at the centroid index
+    with same physical attributes as the reference image
 
-    from https://github.com/christianpayer/MedicalDataAugmentationTool/blob/34e3723397ac5b343f14ec0a8ee49f792e13aeca/utils/landmark/heatmap_image_generator.py
+    adapted from https://github.com/christianpayer/MedicalDataAugmentationTool/tree/master/utils/landmark
 
     Args:
         centroid_index (tuple:int):
@@ -415,9 +435,7 @@ def extract_around_centroid(
     )
 
     # get the start of the ROI
-    roi_start_index = roi_centroid_index_to_start_index(
-        padded_centroid_index, voxel_size
-    )
+    roi_start_index = infer_roi_origin_from_center(padded_centroid_index, voxel_size)
 
     region_of_interest = sitk.RegionOfInterest(padded_img, voxel_size, roi_start_index)
 
@@ -432,10 +450,10 @@ def extract_around_centroid(
 
 if __name__ == "__main__":
     from xrayto3d_preprocess import (
+        combine_segmentations,
         load_centroids,
         read_image,
         write_image,
-        combine_segmentations,
     )
 
     centroid_jsonpath = "2D-3D-Reconstruction-Datasets/verse20/BIDS/sub-verse835/sub-verse835_dir-iso_seg-subreg_ctd.json"
