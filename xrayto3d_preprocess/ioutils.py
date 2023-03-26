@@ -56,7 +56,7 @@ def load_centroids(ctd_path) -> Tuple[Sequence, Sequence]:
     """loads the json centroid file
 
     ctd_path: full path to the json file
-    # from https://github.com/anjany/verse/blob/main/utils/data_utilities.py
+    from https://github.com/anjany/verse/blob/main/utils/data_utilities.py
 
     Returns:
     --------
