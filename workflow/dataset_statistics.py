@@ -1,8 +1,8 @@
 from pathlib import Path
 
 import pandas as pd
-from tqdm import tqdm
 import SimpleITK as sitk
+from tqdm import tqdm
 from xrayto3d_preprocess import (
     get_orientation_code_itk,
     get_orientation_code_nifti,
