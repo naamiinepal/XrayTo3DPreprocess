@@ -9,6 +9,8 @@ from tqdm import tqdm
 
 def mkdir_or_exist(out_dir):
     """wrap os.makedirs"""
+    if isinstance(out_dir, Path):
+        out_dir = str(out_dir)
     os.makedirs(out_dir, exist_ok=True)
 
 
