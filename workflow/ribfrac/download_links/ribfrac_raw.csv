@@ -1,0 +1,4 @@
+dataset,url,md5,zip_filename
+RIBFRAC,https://zenodo.org/record/3893508/files/ribfrac-train-images-1.zip?download=1,d800cc5eb5c32294470b49a76b5116c0,ribfrac-train-images-1.zip
+RIBFRAC,https://zenodo.org/record/3893498/files/ribfrac-train-images-2.zip?download=1,6bbec02c12712f4e3c457fc450a0b02f,ribfrac-train-images-2.zip
+RIBFRAC,https://zenodo.org/record/3893496/files/ribfrac-val-images.zip?download=1,63b82f0ef44e3cdcd4c4d24cba56f0d7,ribfrac-val-images.zip
