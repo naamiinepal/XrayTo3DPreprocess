@@ -1,7 +1,9 @@
+"""utils specific to ctpelvic1k"""
 import pandas as pd
 
 
-def get_series_ID(patient_id: str):
+def get_series_id(patient_id: str):
+    """find series id"""
     csv_path = (
         "external/XrayTo3DPreprocess/workflow/ctpelvic1k/CTColonography_MetaData.csv"
     )
@@ -19,4 +21,5 @@ def get_segmentation_series_number(filename: str):
 
 
 def get_value_from_tcia_json_metadata(metadata_json, key):
+    """return value from metadata"""
     return metadata_json[0][key]

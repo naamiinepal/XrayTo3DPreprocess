@@ -8,13 +8,14 @@ from tqdm import tqdm
 from xrayto3d_preprocess import (
     call_rest_api,
     download_wget,
-    get_image_tcia_restapi_url,
     get_image_metadata_tcia_restapi_url,
+    get_image_tcia_restapi_url,
     zip_dicom_to_nifti,
 )
 
 
-def get_series_ID(patient_id: str):
+def get_series_id(patient_id: str):
+    """find series id"""
     csv_path = (
         "external/XrayTo3DPreprocess/workflow/ctpelvic1k/CTColonography_MetaData.csv"
     )
@@ -56,7 +57,7 @@ def generate_aux_metadata():
         patient_id = str(row["Patient Id"])
         colonog_id = patient_id.split(".")[-1]
         segmentation_filename = str(row["segmentation-filename"])
-        for sid in get_series_ID(patient_id):
+        for sid in get_series_id(patient_id):
             url = get_image_metadata_tcia_restapi_url(sid)
             try:
                 out_json = call_rest_api(url)
@@ -88,6 +89,7 @@ def generate_aux_metadata():
 
 
 def main():
+    """entry point"""
     args = parse_args()
     OUTPUT_DIR = args.out_path
     START_FROM = args.start_from
@@ -100,16 +102,16 @@ def main():
     ):
         if current_row < START_FROM:
             continue
-        Patient_Id, Series_UID = row["Patient Id"], row["Series UID"]
-        url = get_image_tcia_restapi_url(series_uid=Series_UID)
-        with tempfile.TemporaryDirectory() as defaultTempDir:
-            dicom_filepath = f"{defaultTempDir}/{Patient_Id}.zip"
+        patient_id, series_uid = row["Patient Id"], row["Series UID"]
+        url = get_image_tcia_restapi_url(series_uid=series_uid)
+        with tempfile.TemporaryDirectory() as default_temp_dir:
+            dicom_filepath = f"{default_temp_dir}/{patient_id}.zip"
             try:
                 download_wget(url, dicom_filepath, ".")
                 zip_dicom_to_nifti(dicom_filepath, output_dir=OUTPUT_DIR)
             except RuntimeError as e:
                 print(f"{e}")
-            shutil.rmtree(defaultTempDir)
+            shutil.rmtree(default_temp_dir)
 
 
 if __name__ == "__main__":
