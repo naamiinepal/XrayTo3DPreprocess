@@ -1,3 +1,4 @@
+"""bring raw downloaded data into BIDS directory structure"""
 from pathlib import Path
 from xrayto3d_preprocess import copy_subjects_to_individual_dir
 
@@ -6,12 +7,13 @@ CTPELVIC1K_PATH = Path(BASE_PATH) / "ctpelvic1k"
 
 
 def bids_kits():
+    """KITS19 dataset"""
     kits_bids_csv = (
         "external/XrayTo3DPreprocess/workflow/ctpelvic1k/subjects/kits_subjects.csv"
     )
-    KITS_BIDS_BASEPATH = CTPELVIC1K_PATH / "raw" / "KITS19" / "BIDS"
-    KITS19_RAW_IMG_BASEPATH = CTPELVIC1K_PATH / "raw" / "KITS19" / "img"
-    KITS19_RAW_SEG_BASEPATH = (
+    kits_bids_basepath = CTPELVIC1K_PATH / "raw" / "KITS19" / "BIDS"
+    kits19_raw_img_basepath = CTPELVIC1K_PATH / "raw" / "KITS19" / "img"
+    kits19_raw_seg_basepath = (
         CTPELVIC1K_PATH
         / "raw"
         / "KITS19"
@@ -21,21 +23,24 @@ def bids_kits():
 
     copy_subjects_to_individual_dir(
         kits_bids_csv,
-        KITS19_RAW_IMG_BASEPATH,
-        KITS19_RAW_SEG_BASEPATH,
-        KITS_BIDS_BASEPATH,
+        kits19_raw_img_basepath,
+        kits19_raw_seg_basepath,
+        kits_bids_basepath,
+        dest_img_file_pattern="ct.nii.gz",
+        dest_seg_file_pattern="hip.nii.gz",
     )
 
 
 def bids_msd():
+    """MSD-T10 dataset"""
     msd_bids_csv = (
         "external/XrayTo3DPreprocess/workflow/ctpelvic1k/subjects/msd_t10-subjects.csv"
     )
-    MSD_BIDS_BASEPATH = CTPELVIC1K_PATH / "raw" / "MSD-T10" / "BIDS"
-    MSDT10_RAW_IMG_BASEPATH = (
+    msd_bids_basepath = CTPELVIC1K_PATH / "raw" / "MSD-T10" / "BIDS"
+    msdt10_raw_img_basepath = (
         CTPELVIC1K_PATH / "raw" / "MSD-T10" / "img" / "Task10_Colon"
     )
-    MSDT10_RAW_SEG_BASEPATH = (
+    msdt10_raw_seg_basepath = (
         CTPELVIC1K_PATH
         / "raw"
         / "MSD-T10"
@@ -45,77 +50,92 @@ def bids_msd():
 
     copy_subjects_to_individual_dir(
         msd_bids_csv,
-        MSDT10_RAW_IMG_BASEPATH,
-        MSDT10_RAW_SEG_BASEPATH,
-        MSD_BIDS_BASEPATH,
+        msdt10_raw_img_basepath,
+        msdt10_raw_seg_basepath,
+        msd_bids_basepath,
+        dest_img_file_pattern="ct.nii.gz",
+        dest_seg_file_pattern="hip.nii.gz",
     )
 
 
 def bids_cervix():
+    """CERVIX dataset"""
     cervix_bids_csv = (
         "external/XrayTo3DPreprocess/workflow/ctpelvic1k/subjects/cervix_subjects.csv"
     )
-    CERVIX_BIDS_PATH = CTPELVIC1K_PATH / "raw" / "CERVIX" / "BIDS"
-    CERVIX_RAW_IMG_BASEPATH = CTPELVIC1K_PATH / "raw" / "CERVIX" / "img" / "RawData"
-    CERVIX_RAW_SEG_BASEPATH = CTPELVIC1K_PATH / "raw" / "CERVIX" / "seg"
+    cervix_bids_path = CTPELVIC1K_PATH / "raw" / "CERVIX" / "BIDS"
+    cervix_raw_img_basepath = CTPELVIC1K_PATH / "raw" / "CERVIX" / "img" / "RawData"
+    cervix_raw_seg_basepath = CTPELVIC1K_PATH / "raw" / "CERVIX" / "seg"
     copy_subjects_to_individual_dir(
         cervix_bids_csv,
-        CERVIX_RAW_IMG_BASEPATH,
-        CERVIX_RAW_SEG_BASEPATH,
-        CERVIX_BIDS_PATH,
+        cervix_raw_img_basepath,
+        cervix_raw_seg_basepath,
+        cervix_bids_path,
+        dest_img_file_pattern="ct.nii.gz",
+        dest_seg_file_pattern="hip.nii.gz",
     )
 
 
 def bids_abdomen():
+    """ABDOMEN dataset"""
     abdomen_bids_csv = (
         "external/XrayTo3DPreprocess/workflow/ctpelvic1k/subjects/abdomen_subjects.csv"
     )
-    ABMDOMEN_BIDS_PATH = CTPELVIC1K_PATH / "raw" / "ABDOMEN" / "BIDS"
-    ABMDOMEN_RAW_IMG_BASEPATH = CTPELVIC1K_PATH / "raw" / "ABDOMEN" / "img" / "RawData"
-    ABMDOMEN_RAW_SEG_BASEPATH = CTPELVIC1K_PATH / "raw" / "ABDOMEN" / "seg"
+    abmdomen_bids_path = CTPELVIC1K_PATH / "raw" / "ABDOMEN" / "BIDS"
+    abmdomen_raw_img_basepath = CTPELVIC1K_PATH / "raw" / "ABDOMEN" / "img" / "RawData"
+    abmdomen_raw_seg_basepath = CTPELVIC1K_PATH / "raw" / "ABDOMEN" / "seg"
     copy_subjects_to_individual_dir(
         abdomen_bids_csv,
-        ABMDOMEN_RAW_IMG_BASEPATH,
-        ABMDOMEN_RAW_SEG_BASEPATH,
-        ABMDOMEN_BIDS_PATH,
+        abmdomen_raw_img_basepath,
+        abmdomen_raw_seg_basepath,
+        abmdomen_bids_path,
+        dest_img_file_pattern="ct.nii.gz",
+        dest_seg_file_pattern="hip.nii.gz",
     )
 
 
 def bids_clinic():
+    """CLINIC dataset"""
     clinic_bids_csv = (
         "external/XrayTo3DPreprocess/workflow/ctpelvic1k/subjects/clinic_subjects.csv"
     )
-    CLINIC_BIDS_PATH = CTPELVIC1K_PATH / "raw" / "CLINIC" / "BIDS"
-    CLINIC_RAW_IMG_BASEPATH = CTPELVIC1K_PATH / "raw" / "CLINIC" / "img"
-    CLINIC_RAW_SEG_BASEPATH = CTPELVIC1K_PATH / "raw" / "CLINIC" / "seg"
+    clinic_bids_path = CTPELVIC1K_PATH / "raw" / "CLINIC" / "BIDS"
+    clinic_raw_img_basepath = CTPELVIC1K_PATH / "raw" / "CLINIC" / "img"
+    clinic_raw_seg_basepath = CTPELVIC1K_PATH / "raw" / "CLINIC" / "seg"
     copy_subjects_to_individual_dir(
         clinic_bids_csv,
-        CLINIC_RAW_IMG_BASEPATH,
-        CLINIC_RAW_SEG_BASEPATH,
-        CLINIC_BIDS_PATH,
+        clinic_raw_img_basepath,
+        clinic_raw_seg_basepath,
+        clinic_bids_path,
+        dest_img_file_pattern="ct.nii.gz",
+        dest_seg_file_pattern="hip.nii.gz",
     )
 
 
 def bids_clinic_metal():
+    """CLINIC-METAL dataset"""
     clinic_metal_bids_csv = "external/XrayTo3DPreprocess/workflow/ctpelvic1k/subjects/clinic_metal_subjects.csv"
-    CLINIC_METAL_BIDS_PATH = CTPELVIC1K_PATH / "raw" / "CLINIC-METAL" / "BIDS"
-    CLINIC_METAL_RAW_IMG_BASEPATH = CTPELVIC1K_PATH / "raw" / "CLINIC-METAL" / "img"
-    CLINIC_METAL_RAW_SEG_BASEPATH = CTPELVIC1K_PATH / "raw" / "CLINIC-METAL" / "seg"
+    clinic_metal_bids_path = CTPELVIC1K_PATH / "raw" / "CLINIC-METAL" / "BIDS"
+    clinic_metal_raw_img_basepath = CTPELVIC1K_PATH / "raw" / "CLINIC-METAL" / "img"
+    clinic_metal_raw_seg_basepath = CTPELVIC1K_PATH / "raw" / "CLINIC-METAL" / "seg"
     copy_subjects_to_individual_dir(
         clinic_metal_bids_csv,
-        CLINIC_METAL_RAW_IMG_BASEPATH,
-        CLINIC_METAL_RAW_SEG_BASEPATH,
-        CLINIC_METAL_BIDS_PATH,
+        clinic_metal_raw_img_basepath,
+        clinic_metal_raw_seg_basepath,
+        clinic_metal_bids_path,
+        dest_img_file_pattern="ct.nii.gz",
+        dest_seg_file_pattern="hip.nii.gz",
     )
 
 
 def bids_colonog():
+    """COLONOG dataset"""
     colonog_bids_csv = (
         "external/XrayTo3DPreprocess/workflow/ctpelvic1k/subjects/colonog_subjects.csv"
     )
-    COLONOG_BIDS_PATH = CTPELVIC1K_PATH / "raw" / "COLONOG" / "BIDS"
-    COLONOG_RAW_IMG_BASEPATH = CTPELVIC1K_PATH / "zips" / "COLONOG" / "img"
-    COLONOG_RAW_SEG_BASEPATH = (
+    colonog_bids_path = CTPELVIC1K_PATH / "raw" / "COLONOG" / "BIDS"
+    colonog_raw_img_basepath = CTPELVIC1K_PATH / "zips" / "COLONOG" / "img"
+    colonog_raw_seg_basepath = (
         CTPELVIC1K_PATH
         / "zips"
         / "COLONOG"
@@ -124,20 +144,23 @@ def bids_colonog():
     )
     copy_subjects_to_individual_dir(
         colonog_bids_csv,
-        COLONOG_RAW_IMG_BASEPATH,
-        COLONOG_RAW_SEG_BASEPATH,
-        COLONOG_BIDS_PATH,
+        colonog_raw_img_basepath,
+        colonog_raw_seg_basepath,
+        colonog_bids_path,
+        dest_img_file_pattern="ct.nii.gz",
+        dest_seg_file_pattern="hip.nii.gz",
     )
 
 
 def main():
-    # bids_abdomen()
-    # bids_cervix()
-    # bids_msd()
-    # bids_clinic()
-    # bids_clinic_metal()
-    # bids_kits()
-    bids_colonog()
+    """entrypoint"""
+    bids_abdomen()
+    bids_cervix()
+    bids_msd()
+    bids_clinic()
+    bids_clinic_metal()
+    bids_kits()
+    # bids_colonog()
 
 
 if __name__ == "__main__":
