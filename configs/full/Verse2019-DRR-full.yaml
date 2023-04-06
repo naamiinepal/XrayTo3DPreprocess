@@ -1,9 +1,8 @@
 ---
-
 # subject-list
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/verse19/subjectwise/
-  subject_list: configs/subjects_list/verse19_subjects_test.lst
+  subject_list: configs/subjects_list/verse19_subjects_full.lst
 
 # xray image properties
 xray_pose:
@@ -12,7 +11,7 @@ xray_pose:
   size: ${ROI_properties.size}
   drr_from_ct_mask: ${ROI_properties.drr_from_ct_mask}
   drr_from_mask: ${ROI_properties.drr_from_mask}
-  
+
 # output directories
 out_directories:
   _load: directory_conf/dir_ct.yaml
@@ -43,7 +42,7 @@ filename_convention:
     vert_centroid: "{id}_vert-{vert}_centroid.nii.gz"
     vert_centroid_xray_ap: "{id}_vert-{vert}_ap_centroid.png"
     vert_centroid_xray_lat: "{id}_vert-{vert}_lat_centroid.png"
-    vert_ct: '{id}_vert-{vert}_ct.nii.gz' # add 'vert' for vertebra
-    vert_seg: '{id}_vert-{vert}-seg-vert_msk.nii.gz'
+    vert_ct: "{id}_vert-{vert}_ct.nii.gz" # add 'vert' for vertebra
+    vert_seg: "{id}_vert-{vert}-seg-vert_msk.nii.gz"
     vert_overlay_ap: "{id}_vert-{vert}_ap_overlay.png"
     vert_overlay_lat: "{id}_vert-{vert}_lat_overlay.png"
