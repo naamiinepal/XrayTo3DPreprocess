@@ -1,3 +1,4 @@
+"""generate x-ray segmentation pair for ctpelvic1k-hip dataset"""
 from multiprocessing import Pool
 from pathlib import Path
 
@@ -21,6 +22,7 @@ from xrayto3d_preprocess import (
 
 
 def process_subject(subject_id, ct_path, seg_path, config, output_path_template):
+    """generate xray and segmentation pairs for corresponding full view ct-seg pair"""
     ct = read_image(ct_path)
     seg = read_image(seg_path)
 
@@ -123,6 +125,7 @@ def process_subject(subject_id, ct_path, seg_path, config, output_path_template)
 
 
 def create_directories(out_path_template, config):
+    """create dir to save xrays and segmentations"""
     for key, out_dir in config["out_directories"].items():
         Path(out_path_template.format(output_type=out_dir)).mkdir(
             exist_ok=True, parents=True
@@ -130,6 +133,7 @@ def create_directories(out_path_template, config):
 
 
 def generate_path(sub_dir: str, name: str, subject_id, output_path_template, config):
+    """xray_ap:"{id}_hip-ap.png -> img0001_hip-ap.png"""
     output_fileformat = config["filename_convention"]["output"]
     out_dirs = config["out_directories"]
     filename = output_fileformat[name].format(id=subject_id)
@@ -141,6 +145,7 @@ def generate_path(sub_dir: str, name: str, subject_id, output_path_template, con
 
 
 def process_totalsegmentor_subject_helper(subject_id: str):
+    """create required subdirs and generate xray-seg pairs"""
     logger.debug(f"{subject_id}")
     # define paths
     input_fileformat = config["filename_convention"]["input"]
@@ -190,6 +195,10 @@ if __name__ == "__main__":
 
     # num_workers = 1
     def initialize_config_for_all_workers():
+        """
+        passed to multiprocessing threads for all of them to
+        be able to access global configuration
+        """
         global config
         config = read_config_and_load_components(args.config_file)
 

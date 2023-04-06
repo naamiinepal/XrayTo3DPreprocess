@@ -1,8 +1,9 @@
+"""create subjectwise subdirectory containing ct-segmentation for each patient"""
 import shutil
 from pathlib import Path
 
 from tqdm import tqdm
-from xrayto3d_preprocess import get_nifti_stem, get_verse_subject_id
+from xrayto3d_preprocess import get_verse_subject_id
 
 if __name__ == "__main__":
     base_dirs = [
