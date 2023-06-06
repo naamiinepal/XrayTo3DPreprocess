@@ -1,0 +1,48 @@
+---
+
+# subject-list
+subjects:
+  subject_basepath: 2D-3D-Reconstruction-Datasets/ctpelvic1k/raw/COLONOG/BIDS
+  subject_list: external/XrayTo3DPreprocess/workflow/ctpelvic1k/subjects/colonog_subjects.lst
+
+# xray image properties
+xray_pose:
+  _load: xray_pose_conf/${ROI_properties.axcode}_pose.yaml
+  res: ${ROI_properties.res}
+  size: ${ROI_properties.size}
+  drr_from_ct_mask: ${ROI_properties.drr_from_ct_mask}
+  drr_from_mask: ${ROI_properties.drr_from_mask}
+  
+# output directories
+out_directories:
+  _load: directory_conf/dir_ct.yaml
+
+# ROI extraction properties
+ROI_properties:
+  axcode: PIR
+  extraction_ratio:
+    L: 0.5
+    A: 0.5
+    S: 0.5
+  ct_padding: -1024
+  seg_padding: 0
+  drr_from_ct_mask: False
+  drr_from_mask: False
+  res: 1.0
+  size: 288 # 32 * 7
+
+# filename conventions
+filename_convention:
+  input:
+    ct: "ct.nii.gz"
+    seg: "hip.nii.gz"
+    ctd: ""
+  output:
+    xray_ap: "{id}_hip-ap.png"
+    xray_lat: "{id}_hip-lat.png"
+    xray_mask_ap: "{id}_hip_mask-ap.png"
+    xray_mask_lat: "{id}_hip_mask-lat.png"    
+    ct_roi: '{id}_hip-ct.nii.gz'
+    ct_mask_roi: '{id}_hip-ct-mask.nii.gz' 
+    seg_roi: '{id}_hip_msk.nii.gz'
+

@@ -1,0 +1,9 @@
+# xray image properties
+ap:
+  rx: -90
+  ry: 0
+  rz: 90
+lat:
+  rx: -90
+  ry: 0
+  rz: 0

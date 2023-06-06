@@ -1,0 +1,44 @@
+---
+
+# subject-list
+subjects:
+  subject_basepath: 2D-3D-Reconstruction-Datasets/totalsegmentator/Totalsegmentator_dataset
+  subject_list: external/XrayTo3DPreprocess/workflow/totalsegmentor_femur/subjects_30k.csv
+
+# xray image properties
+xray_pose:
+  _load: xray_pose_conf/${ROI_properties.axcode}_pose.yaml
+  res: ${ROI_properties.res}
+  size: ${ROI_properties.size}
+  drr_from_ct_mask: ${ROI_properties.drr_from_ct_mask}
+  drr_from_mask: ${ROI_properties.drr_from_mask}
+  
+# output directories
+out_directories:
+  _load: directory_conf/dir_ct.yaml
+
+# ROI extraction properties
+ROI_properties:
+  axcode: PIR
+  is_left: True
+  ct_padding: -1024
+  seg_padding: 0
+  drr_from_ct_mask: False
+  drr_from_mask: False
+  res: 1.0
+  size: 128
+
+# filename conventions
+filename_convention:
+  input:
+    ct: "ct.nii.gz"
+    seg: "segmentations/femur_left.nii.gz"
+    ctd: ""
+  output:
+    xray_ap: "{id}_femur_left-ap.png"
+    xray_lat: "{id}_femur_left-lat.png"
+    xray_mask_ap: "{id}_femur_left_mask-ap.png"
+    xray_mask_lat: "{id}_femur_left_mask-lat.png"        
+    ct_roi: '{id}_femur_left-ct.nii.gz' 
+    ct_mask_roi: '{id}_femur_left-ct-mask.nii.gz' 
+    seg_roi: '{id}_femur_left_msk.nii.gz'

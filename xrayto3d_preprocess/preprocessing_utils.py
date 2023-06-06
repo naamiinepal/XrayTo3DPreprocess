@@ -1,5 +1,6 @@
 import os
 from typing import Dict, Sequence, Tuple
+from copy import deepcopy
 
 import SimpleITK as sitk
 
@@ -46,6 +47,26 @@ def extract_vertebra_around_vbcentroid(
         centroid_heatmap = reorient_to(centroid_heatmap, axcodes_to=config["axcode"])
 
     return region_of_interest, centroid_heatmap
+
+
+def generate_perturbed_xray(
+    input_image_path,
+    projection_type: ProjectionType,
+    config,
+    out_xray_path,
+    lat_view_perturbation_angle: int,
+):
+    """ "Generate perturbed x-ray from CT i.e. instead of Biplanar x-rays, the LAT view can vary by given perturbation angle"""
+    orientation = "ap" if projection_type == ProjectionType.AP else "lat"
+    perturbed_config = deepcopy(config)
+    perturbed_config[orientation]["rz"] += lat_view_perturbation_angle
+    drr_command = get_drrsiddonjacobs_command_string(
+        input_image_path,
+        out_xray_path,
+        orientation=orientation,
+        config=perturbed_config,
+    )
+    os.system(drr_command)
 
 
 def generate_xray(
