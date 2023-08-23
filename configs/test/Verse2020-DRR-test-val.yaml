@@ -3,7 +3,7 @@
 # subject-list
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/verse20/subjectwise/
-  subject_list: configs/subjects_list/verse2020_subjects_test_val.lst
+  subject_list: configs/test/subjects_list/verse2020_subjects_test_val.lst
 
 # xray image properties
 xray_pose:

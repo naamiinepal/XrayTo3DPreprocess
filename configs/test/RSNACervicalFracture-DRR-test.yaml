@@ -3,7 +3,7 @@
 # subject-list
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/rsna_cervical_fracture/subjectwise
-  subject_list: configs/subjects_list/rsna_cervical_test.list
+  subject_list: configs/test/subjects_list/rsna_cervical_test.list
 
 # xray image properties
 xray_pose:

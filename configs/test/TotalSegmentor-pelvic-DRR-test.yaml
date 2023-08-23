@@ -3,7 +3,7 @@
 # subject-list
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/TotalSegmentor-full
-  subject_list: configs/subjects_list/left_femur_nonpartial_test.lst
+  subject_list: configs/test/subjects_list/left_femur_nonpartial_test.lst
 
 # xray image properties
 xray_pose:

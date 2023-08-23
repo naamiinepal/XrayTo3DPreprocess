@@ -3,7 +3,7 @@
 # subject-list
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/totalsegmentator/Totalsegmentator_dataset
-  subject_list: external/XrayTo3DPreprocess/workflow/totalsegmentor_femur/subjects_30k.csv
+  subject_list: configs/subjects_list/subjects_30k.lst
 
 # xray image properties
 xray_pose:

@@ -2,7 +2,7 @@
 # subject-list
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/LIDC-test/subjectwise
-  subject_list: configs/subjects_list/lidc_subjects_test.lst
+  subject_list: configs/test/subjects_list/lidc_subjects_test.lst
 
 # xray image properties
 xray_pose:

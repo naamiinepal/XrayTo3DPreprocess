@@ -27,7 +27,7 @@ out_directories:
   _load: directory_conf/dir_ct.yaml
 subjects:
   subject_basepath: 2D-3D-Reconstruction-Datasets/ctpelvic1k/raw/COLONOG/BIDS
-  subject_list: external/XrayTo3DPreprocess/workflow/ctpelvic1k/subjects/colonog_subjects.lst
+  subject_list: configs/subjects_list/colonog_subjects.lst
 xray_pose:
   _load: xray_pose_conf/${ROI_properties.axcode}_pose.yaml
   drr_from_mask: ${ROI_properties.drr_from_mask}
