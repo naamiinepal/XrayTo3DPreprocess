@@ -122,6 +122,9 @@ def get_interpolator(interpolator: str):
     if interpolator == "linear":
         return sitk.sitkLinear
 
+def resample_isotropic(img: sitk.Image, spacing, interpolator):
+    'wrapper around make_isotropic'
+    return make_isotropic(img, spacing, interpolator)
 
 def make_isotropic(img: sitk.Image, spacing=None, interpolator="linear"):
     """
