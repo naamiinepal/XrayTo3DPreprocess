@@ -42,3 +42,6 @@ filename_convention:
     xray_lat: "{id}_rib-lat.png"
     ct_roi: '{id}_rib-ct.nii.gz' 
     seg_roi: '{id}_rib_msk.nii.gz'
+    xray_ap_patch: '{id}_{patch_id}_rib-ap.png'
+    xray_lat_patch: '{id}_{patch_id}_rib-lat.png'
+    seg_roi_patch: '{id}_{patch_id}_rib_msk.nii.gz'

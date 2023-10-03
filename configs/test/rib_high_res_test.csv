@@ -1,0 +1,9 @@
+,ap,lat,seg
+0,test_data/test_patches_v3_160/test_patch_ap_0.png,test_data/test_patches_v3_160/test_patch_lat_0.png,test_data/test_patches_v3_160/test_patch_seg_0.nii.gz
+1,test_data/test_patches_v3_160/test_patch_ap_1.png,test_data/test_patches_v3_160/test_patch_lat_1.png,test_data/test_patches_v3_160/test_patch_seg_1.nii.gz
+2,test_data/test_patches_v3_160/test_patch_ap_2.png,test_data/test_patches_v3_160/test_patch_lat_2.png,test_data/test_patches_v3_160/test_patch_seg_2.nii.gz
+3,test_data/test_patches_v3_160/test_patch_ap_3.png,test_data/test_patches_v3_160/test_patch_lat_3.png,test_data/test_patches_v3_160/test_patch_seg_3.nii.gz
+4,test_data/test_patches_v3_160/test_patch_ap_4.png,test_data/test_patches_v3_160/test_patch_lat_4.png,test_data/test_patches_v3_160/test_patch_seg_4.nii.gz
+5,test_data/test_patches_v3_160/test_patch_ap_5.png,test_data/test_patches_v3_160/test_patch_lat_5.png,test_data/test_patches_v3_160/test_patch_seg_5.nii.gz
+6,test_data/test_patches_v3_160/test_patch_ap_6.png,test_data/test_patches_v3_160/test_patch_lat_6.png,test_data/test_patches_v3_160/test_patch_seg_6.nii.gz
+7,test_data/test_patches_v3_160/test_patch_ap_7.png,test_data/test_patches_v3_160/test_patch_lat_7.png,test_data/test_patches_v3_160/test_patch_seg_7.nii.gz

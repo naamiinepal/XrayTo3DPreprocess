@@ -12,11 +12,6 @@ xray_pose:
   size: ${ROI_properties.size}
   drr_from_ct_mask: ${ROI_properties.drr_from_ct_mask}
   drr_from_mask: ${ROI_properties.drr_from_mask}
-  perturbation_angle:
-    - 0
-    - 2
-    - 5
-    - 10
 
 # output directories
 out_directories:
