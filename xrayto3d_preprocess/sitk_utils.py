@@ -155,7 +155,9 @@ def make_isotropic(img: sitk.Image, spacing=None, interpolator="linear"):
     resampler.SetOutputOrigin(img.GetOrigin())
     resampler.SetTransform(sitk.Transform())
     resampler.SetInterpolator(get_interpolator(interpolator))
-    resampler.SetDefaultPixelValue(img.GetPixelIDValue())
+    # resampler.SetDefaultPixelValue(img.GetPixelIDValue())
+
+    resampler.SetDefaultPixelValue(0)
 
     return resampler.Execute(img)
 
