@@ -39,4 +39,4 @@ if __name__ == "__main__":
             # copy the image, seg and json files to destination directory
             shutil.copy(image_file, subject_dir / "ct.nii.gz")
             shutil.copy(seg_file, subject_dir / "seg.nii.gz")
-            shutil.copy(json_file, subject_dir)
+            shutil.copy(json_file, subject_dir/'ctd.json')

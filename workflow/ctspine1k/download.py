@@ -8,9 +8,9 @@ from xrayto3d_preprocess import download_gdown, mkdir_or_exist
 BASE_PATH = "2D-3D-Reconstruction-Datasets"
 CTSPINE1K_PATH = Path(BASE_PATH) / "ctspine1k"
 
-RAW_COLONOG_URL_PATH = "external/XrayTo3DPreprocess/workflow/ctspine1k/colonog_Path.csv"
+RAW_COLONOG_URL_PATH = "workflow/ctspine1k/colonog_Path.csv"
 METADATA_PATH = (
-    "external/XrayTo3DPreprocess/workflow/ctspine1k/CTColonography_MetaData.csv"
+    "workflow/ctspine1k/CTColonography_MetaData.csv"
 )
 
 

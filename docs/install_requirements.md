@@ -5,7 +5,7 @@
 2. Pass the cmake switch to build ITKTwoProjectionRegistration available in the Modules/Remote. Compile only required Modules. Please choose the ITK version that works with the available C++ compiler. For example, older ITKv4.0 does not work with g++ compiler > 8.0
 For example, 
 ```shell
-mkdir external
+mkdir -p external
 cd external
 wget https://github.com/InsightSoftwareConsortium/ITK/archive/refs/tags/v5.3.0.tar.gz
 tar -xzvf v5.3.0.tar.gz
