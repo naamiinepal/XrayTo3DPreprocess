@@ -6,7 +6,7 @@ pip install .
 
 Time to download the dataset
 |Dataset        | Time              | Size (GB) | #CT Scans         |
-|---            | ---               | ---       |           |
+|---            | ---               | ---       |---           |
 |Verse20        | 2 hr @ 4 MB/s     |36           | 214         |
 |Verse19        |                   |12           |160         |
 |Totalsegmentor |                   |           |           |
