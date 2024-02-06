@@ -3,3 +3,6 @@ build/
 xrayto3d_preprocess.egg-info/
 external/
 2D-3D-Reconstruction-Datasets
+wget-log
+logs/Verse2020-DRR-full.log
+logs/Verse2019-DRR-full.log

@@ -1,0 +1,20 @@
+channels:
+  - defaults
+  - conda-forge
+  - anaconda
+  - bioconda
+dependencies:
+  - python=3.8
+  - numpy
+  - nibabel
+  - itk
+  - simpleitk=2.0 # get rid of ITK ERROR: ITK only supports orthonormal direction cosines.  No orthonormal definition found!
+  - scikit-image
+  - pillow
+  - pandas
+  - matplotlib
+  - tqdm
+  - omegaconf
+  - gdown
+  - synapseclient # command-line tool to download from synapse.org
+  - monai # this repo uses monai.app.utils to extract zip files. is it too much? because of this dependency, we have to pull other repos such as pytorch which are not needed here

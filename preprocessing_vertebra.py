@@ -1,4 +1,6 @@
 """preprocess spine dataset"""
+import os
+from multiprocessing import Pool
 import numpy as np
 import SimpleITK as sitk
 from xrayto3d_preprocess import (
@@ -48,7 +50,7 @@ def process_subject(
             config["ROI_properties"], seg_img, vb_id, ctd, ImageType.SEGMENTATION
         )
         out_seg_path = generate_path(
-            "seg", "vert_seg", vb_id, subject_id, output_path_template, config
+            "seg_roi", "vert_seg", vb_id, subject_id, output_path_template, config
         )
         write_image(seg_roi, out_seg_path)
 
@@ -58,7 +60,7 @@ def process_subject(
         if config["ROI_properties"]["drr_from_ct_mask"]:
             ct_roi = sitk.Mask(ct_roi, seg_roi > 0.5)
         out_ct_path = generate_path(
-            "ct", "vert_ct", vb_id, subject_id, output_path_template, config
+            "ct_roi", "vert_ct", vb_id, subject_id, output_path_template, config
         )
         write_image(ct_roi, out_ct_path)
 
@@ -167,6 +169,59 @@ def create_directories(out_path_template, config):
         )
 
 
+def process_vertebra_subject_helper(subject_id: str):
+    logger.debug(f"subject {subject_id}")
+    if args.dataset == "verse2020":
+        subject_id, input_filename_prefix = subject_id
+        ct_path = (
+            Path(subject_basepath)
+            / subject_id
+            / input_fileformat["ct"].format(id=input_filename_prefix)
+        )
+        seg_path = (
+            Path(subject_basepath)
+            / subject_id
+            / input_fileformat["seg"].format(id=input_filename_prefix)
+        )
+        centroid_path = (
+            Path(subject_basepath)
+            / subject_id
+            / input_fileformat["ctd"].format(id=input_filename_prefix)
+        )
+    else:
+        subject_id,  = subject_id
+        ct_path = (
+            Path(subject_basepath)
+            / subject_id
+            / input_fileformat["ct"].format(id=subject_id)
+        )
+        seg_path = (
+            Path(subject_basepath)
+            / subject_id
+            / input_fileformat["seg"].format(id=subject_id)
+        )
+        centroid_path = (
+            Path(subject_basepath)
+            / subject_id
+            / input_fileformat["ctd"].format(id=subject_id)
+        )
+
+    OUT_DIR_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}'
+    OUT_PATH_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}/{{output_name}}'
+
+    logger.debug(f'ct {ct_path} seg {seg_path} ctd {centroid_path}')
+    create_directories(OUT_DIR_TEMPLATE, config)
+    process_subject(
+        subject_id,
+        ct_path,
+        seg_path,
+        args.dataset,
+        centroid_path,
+        config,
+        OUT_PATH_TEMPLATE,
+    )
+
+
 if __name__ == "__main__":
     import argparse
     from pathlib import Path
@@ -177,6 +232,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("config_file")
     parser.add_argument("--dataset")
+    parser.add_argument('--parallel',action='store_true',default=False)
 
     args = parser.parse_args()
 
@@ -200,58 +256,21 @@ if __name__ == "__main__":
     subject_list = (
         pd.read_csv(config["subjects"]["subject_list"], header=None)
         .to_numpy()
-        .flatten()
     )
 
     logger.debug(f"found {len(subject_list)} subjects")
     logger.debug(subject_list)
 
-    for subject_id in tqdm(subject_list, total=len(subject_list)):
-        logger.debug(f"subject {subject_id}")
-        if args.dataset == "verse2020":
-            subject_id, input_filename_prefix = subject_id
-            ct_path = (
-                Path(subject_basepath)
-                / subject_id
-                / input_fileformat["ct"].format(id=input_filename_prefix)
-            )
-            seg_path = (
-                Path(subject_basepath)
-                / subject_id
-                / input_fileformat["seg"].format(id=input_filename_prefix)
-            )
-            centroid_path = (
-                Path(subject_basepath)
-                / subject_id
-                / input_fileformat["ctd"].format(id=input_filename_prefix)
-            )
-        else:
-            ct_path = (
-                Path(subject_basepath)
-                / subject_id
-                / input_fileformat["ct"].format(id=subject_id)
-            )
-            seg_path = (
-                Path(subject_basepath)
-                / subject_id
-                / input_fileformat["seg"].format(id=subject_id)
-            )
-            centroid_path = (
-                Path(subject_basepath)
-                / subject_id
-                / input_fileformat["ctd"].format(id=subject_id)
-            )
+    num_workers = os.cpu_count()
 
-        OUT_DIR_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}'
-        OUT_PATH_TEMPLATE = f'{subject_basepath}/{subject_id}/{config["out_directories"]["derivatives"]}/{{output_type}}/{{output_name}}'
-
-        create_directories(OUT_DIR_TEMPLATE, config)
-        process_subject(
-            subject_id,
-            ct_path,
-            seg_path,
-            args.dataset,
-            centroid_path,
-            config,
-            OUT_PATH_TEMPLATE,
-        )
+    def initialize_config_for_all_workers():
+        global config
+        config = read_config_and_load_components(args.config_file)
+    
+    if args.parallel:
+        with Pool(processes=num_workers, 
+                initializer=initialize_config_for_all_workers) as p:
+            results = tqdm(p.map(process_vertebra_subject_helper, subject_list),total=len(subject_list))
+    else:
+        for subject_id in tqdm(subject_list):
+            process_vertebra_subject_helper(subject_id)
