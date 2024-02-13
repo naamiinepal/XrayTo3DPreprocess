@@ -195,7 +195,7 @@ def simulate_parallel_projection(
         return projection[:, :, 0]
 
 
-def rotate_about_image_center(img: sitk.Image, rx, ry, rz) -> sitk.Image:
+def rotate_about_image_center(img: sitk.Image, rx, ry, rz, interpolator=get_interpolator('nearest')) -> sitk.Image:
     """rotation angles are assumed to be given in degrees"""
 
     transform = sitk.Euler3DTransform()
@@ -211,8 +211,8 @@ def rotate_about_image_center(img: sitk.Image, rx, ry, rz) -> sitk.Image:
     isocenter = img.TransformIndexToPhysicalPoint(center_index)
 
     transform.SetCenter(isocenter)
-
-    return sitk.Resample(img, transform=transform)
+    default_pixel_value = -1024 if interpolator == sitk.sitkLinear else 0
+    return sitk.Resample(img, transform=transform,interpolator=interpolator,defaultPixelValue=default_pixel_value,outputPixelType=img.GetPixelID())
 
 
 def reorient_to(img, axcodes_to: Union[sitk.Image, str] = "PIR", verb=False):
