@@ -35,7 +35,8 @@ filename_convention:
   input:
     ct: ct.nii.gz
     seg: seg.nii.gz
-    ctd: ctd.json
+    ctd: "{id}_seg-subreg_ctd.json"
+
   output:
     vert_xray_ap: "{id}_vert-{vert}_ap.png"
     vert_xray_lat: "{id}_vert-{vert}_lat.png"
