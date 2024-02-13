@@ -76,7 +76,10 @@ def generate_xray(
     - use DRRSiddonJacobs if CT
     - simulate projection if Segmentation (DRRSiddonJacobs does not work well for segmentation)
     """
-    drr_from_mask = config["drr_from_mask"]
+    if config and ('drr_from_mask' in config):
+        drr_from_mask = config["drr_from_mask"]
+    else:
+        drr_from_mask = False
     orientation = "ap" if projection_type == ProjectionType.AP else "lat"
 
     if drr_from_mask:
