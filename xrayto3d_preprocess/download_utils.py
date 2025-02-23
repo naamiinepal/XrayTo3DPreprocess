@@ -97,7 +97,7 @@ def download_wget(
     if isinstance(output_dir, str):
         output_dir = Path(output_dir)
 
-    url_format = "wget {input_url} -O {save_path}"
+    url_format = "wget --no-check-certificate {input_url} -O {save_path}"
     out_path = output_dir / filename
     if out_path.exists():
         print(f"{out_path} exists. verifying integrity of the file... ")

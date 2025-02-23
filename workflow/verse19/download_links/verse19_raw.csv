@@ -1,4 +1,4 @@
 dataset,url,md5,zip_filename
-VERSE19,https://s3.bonescreen.de/public/VerSe-complete/dataset-verse19training.zip,c15b4e7e974aec858b70c0871c00f185,dataset-verse19training.zip
-VERSE19,https://s3.bonescreen.de/public/VerSe-complete/dataset-verse19validation.zip,36e09f15719d5d4e8387321426aaf739,dataset-verse19validation.zip
-VERSE19,https://s3.bonescreen.de/public/VerSe-complete/dataset-verse19test.zip,a6b4549695593759148934be2aa83c2b,dataset-verse19test.zip
+VERSE19,https://files.de-1.osf.io/v1/resources/jtfa5/providers/osfstorage/5ffca086e80d370320a594cc/?zip=,c15b4e7e974aec858b70c0871c00f185,dataset-verse19training.zip
+VERSE19,https://files.de-1.osf.io/v1/resources/jtfa5/providers/osfstorage/5ffcb524ba0109031c8931fa/?zip=,36e09f15719d5d4e8387321426aaf739,dataset-verse19validation.zip
+VERSE19,https://files.de-1.osf.io/v1/resources/jtfa5/providers/osfstorage/5ffcbd71e80d370336a56f8c/?zip=,a6b4549695593759148934be2aa83c2b,dataset-verse19test.zip
